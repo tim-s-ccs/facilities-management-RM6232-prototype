@@ -231,6 +231,9 @@ if (promoMode === 'true') {
   })
 }
 
+// Add routes created for the app
+const facilitiesManagementRoutes = require('./dist/router').default
+
 // Load routes (found in app/routes.js)
 if (typeof (routes) !== 'function') {
   console.log(routes.bind)
@@ -238,6 +241,7 @@ if (typeof (routes) !== 'function') {
   routes.bind(app)
 } else {
   app.use('/', routes)
+  facilitiesManagementRoutes.forEach((route) => app.use(...route))
 }
 
 if (useDocumentation) {

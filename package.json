@@ -7,7 +7,7 @@
     "node": ">=10.0.0 <16.0.0"
   },
   "scripts": {
-    "start": "node start.js",
+    "start": "rm -rf ./dist/ && tsc && node start.js",
     "lint": "standard",
     "test": "npm run lint && gulp generate-assets && jest"
   },
@@ -46,6 +46,7 @@
     "uuid": "^7.0.3"
   },
   "devDependencies": {
+    "@types/express": "^4.17.13",
     "@typescript-eslint/eslint-plugin": "^5.2.0",
     "@typescript-eslint/parser": "^5.2.0",
     "eslint": "^6.8.0",
