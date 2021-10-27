@@ -1,0 +1,100 @@
+{% from "govuk/components/button/macro.njk"              import govukButton %}
+{% from "govuk/components/error-message/macro.njk"       import govukErrorMessage %}
+{% from "govuk/components/input/macro.njk"               import govukInput %}
+{% from "govuk/components/select/macro.njk"              import govukSelect %}
+
+{% macro addressContainer(params) %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full" data-module="find-address">
+      <div id="postcode-search" class="{{ '' if params.isPostcodeSearchVisible else 'govuk-visually-hidden' }}" data-propertyname="organisation_address_postcode">
+        {{ govukInput({
+          label: {
+            text: "Postcode"
+          },
+          id: "postcode",
+          classes: "govuk-input postcode-entry govuk-input--width-10",
+          name: params.inputName + "[postcode]",
+          autocomplete: "postcode",
+          value: params.addressObject.data.postcode,
+          pattern: '^(([A-Za-z][A-Za-z]{0,1})([0-9][A-Za-z0-9]{0,1})) {0,}(([0-9])([A-Za-z]{2}))$',
+          required: 'true',
+          maxlength: 8,
+          attributes: {
+            tabindex: '0' if params.isPostcodeSearchVisible else '-1'
+          },
+          errorMessage: {
+            text: params.addressObject.errors.postcode.errorMessage
+          } if params.addressObject.errors.postcode !== undefined
+        }) }}
+        
+        {{ govukErrorMessage({
+          id: "hidden-postcode-error",
+          text: "Enter a valid postcode, for example SW1A 1AA",
+          classes: "govuk-visually-hidden"
+        }) }}
+
+        {{ govukButton({
+          text: "Find address",
+          classes: "govuk-button govuk-!-margin-top-4" + '' if params.isPostcodeSearchVisible else 'govuk-visually-hidden',
+          attributes: {
+            id: 'find-address-button',
+            tabindex: '0' if params.isPostcodeSearchVisible else '-1'
+          }
+        }) }}
+      </div>
+    
+      <div id="postcode-change" class="{{ '' if params.isPostcodeChangeVisible else 'govuk-visually-hidden' }}">
+        <span class="govuk-heading-s govuk-!-margin-bottom-1">
+          Postcode
+        </span>
+        <span id="postcode-on-view" class="govuk-body govuk-!-margin-right-4">
+          {{ params.addressObject.data.postcode }}
+        </span>
+        <a href="#postcode-search" id="change-input-1" class="govuk-link" tabindex="{{ '0' if params.isPostcodeChangeVisible else '-1' }}">
+          Change
+        </a>
+      </div>
+
+      <div id="select-an-address" class="{{ '' if params.isSelectAnAddressVisible else 'govuk-visually-hidden' }}">
+        {{ govukSelect({
+          id: "address-results-container",
+          name: "address-results-container",
+          label: {
+            text: "Select an address",
+            classes: "govuk-heading-s govuk-!-margin-top-3 govuk-!-margin-bottom-1"
+          },
+          items: params.addressList,
+          attributes: {
+            tabindex: '0' if params.isSelectAnAddressVisible else '-1',
+            'data-withdata-text-single': 'address found',
+            'data-withdata-text-plural': 'addresses found'
+          },
+          errorMessage: {
+            text: params.addressObject.errors.base.errorMessage
+          } if params.addressObject.errors.base !== undefined
+        }) }}
+
+        <hr class="govuk-section-break govuk-!-margin-top-2">
+        <a href="{{ params.enterAddressManuallyLink }}" id="cant-find-address-link" class="govuk-link govuk-!-margin-right-4" tabindex="{{ '0' if params.isSelectAnAddressVisible else '-1' }}">
+          Enter address manually, if you can’t find address
+        </a>
+      </div>
+
+      <div id='full-address' class="govuk-!-margin-bottom-6 {{ '' if params.isFullAddressVisible else 'govuk-visually-hidden' }}">
+        <div class="govuk-body govuk-!-margin-bottom-2" id="address-text">
+          {{ params.addressObject.fullAddress() }}
+        </div>
+        <a href="#postcode-search" id="change-input-2" class="govuk-link" tabindex="{{ '0' if params.isFullAddressVisible else '-1' }}">
+          Change
+        </a>
+      </div>
+
+      <div id="hidden-address-fields">
+        <input id="address-line-1" type="hidden" value="{{ params.addressObject.data.addressLine1 }}" name="{{ params.inputName }}[addressLine1]">
+        <input id="address-line-2" type="hidden" value="{{ params.addressObject.data.addressLine2 }}" name="{{ params.inputName }}[addressLine2]">
+        <input id="address-town" type="hidden" value="{{ params.addressObject.data.city }}" name="{{ params.inputName }}[city]">
+        <input id="address-county" type="hidden" value="{{ params.addressObject.data.county }}" name="{{ params.inputName }}[county]">
+      </div>
+    </div>
+  </div>
+{% endmacro %}

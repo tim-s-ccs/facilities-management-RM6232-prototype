@@ -1,0 +1,114 @@
+{% extends "application.html" %}
+
+{% block pageTitle %}
+  Add address: {{ super() }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-body govuk-grid-row buyer-details">
+    <div class="govuk-grid-column-two-thirds" id="edit-contact-detail-address">
+      <form action="/facilities-management/RM6232/buyer-details/{{ buyerID }}/edit-address" method="post" class="form">
+        {{ govukBackLink({
+          text: "Return to manage your details",
+          href: '/facilities-management/RM6232/buyer-details/' + buyerID + '/edit'
+        }) }}
+
+        {{ govukErrorSummary({
+          titleText: "There is a problem",
+          errorList: errorList
+        }) if errorList.length > 0 }}
+
+        <div class="govuk-caption-m govuk-!-margin-top-2 govuk-!-margin-bottom-1">
+          {{ data["user"]["email"] }}
+        </div>
+        <div class="govuk-caption-xl govuk-!-font-size-36">
+          Manage your details
+        </div>
+        <h1 class="govuk-heading-xl">
+          Add address
+        </h1>
+
+        {% call govukFieldset({
+          legend: {
+            text: "Organisation address",
+            classes: "govuk-fieldset__legend--m"
+          }
+        }) %}
+
+          {{ govukInput({
+            label: {
+              text: "Building and street"
+            },
+            id: "addressLine1",
+            name: "facilitiesManagement[organisationAddress][addressLine1]",
+            autocomplete: "addressLine1",
+            value: addressData.addressLine1,
+            errorMessage: {
+              text: errors.addressLine1.errorMessage
+            } if errors.addressLine1 !== undefined
+          }) }}
+
+          {{ govukInput({
+            label: {
+              text: "Organisation address line 2",
+              classes: "govuk-visually-hidden"
+            },
+            id: "addressLine2",
+            name: "facilitiesManagement[organisationAddress][addressLine2]",
+            autocomplete: "addressLine2",
+            value: addressData.addressLine2,
+            errorMessage: {
+              text: errors.addressLine2.errorMessage
+            } if errors.addressLine2 !== undefined
+          }) }}
+
+          {{ govukInput({
+            label: {
+              text: "Town or city"
+            },
+            id: "city",
+            name: "facilitiesManagement[organisationAddress][city]",
+            autocomplete: "city",
+            value: addressData.city,
+            errorMessage: {
+              text: errors.city.errorMessage
+            } if errors.city !== undefined
+          }) }}
+
+          {{ govukInput({
+            label: {
+              text: "County (optional)"
+            },
+            id: "county",
+            name: "facilitiesManagement[organisationAddress][county]",
+            autocomplete: "county",
+            value: addressData.county,
+            errorMessage: {
+              text: errors.county.errorMessage
+            } if errors.county !== undefined
+          }) }}
+
+          {{ govukInput({
+            label: {
+              text: "Postcode"
+            },
+            id: "postcode",
+            name: "facilitiesManagement[organisationAddress][postcode]",
+            classes: "govuk-input--width-10",
+            autocomplete: "postcode",
+            value: addressData.postcode,
+            errorMessage: {
+              text: errors.postcode.errorMessage
+            } if errors.postcode !== undefined
+          }) }}
+    
+        {% endcall %}
+
+        {{ govukButton({
+          element: "input",
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

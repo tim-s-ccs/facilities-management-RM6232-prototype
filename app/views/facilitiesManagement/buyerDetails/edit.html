@@ -1,0 +1,146 @@
+{% from "../address/addressContainer.html" import addressContainer %}
+
+{% extends "application.html" %}
+
+{% block pageTitle %}
+  Manage your details: {{ super() }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-body govuk-grid-row buyer-details" id="buyer_details">
+    <div class="govuk-grid-column-two-thirds" id="edit-contact-detail">
+      <form action="/facilities-management/RM6232/buyer-details/{{ buyerID }}" method="post" class="form">
+        <input id="buyer-id" type="hidden" value="{{ buyerID }}" name="facilitiesManagement[id]">
+
+        {{ govukBackLink({
+          text: "Return to your account",
+          href: "/facilities-management/RM6232"
+        }) }}
+
+        {{ govukErrorSummary({
+          titleText: "There is a problem",
+          errorList: errorList
+        }) if errorList.length > 0 }}
+
+        <div class="govuk-caption-l govuk-!-margin-top-2">
+          {{ data["user"]["email"] }}
+        </div>
+
+        {% call govukFieldset({
+          legend: {
+            text: "Manage your details",
+            classes: "govuk-fieldset__legend--l",
+            isPageHeading: true
+          }
+        }) %}
+          <h2 class="govuk-heading-m">
+            Personal details
+          </h2>
+
+          {{ govukInput({
+            label: {
+              text: "Name"
+            },
+            id: "fullName",
+            name: "facilitiesManagement[fullName]",
+            autocomplete: "fullName",
+            value: buyerDetailData.fullName,
+            errorMessage: {
+              text: errors.fullName.errorMessage
+            } if errors.fullName !== undefined
+          }) }}
+
+          {{ govukInput({
+            label: {
+              text: "Job title"
+            },
+            id: "jobTitle",
+            name: "facilitiesManagement[jobTitle]",
+            autocomplete: "jobTitle",
+            value: buyerDetailData.jobTitle,
+            errorMessage: {
+              text: errors.jobTitle.errorMessage
+            } if errors.jobTitle !== undefined
+          }) }}
+
+          {{ govukInput({
+            label: {
+              text: "Telephone number"
+            },
+            id: "telephoneNumber",
+            name: "facilitiesManagement[telephoneNumber]",
+            autocomplete: "telephoneNumber",
+            classes: "govuk-!-width-one-half",
+            value: buyerDetailData.telephoneNumber,
+            errorMessage: {
+              text: errors.telephoneNumber.errorMessage
+            } if errors.telephoneNumber !== undefined
+          }) }}
+
+          <h2 class="govuk-heading-m govuk-!-margin-top-3">
+            Organisation details
+          </h2>
+
+          {{ govukInput({
+            label: {
+              text: "Organisation name"
+            },
+            id: "organisationName",
+            name: "facilitiesManagement[organisationName]",
+            autocomplete: "organisationName",
+            value: buyerDetailData.organisationName,
+            errorMessage: {
+              text: errors.organisationName.errorMessage
+            } if errors.organisationName !== undefined
+          }) }}
+
+          <div class="govuk-!-margin-top-7">
+            <h2 class="govuk-heading-s govuk-!-margin-bottom-0">
+              Organisation address
+            </h2>
+          </div>
+          {{ addressContainer(addressContainerParams) }}
+
+          <h2 class="govuk-heading-m">
+            Sector
+          </h2>
+
+          {{ govukRadios({
+            classes: "govuk-radios--inline",
+            idPrefix: "centralGovernment",
+            name: "facilitiesManagement[centralGovernment]",
+            fieldset: {
+              legend: {
+                text: "Which type of public sector organisation are you buying for?",
+                classes: "govuk-!-font-weight-bold"
+              }
+            },
+            hint: {
+              html: 'Search <a href="https://www.gov.uk/government/organisations" target="_blank"> central government departments, agencies and public bodies</a> if you’re unsure.'
+            },
+            items: [
+              {
+                value: "true",
+                text: "Central government",
+                checked: buyerDetailData.centralGovernment === "true"
+              },
+              {
+                value: "false",
+                text: "Wider public sector",
+                checked: buyerDetailData.centralGovernment === "false"
+              }
+            ],
+            errorMessage: {
+              text: errors.centralGovernment.errorMessage
+            } if errors.centralGovernment !== undefined
+          }) }}
+
+          {{ govukButton({
+            element: "input",
+            text: "Save and continue"
+          }) }}
+        {% endcall %}
+      </form>
+    </div>
+  </div>
+{% endblock %}

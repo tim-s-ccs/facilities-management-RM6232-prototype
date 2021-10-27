@@ -18,7 +18,23 @@ Example usage:
 */
 
 module.exports = {
-
+  user: {
+    email: 'buyer@example.com',
+    buyerDetail: {
+      id: '1',
+      fullName: 'James Bond',
+      jobTitle: 'Secret Agent',
+      telephoneNumber: '0345 007 2222',
+      organisationName: 'MI6',
+      organisationAddress: {
+        addressLine1: 'SIS Building',
+        addressLine2: '85 Albert Embankment',
+        city: 'London',
+        postcode: 'SE11 5AW'
+      },
+      centralGovernment: 'true'
+    }
+  }
   // Insert values here
 
 }
