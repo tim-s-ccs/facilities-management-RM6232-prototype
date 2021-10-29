@@ -10,7 +10,7 @@
     "start": "rm -rf ./dist/ && tsc && node start.js",
     "lint": "standard",
     "test": "npm run lint && gulp generate-assets && jest",
-    "tsc": "./node_modules/typescript/bin/tsc",
+    "tsc": "rm -rf ./dist/ && ./node_modules/typescript/bin/tsc",
     "build": "tsc",
     "postinstall": "npm run build"
   },
@@ -50,6 +50,8 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
+    "@types/express-session": "^1.17.4",
+    "@types/jquery": "^3.5.8",
     "@typescript-eslint/eslint-plugin": "^5.2.0",
     "@typescript-eslint/parser": "^5.2.0",
     "eslint": "^6.8.0",
