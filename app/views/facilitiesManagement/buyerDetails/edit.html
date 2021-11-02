@@ -94,12 +94,17 @@
             } if errors.organisationName !== undefined
           }) }}
 
-          <div class="govuk-!-margin-top-7">
-            <h2 class="govuk-heading-s govuk-!-margin-bottom-0">
-              Organisation address
-            </h2>
-          </div>
-          {{ addressContainer(addressContainerParams) }}
+          {% call govukFieldset({
+            legend: {
+              text: "Organisation address",
+              classes: "govuk-fieldset__legend--m"
+            }
+          }) %}
+
+            {{ addressContainer(addressContainerParams) }}
+
+          {% endcall %}
+
 
           <h2 class="govuk-heading-m">
             Sector

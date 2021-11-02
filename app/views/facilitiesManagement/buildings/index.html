@@ -1,0 +1,79 @@
+{% extends "application.html" %}
+
+{% block pageTitle %}
+  Buildings: {{ super() }}
+{% endblock %}
+
+{% block content %}
+  <h1 class="govuk-heading-xl">
+    Buildings
+  </h1>
+
+  <div id="buildings-container">
+    {{ govukButton({
+      text: "Add a building",
+      href: "/facilities-management/RM6232/buildings/new",
+      classes: "govuk-!-margin-bottom-6"
+    }) }}
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <p class="govuk-!-margin-bottom-2">
+          Set up the buildings in which you want FM services to be delivered to.
+        </p>
+
+        {{ govukDetails({
+          summaryText: "How it works",
+          html: '
+            <p class="govuk-!-margin-bottom-2">
+              When creating your buildings, you are not restricted to create just full buildings, for example you may choose to set up just a floor or a specific area within a building. You may also set up an external area, such as a park, as a ‘building’.
+            </p>
+            <p class="govuk-!-margin-bottom-2">
+              Your service pricing will be broken down to show a cost per service per ‘building’, allowing you to manage your contract effectively. You should therefore create ‘buildings’ dependent on the level of detail you require.
+            </p>
+            <p>
+              If you have a site, campus, group of buildings, these should be set up individually and not grouped together into one site.
+            </p>
+          '
+        }) }}
+      </div>
+    </div>
+    <div class="govuk-grid-row govuk-!-margin-bottom-4">
+      <div class="govuk-grid-column-full">
+        
+        {% if buldingRows.length === 0 %}
+          <h2 class="govuk-heading-m govuk-!-margin-top-6">
+            My buildings
+          </h2>
+          <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-3">
+            <span class="govuk-hint">You have no saved buildings</span>
+          <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-top-3">
+        {% else %}
+          {{ govukTable({
+            caption: "My buildings",
+            captionClasses: "govuk-table__caption--m",
+            head: [
+              {
+                text: "Building name"
+              },
+              {
+                text: "Description"
+              },
+              {
+                text: "Last updated"
+              },
+              {
+                text: "Status"
+              }
+            ],
+            rows: buldingRows
+          }) }}
+        {% endif %}
+      </div>
+    </div>
+
+    <a href="/facilities-management/RM6232" class="govuk-body govuk-link--no-visited-state">
+      Return to your account
+    </a>
+  </div>
+{% endblock %}

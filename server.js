@@ -232,7 +232,7 @@ if (promoMode === 'true') {
 }
 
 // Add routes created for the app
-const facilitiesManagementRoutes = require('./dist/router').default
+const facilitiesManagementRoutes = require('./dist/app/router').default
 
 // Load routes (found in app/routes.js)
 if (typeof (routes) !== 'function') {
