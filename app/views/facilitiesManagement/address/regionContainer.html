@@ -1,0 +1,48 @@
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+
+{% macro regionContainer(params) %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full" data-module="find-region">
+      <div id="select-a-region" class="{{ '' if params.isSelectRegionVisible else 'govuk-visually-hidden' }}">
+        <span class="govuk-heading-s govuk-!-margin-bottom-1">
+          Region
+        </span>
+        <span class="govuk-caption-m">
+          Please confirm the region your building is located in. This will help us shortlist the suppliers who can deliver your services.
+        </span>
+        {{ govukSelect({
+          id: "regions-container",
+          name: "regions-container",
+          label: {
+            text: "Select a region",
+            classes: "govuk-heading-s govuk-!-margin-top-3 govuk-!-margin-bottom-1"
+          },
+          items: params.regionList,
+          attributes: {
+            tabindex: '0' if params.isSelectRegionVisible else '-1',
+            'data-withdata-text-single': 'region found',
+            'data-withdata-text-plural': 'regions found'
+          },
+          errorMessage: {
+            text: params.regionObject.errors.base.errorMessage
+          } if params.regionObject.errors.base !== undefined
+        }) }}
+      </div>
+      <div id="full-region" class="{{ '' if params.isFullRegionVisible else 'govuk-visually-hidden' }}">
+        <span class="govuk-heading-s govuk-!-margin-bottom-1">
+          Region
+        </span>
+        <div class="govuk-body govuk-!-margin-bottom-2" id="region-text">
+          {{ params.regionObject.data.name }}
+        </div>
+        <a href="#select-a-region" id="change-input-3" class="govuk-link" tabindex="{{ '0' if params.isFullRegionVisible else '-1' }}">
+          Change
+        </a>
+      </div>
+      <div id="hidden-region-fields">
+        <input id="address-region" type="hidden" value="{{ params.regionObject.data.name }}" name="{{ params.inputName }}[name]">
+        <input id="address-region-code" type="hidden" value="{{ params.regionObject.data.code }}" name="{{ params.inputName }}[code]">
+      </div>
+    </div>
+  </div>
+{% endmacro %}

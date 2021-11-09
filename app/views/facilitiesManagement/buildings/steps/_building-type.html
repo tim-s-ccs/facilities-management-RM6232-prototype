@@ -1,0 +1,23 @@
+{{ govukRadios({
+  idPrefix: "buildingType",
+  name: "facilitiesManagementBuilding[buildingType]",
+  fieldset: {
+    legend: {
+      text: "Choose the building type that best describes your building",
+      classes: "govuk-fieldset__legend--m"
+    }
+  },
+  items: pageDescription.additionalDetails.buildingTypeRadioItems.slice(0, 2)
+}) }}
+
+<div class="govuk-radios__divider">or</div>
+
+{{ govukDetails({
+  summaryText: "View more building types",
+  open: pageDescription.additionalDetails.detailsOpen,
+  html: govukRadios({
+    idPrefix: "buildingType",
+    name: "facilitiesManagementBuilding[buildingType]",
+    items: pageDescription.additionalDetails.buildingTypeRadioItems.slice(2, -1)
+  })
+}) }}

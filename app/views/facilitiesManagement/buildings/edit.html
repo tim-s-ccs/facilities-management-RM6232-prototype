@@ -1,0 +1,54 @@
+{% extends "application.html" %}
+
+{% block pageTitle %}
+  {{ pageDescription.pageTitle }}: {{ super() }}
+{% endblock %}
+
+{% block content %}
+  {{ govukBackLink({
+    text: pageDescription.previousStep.text,
+    href: pageDescription.previousStep.href
+  }) }}
+
+  <h1 class="govuk-heading-xl" id="main_title">
+    <span class="govuk-caption-m govuk-!-margin-bottom-1">
+      Step {{ pageDescription.stepNumber }} of 4
+    </span>
+    <span class="govuk-caption-xl">
+      Buildings — {{ building.data.name }}
+    </span>
+    {{ pageDescription.pageTitle }}
+  </h1>
+
+  <form action="/facilities-management/RM6232/buildings/{{building.data.id}}/edit/{{ step }}" method="post" class="form">
+    <div class="govuk-!-width-two-thirds">
+      {% include 'facilitiesManagement/buildings/steps/_' + step + '.html' %}
+    </div>
+
+    <div class="govuk-!-margin-top-5">
+      {{ govukButton({
+        element: "input",
+        text: "Save and continue",
+        name: "continue",
+        classes: "govuk-!-margin-right-4"
+      }) if pageDescription.save_and_continue }}
+      {{ govukButton({
+        element: "input",
+        text: "Save and return to building details summary",
+        name: "return",
+        classes: "govuk-button--secondary"
+      }) if pageDescription.save_and_return }}
+      {% if  pageDescription.nextStep !== undefined %}
+        <br/>
+        <a href="{{ pageDescription.nextStep.href }}" class="govuk-body govuk-link--no-visited-state">
+          Skip this step
+        </a>
+      {% endif %}
+    </div>
+    {% if  pageDescription.nextStep !== undefined %}
+      <span class="govuk-caption-m govuk-!-margin-top-3">
+        Next: {{ pageDescription.nextStep.text }}
+      </span>
+    {% endif %}
+  </form>
+{% endblock %}

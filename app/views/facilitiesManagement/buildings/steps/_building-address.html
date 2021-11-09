@@ -1,0 +1,55 @@
+{% call govukFieldset({
+  legend: {
+    text: "Address",
+    classes: "govuk-fieldset__legend--m"
+  }
+}) %}
+  <p class="govuk-caption-m">
+    We’ll use the address to assess the region in which your building is located. This will help us to shortlist the suppliers who can deliver your services.
+  </p>
+
+  {{ govukInput({
+    label: {
+      text: "Building and street line 1 of 2"
+    },
+    id: "addressLine1",
+    name: "facilitiesManagementBuilding[address][addressLine1]",
+    classes: "govuk-input--width-20",
+    autocomplete: "addressLine1",
+    value: building.data.address.data.addressLine1
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Building and street line 2 of 2 (optional)"
+    },
+    id: "addressLine1",
+    classes: "govuk-input--width-20",
+    name: "facilitiesManagementBuilding[address][addressLine2]",
+    autocomplete: "addressLine2",
+    value: building.data.address.data.addressLine2
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Town or city"
+    },
+    id: "city",
+    name: "facilitiesManagement[organisationAddress][city]",
+    classes: "govuk-input--width-10",
+    autocomplete: "city",
+    value: building.data.address.data.city
+  }) }}
+
+  {{ govukInput({
+    label: {
+      text: "Postcode"
+    },
+    id: "postcode",
+    name: "facilitiesManagement[organisationAddress][postcode]",
+    classes: "govuk-input--width-10",
+    autocomplete: "postcode",
+    value: building.data.address.data.postcode
+  }) }}
+  
+{% endcall %}

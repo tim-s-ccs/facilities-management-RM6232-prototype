@@ -1,0 +1,46 @@
+<p class="govuk-body">
+  Please enter your building's internal and external area sizes below. These are used to calculate service pricing, where necessary. If your building does not have an internal or external area, please enter '0' in the relevant field.
+</p>
+
+{{ govukInput({
+  label: {
+    text: "What’s the size of the internal area of this building?",
+    classes: "govuk-label--m"
+  },
+  hint: {
+    html: '
+      <p class="govuk-hint">
+        Gross internal area (GIA) is the area of a building measured to the internal face of the perimeter walls at each floor level.<br>For example, 1800 square metres.
+      </p>
+      <p class="govuk-hint">
+        For further information on GIA <a aria-label="Read the Valuation Office Agency advice on the Code of measuring practice" title="Code of measuring practice: definitions for rating purposes" target="_blank" href="https://www.gov.uk/government/publications/measuring-practice-for-voa-property-valuations/code-of-measuring-practice-definitions-for-rating-purposes#gross-internal-area">follow this link (opens in a new tab)</a>.
+      </p>
+    '
+  },
+  classes: "govuk-input--width-5",
+  id: "gia",
+  name: "facilitiesManagementBuilding[gia]",
+  value: building.data.gia or "0",
+  suffix: {
+    text: "sqm"
+  },
+  type: 'number'
+}) }}
+
+{{ govukInput({
+  label: {
+    text: "What's the size of the external area?",
+    classes: "govuk-label--m"
+  },
+  hint: {
+    html: 'An external area can be the grounds surrounding a building, or an area without any building for example a park, and is measured in square metres.<br> For example 18000 square metres.'
+  },
+  classes: "govuk-input--width-5",
+  id: "externalArea",
+  name: "facilitiesManagementBuilding[externalArea]",
+  value: building.data.externalArea or "0",
+  suffix: {
+    text: "sqm"
+  },
+  type: 'number'
+}) }}

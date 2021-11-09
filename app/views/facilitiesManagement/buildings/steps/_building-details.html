@@ -1,0 +1,47 @@
+{% from "../../address/addressContainer.html" import addressContainer %}
+{% from "../../address/regionContainer.html" import regionContainer %}
+
+{{ govukInput({
+  label: {
+    text: "What is the name of your building?",
+    classes: "govuk-label--m"
+  },
+  hint: {
+    text: "This will help you refer to your building or part of the building when selecting services. For example, Newbury office 3rd floor."
+  },
+  id: "name",
+  name: "facilitiesManagementBuilding[name]",
+  classes: "govuk-input--width-20",
+  value: building.data.name
+}) }}
+
+{{ govukInput({
+  label: {
+    text: "Add a description (optional)",
+    classes: "govuk-label--m"
+  },
+  hint: {
+    text: "Enter a description or reference, for example, some users put cost centres in this field."
+  },
+  id: "description",
+  name: "facilitiesManagementBuilding[description]",
+  classes: "govuk-input--width-20",
+  value: building.data.description
+}) }}
+
+
+<div class="govuk-body">
+  {% call govukFieldset({
+    legend: {
+      text: "What is the address?",
+      classes: "govuk-fieldset__legend--m"
+    }
+  }) %}
+    <p class="govuk-caption-m">
+      We’ll use the address to assess the region in which your building is located. This will help us to shortlist the suppliers who can deliver your services.
+    </p>
+
+    {{ addressContainer(pageDescription.additionalDetails.addressContainerParams) }}
+    {{ regionContainer(pageDescription.additionalDetails.regionContainerParams) }}
+  {% endcall %}
+</div>
