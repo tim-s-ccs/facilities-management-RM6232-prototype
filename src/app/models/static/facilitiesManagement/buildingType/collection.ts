@@ -1,7 +1,7 @@
 import BuildingType from './model'
 import buildingTypes from '../../../../data/buildingTypes'
 import StaticCollection from '../../../../../framework/models/static/staticCollection'
-import { BuildingTypesInterface } from '../../../../types/models/facilitiesManagement/buildingType'
+import { BuildingTypesInterface } from '../../../../types/models/static/facilitiesManagement/buildingType'
 
 class BuildingTypes extends StaticCollection implements BuildingTypesInterface {
   collection: Array<BuildingType>
@@ -9,7 +9,7 @@ class BuildingTypes extends StaticCollection implements BuildingTypesInterface {
   constructor() {
     super(buildingTypes, BuildingType)
 
-    this.collection = this._records as Array<BuildingType>
+    this.collection = this._collection as Array<BuildingType>
   }
 }
 

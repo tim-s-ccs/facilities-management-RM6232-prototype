@@ -1,7 +1,7 @@
 import SecurityClearance from './model'
 import securityClearances from '../../../../data/securityClearances'
 import StaticCollection from '../../../../../framework/models/static/staticCollection'
-import { SecurityClearancesInterface } from '../../../../types/models/facilitiesManagement/securityClearance'
+import { SecurityClearancesInterface } from '../../../../types/models/static/facilitiesManagement/securityClearance'
 
 class SecurityClearances extends StaticCollection implements SecurityClearancesInterface {
   collection: Array<SecurityClearance>
@@ -9,7 +9,7 @@ class SecurityClearances extends StaticCollection implements SecurityClearancesI
   constructor() {
     super(securityClearances, SecurityClearance)
 
-    this.collection = this._records as Array<SecurityClearance>
+    this.collection = this._collection as Array<SecurityClearance>
   }
 }
 

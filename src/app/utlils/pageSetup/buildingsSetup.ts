@@ -1,23 +1,25 @@
 import addressContainerSetup from './addressContainerSetup'
-import Building from '../models/active/facilitiesManagement/building/model'
-import Buildings from '../models/active/facilitiesManagement/building/collection'
-import BuildingType from '../models/static/facilitiesManagement/buildingType/model'
-import BuildingTypes from '../models/static/facilitiesManagement/buildingType/collection'
-import formatDate from './formatDate'
+import Building from '../../models/active/facilitiesManagement/building/model'
+import Buildings from '../../models/active/facilitiesManagement/building/collection'
+import BuildingType from '../../models/static/facilitiesManagement/buildingType/model'
+import BuildingTypes from '../../models/static/facilitiesManagement/buildingType/collection'
+import formatDate from '../formatDate'
 import regionContainerSetup from './regionContainerSetup'
-import SecurityClearance from '../models/static/facilitiesManagement/securityClearance/model'
-import SecurityClearances from '../models/static/facilitiesManagement/securityClearance/collection'
-import StaticModel from '../../framework/models/static/staticModel'
+import SecurityClearance from '../../models/static/facilitiesManagement/securityClearance/model'
+import SecurityClearances from '../../models/static/facilitiesManagement/securityClearance/collection'
+import StaticModel from '../../../framework/models/static/staticModel'
+import { BuildingPageDescription, BuildingRowItems, RadioItem } from '../../types/utils/pageSetup/buildingsSetup'
 import { Request } from 'express'
+import { Tables } from '../../types/models/tables'
 
-const buildingRows = (buildings: Buildings): Array<any> => {
-  return buildings.collection.map((building) => {
+const buildingRows = (buildings: Buildings): Array<BuildingRowItems> => {
+  return buildings.collection.map((building): BuildingRowItems => {
     return [
       {
         html: `<a class="govuk-link" aria-label="View details for ${building.data.name}" href="/facilities-management/RM6232/buildings/${building.data.id}">${building.data.name}</a>`
       },
       {
-        text: building.data.description.length > 0 ? building.data.description : '-'
+        text: building.data.description !== undefined && String(building.data.description).length > 0 ? building.data.description : '-'
       },
       {
         text: formatDate(building.data.updatedAt)
@@ -29,22 +31,11 @@ const buildingRows = (buildings: Buildings): Array<any> => {
   })
 }
 
-const getBuilding = (req: Request, id: string): Building => {
-  const buildings = new Buildings(req.session.data['user']['buildings'])
-  
-  return buildings.find(String(id)) as Building
+const getBuilding = (req: Request): Building => {
+  return Building.find(Number(req.params['id']), req.session.data.tables as Tables)
 }
 
-type RadioItem = {
-  value: string
-  text: string
-  hint: {
-    text: string
-  }
-  checked: boolean
-}
-
-const getRadioItem = (id: string, staticModel: StaticModel): RadioItem => {
+const getRadioItem = (staticModel: StaticModel, id?: number): RadioItem => {
   return {
     value: staticModel.data.id,
     text: staticModel.data.name,
@@ -55,32 +46,16 @@ const getRadioItem = (id: string, staticModel: StaticModel): RadioItem => {
   }
 }
 
-const getBuildingTypeRadioItems = (currentBuildingTypeID: string): Array<RadioItem> => {
-  return BuildingTypes.collection.map((buildingType: BuildingType) => getRadioItem(currentBuildingTypeID, buildingType))
+const getBuildingTypeRadioItems = (currentBuildingTypeID?: number): Array<RadioItem> => {
+  return BuildingTypes.collection.map((buildingType: BuildingType) => getRadioItem(buildingType, currentBuildingTypeID))
 }
 
-const getSecurityClearanceRadioItems = (currentSecurityClearanceID: string): Array<RadioItem> => {
-  return SecurityClearances.collection.map((securityClearance: SecurityClearance) => getRadioItem(currentSecurityClearanceID, securityClearance))
+const getSecurityClearanceRadioItems = (currentSecurityClearanceID?: number): Array<RadioItem> => {
+  return SecurityClearances.collection.map((securityClearance: SecurityClearance) => getRadioItem(securityClearance, currentSecurityClearanceID))
 }
 
-type buildingPageDescription = {
-  pageTitle: string
-  stepNumber: number
-  save_and_continue: boolean
-  save_and_return: boolean
-  previousStep: {
-    text: string
-    href: string
-  }
-  nextStep?: {
-    text: string
-    href: string
-  }
-  additionalDetails?: {[key: string]: any}
-}
-
-const pageDescription = (building: Building, step: string): buildingPageDescription | undefined => {
-  const id: string = building.data.id
+const pageDescription = (building: Building, step: string): BuildingPageDescription | undefined => {
+  const id: number = building.data.id
 
   switch (step) {
   case 'building-details':
@@ -108,9 +83,9 @@ const pageDescription = (building: Building, step: string): buildingPageDescript
           }
         ),
         regionContainerParams: regionContainerSetup(
+          'facilitiesManagement[region]',
           building.data.address,
-          building.data.region,
-          'facilitiesManagement[region]'
+          building.data.region
         )
       }
     }
@@ -155,8 +130,8 @@ const pageDescription = (building: Building, step: string): buildingPageDescript
         href: `/facilities-management/RM6232/buildings/${id}/edit/security-clearance`
       },
       additionalDetails: {
-        buildingTypeRadioItems: getBuildingTypeRadioItems(building.data.buildingType.data.id as string),
-        detailsOpen: Number(building.data.buildingType.data.id) > 1
+        buildingTypeRadioItems: getBuildingTypeRadioItems(building.data.buildingType?.data.id),
+        detailsOpen: (building.data.buildingType?.data.id as number) > 1
       }
     }
   case 'security-clearance':
@@ -174,7 +149,7 @@ const pageDescription = (building: Building, step: string): buildingPageDescript
         href: `/facilities-management/RM6232/buildings/${id}`
       },
       additionalDetails: {
-        securityClearanceRadioItems: getSecurityClearanceRadioItems(building.data.securityClearance.data.id as string),
+        securityClearanceRadioItems: getSecurityClearanceRadioItems(building.data.securityClearance?.data.id),
       }
     }
   }

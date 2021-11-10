@@ -3,6 +3,7 @@ export interface RegionInterface {
 }
 
 export type RegionData = {
+  id: number
   name: string
   code: string
 }

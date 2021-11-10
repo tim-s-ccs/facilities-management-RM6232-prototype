@@ -1,3 +1,4 @@
+import { Request } from 'express'
 import { Schema } from '../validation/schema'
 
 export interface ModelInterface {
@@ -5,17 +6,20 @@ export interface ModelInterface {
 }
 
 export interface ActiveModelInterface {
-  schema: Schema,
+  tableName: string
+  schema: Schema
   errors: {[key: string]: ModelError}
   attributes(): object
   validate(call: string): boolean
   errorList(): Array<ListError>
+  save(req: Request): void
 }
 
 export interface StaticModelInterface {
 }
 
 export type ModelData = {
+  id: number
   [key: string]: any
 }
 

@@ -1,8 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Session } from 'express-session'
+import { Tables } from './models/tables'
 
 declare module 'express-session' {
   interface Session {
-    data: any;
+    data: {
+      tables: Tables
+      [key: string]: any
+    }
   }
 }

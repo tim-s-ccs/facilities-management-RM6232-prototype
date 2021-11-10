@@ -1,10 +1,15 @@
 import ActiveCollection from '../../../../../framework/models/active/activeCollection'
 import Building from './model'
-import { BuildingData } from '../../../../types/models/facilitiesManagement/building'
+import { Condition } from '../../../../../framework/types/models/collection'
+import { Tables } from '../../../../types/models/tables'
 
 class Buildings extends ActiveCollection {
-  constructor(data: Array<BuildingData>) {
-    super(data, Building)
+  collection: Array<Building>
+
+  constructor(tables: Tables, conditions?: Array<Condition>) {
+    super(tables.buildings, tables, Building, conditions)
+
+    this.collection = this._collection as Array<Building>
   }
 }
 

@@ -1,10 +1,10 @@
-import Address from '../models/active/facilitiesManagement/address/model'
-import Region from '../models/active/facilitiesManagement/region/model'
-import regions from '../data/regions'
+import Address from '../../models/active/facilitiesManagement/address/model'
+import Region from '../../models/active/facilitiesManagement/region/model'
+import regions from '../../data/regions'
 
-const regionContainerSetup = (address: Address, region: Region, inputName: string): object => {
+const regionContainerSetup = (inputName: string, address: Address, region?: Region): object => {
   const addressLine1: string = address.data.addressLine1
-  const regionName: string = region.data.name
+  const regionName: string = region !== undefined ? region.data.name : ''
 
   const isSelectRegionVisible: boolean = addressLine1 !== '' && regionName === ''
   const isFullRegionVisible: boolean = regionName !== ''

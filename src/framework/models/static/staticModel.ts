@@ -4,10 +4,10 @@ import { ModelData, StaticModelInterface } from '../../types/models/model'
 abstract class StaticModel extends Model implements StaticModelInterface {
   protected _record: ModelData
 
-  constructor(id: string, source: Array<ModelData>) {
+  constructor(id: number, table: Array<ModelData>, tableName: string) {
     super()
 
-    this._record = source.find((record: ModelData) => record.id === id) as ModelData
+    this._record = StaticModel._find(id, table, tableName) as ModelData
   }
 }
 

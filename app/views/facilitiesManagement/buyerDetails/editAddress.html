@@ -7,10 +7,10 @@
 {% block content %}
   <div class="govuk-body govuk-grid-row buyer-details">
     <div class="govuk-grid-column-two-thirds" id="edit-contact-detail-address">
-      <form action="/facilities-management/RM6232/buyer-details/{{ buyerID }}/edit-address" method="post" class="form">
+      <form action="/facilities-management/RM6232/buyer-details/{{buyerDetailData.id }}/edit-address" method="post" class="form">
         {{ govukBackLink({
           text: "Return to manage your details",
-          href: '/facilities-management/RM6232/buyer-details/' + buyerID + '/edit'
+          href: '/facilities-management/RM6232/buyer-details/' +buyerDetailData.id + '/edit'
         }) }}
 
         {{ govukErrorSummary({
@@ -19,7 +19,7 @@
         }) if errorList.length > 0 }}
 
         <div class="govuk-caption-m govuk-!-margin-top-2 govuk-!-margin-bottom-1">
-          {{ data["user"]["email"] }}
+          {{ data.user.email }}
         </div>
         <div class="govuk-caption-xl govuk-!-font-size-36">
           Manage your details
@@ -39,8 +39,8 @@
             label: {
               text: "Building and street"
             },
-            id: "addressLine1",
-            name: "facilitiesManagement[organisationAddress][addressLine1]",
+            id: "buyerDetail_organisationAddress_addressLine1",
+            name: "buyerDetail[organisationAddress][addressLine1]",
             autocomplete: "addressLine1",
             value: addressData.addressLine1,
             errorMessage: {
@@ -53,8 +53,8 @@
               text: "Organisation address line 2",
               classes: "govuk-visually-hidden"
             },
-            id: "addressLine2",
-            name: "facilitiesManagement[organisationAddress][addressLine2]",
+            id: "buyerDetail_organisationAddress_addressLine2",
+            name: "buyerDetail[organisationAddress][addressLine2]",
             autocomplete: "addressLine2",
             value: addressData.addressLine2,
             errorMessage: {
@@ -66,8 +66,8 @@
             label: {
               text: "Town or city"
             },
-            id: "city",
-            name: "facilitiesManagement[organisationAddress][city]",
+            id: "buyerDetail_organisationAddress_city",
+            name: "buyerDetail[organisationAddress][city]",
             autocomplete: "city",
             value: addressData.city,
             errorMessage: {
@@ -79,8 +79,8 @@
             label: {
               text: "County (optional)"
             },
-            id: "county",
-            name: "facilitiesManagement[organisationAddress][county]",
+            id: "buyerDetail_organisationAddress_county",
+            name: "buyerDetail[organisationAddress][county]",
             autocomplete: "county",
             value: addressData.county,
             errorMessage: {
@@ -92,8 +92,8 @@
             label: {
               text: "Postcode"
             },
-            id: "postcode",
-            name: "facilitiesManagement[organisationAddress][postcode]",
+            id: "buyerDetail_organisationAddress_postcode",
+            name: "buyerDetail[organisationAddress][postcode]",
             classes: "govuk-input--width-10",
             autocomplete: "postcode",
             value: addressData.postcode,
