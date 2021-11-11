@@ -1,15 +1,15 @@
-import Address from '../../../models/active/facilitiesManagement/address/model'
+import Address from '../../../../models/active/facilitiesManagement/address/model'
 
 export interface BuyerDetailInterface {
   data: BuyerDetailData
 }
 
 export type BuyerDetailData = {
-  id: string
+  id: number
   fullName: string
   jobTitle: string
   telephoneNumber: string
   organisationName: string
   organisationAddress: Address
-  centralGovernment: string
+  centralGovernment: boolean
 }

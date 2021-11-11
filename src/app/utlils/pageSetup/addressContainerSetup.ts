@@ -1,8 +1,9 @@
-import Address from '../models/active/facilitiesManagement/address/model'
-import addresses from '../data/addresses'
-import { ModelError } from '../../framework/types/models/model'
+import Address from '../../models/active/facilitiesManagement/address/model'
+import addresses from '../../data/addresses'
+import { AddresListItem, AddressContainerParams, AddressContainerSetupOptions } from '../../types/utils/pageSetup/addressContainerSetup'
+import { ModelError } from '../../../framework/types/models/model'
 
-const addressContainerSetup = (address: Address, errors: {[key: string]: ModelError}, options: {inputName: string, enterAddressManuallyLink: string, showAddressHeading: boolean}): object => {
+const addressContainerSetup = (address: Address, errors: {[key: string]: ModelError}, options: AddressContainerSetupOptions): AddressContainerParams => {
   const postcode: string = address.data.postcode
   const addressLine1: string = address.data.addressLine1
 
@@ -12,7 +13,7 @@ const addressContainerSetup = (address: Address, errors: {[key: string]: ModelEr
   const isSelectAnAddressVisible: boolean = isPostcodeChangeVisible
   const isFullAddressVisible: boolean = addressLine1 !== ''
 
-  const addressList: Array<{[key: string]: any}> = [
+  const addressList: Array<AddresListItem> = [
     {
       text: '6 addresses found',
       disabled: true

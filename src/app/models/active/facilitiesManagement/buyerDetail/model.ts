@@ -1,12 +1,14 @@
 import ActiveModel from '../../../../../framework/models/active/activeModel'
 import Address from '../address/model'
 import buyerDetailSchema from './schema'
-import { BuyerDetailData, BuyerDetailInterface } from '../../../../types/models/facilitiesManagement/buyerDetail'
+import { BuyerDetailData, BuyerDetailInterface } from '../../../../types/models/active/facilitiesManagement/buyerDetail'
+import { BuyerDetailRow, Tables } from '../../../../types/models/tables'
 
 class BuyerDetail extends ActiveModel implements BuyerDetailInterface {
+  tableName: string = 'buyerDetails'
   data: BuyerDetailData
 
-  constructor(data: {[key: string]: any}) {
+  constructor(data: BuyerDetailRow, tables: Tables) {
     super(buyerDetailSchema)
 
     this.data = {
@@ -15,9 +17,13 @@ class BuyerDetail extends ActiveModel implements BuyerDetailInterface {
       jobTitle: data.jobTitle,
       telephoneNumber: data.telephoneNumber,
       organisationName: data.organisationName,
-      organisationAddress: new Address(data.organisationAddress),
+      organisationAddress: Address.find(data.organisationAddressID, tables),
       centralGovernment: data.centralGovernment
     }
+  }
+
+  static find = (id: number, tables: Tables): BuyerDetail => {
+    return new this(this._find(id, tables.buyerDetails, this.name) as BuyerDetailRow, tables)
   }
 }
 

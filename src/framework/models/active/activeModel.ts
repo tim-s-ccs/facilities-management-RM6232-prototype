@@ -1,10 +1,13 @@
-import Model from '../model'
-import { ActiveModelInterface, ModelError } from '../../types/models/model'
-import { Schema } from '../../types/validation/schema'
-import InputValidator from '../../validation/validators/inputValidator'
 import CustomValidator from '../../validation/validators/customValidator'
+import InputValidator from '../../validation/validators/inputValidator'
+import Model from '../model'
+import { ActiveModelInterface, ModelData, ModelError } from '../../types/models/model'
+import { Request } from 'express'
+import { Schema } from '../../types/validation/schema'
+import { TableRow, Tables } from '../../types/models/tables'
 
 abstract class ActiveModel extends Model implements ActiveModelInterface {
+  abstract tableName: string
   schema: Schema
   errors: {[key: string]: ModelError} = {}
 
@@ -12,16 +15,6 @@ abstract class ActiveModel extends Model implements ActiveModelInterface {
     super()
 
     this.schema = schema
-  }
-
-  attributes = (): object => {
-    return Object.fromEntries(Object.keys(this.data).map((attributeKey) => {
-      if(this.data[attributeKey] instanceof Model) {
-        return [attributeKey, this.data[attributeKey].attributes()]
-      } else {
-        return [attributeKey, this.data[attributeKey]]
-      }
-    }))
   }
 
   validate = (call: string) => {
@@ -54,7 +47,7 @@ abstract class ActiveModel extends Model implements ActiveModelInterface {
     }
 
     Object.keys(this.data)
-      .filter((attribute: string) => this.data[attribute] instanceof Model)
+      .filter((attribute: string) => this.data[attribute] instanceof ActiveModel)
       .forEach((attribute: string) => {
         const model = this.data[attribute] 
 
@@ -73,6 +66,40 @@ abstract class ActiveModel extends Model implements ActiveModelInterface {
         href: `#${attribute}-error`
       }
     })
+  }
+
+  attributes = (): TableRow => {
+    return Object.fromEntries(Object.keys(this.data).map((attribute) => {
+      if(this.data[attribute] instanceof Model) {
+        return [`${attribute}ID`, (this.data[attribute] as Model).data.id]
+      } else {
+        return [attribute, this.data[attribute]]
+      }
+    })) as TableRow
+  }
+
+  assignAttributes = (data: ModelData): void  => {
+    for (const attribute in this.data) {
+      if (attribute in data) {
+        if (this.data[attribute] instanceof ActiveModel) {
+          (this.data[attribute] as ActiveModel).assignAttributes(data[attribute])
+        } else {
+          this.data[attribute] = data[attribute]
+        }
+      }
+    }
+  }
+
+  save = (req: Request) => {
+    const activeModelAttributes: Array<string> = Object.keys(this.data).filter((attribute) => this.data[attribute] instanceof ActiveModel)
+    
+    activeModelAttributes.forEach(activeModelAttribute => (this.data[activeModelAttribute] as ActiveModel).save(req))
+    
+    const tables: Tables = req.session.data.tables
+    
+    const index: number = tables[this.tableName].map(row => row.id).indexOf(this.data.id)
+  
+    tables[this.tableName][index] = this.attributes()
   }
 }
 

@@ -1,3 +1,5 @@
+/* global $ */
+
 const finderComponent = {
   isRegionContainterPresent: $('[data-module=\'find-region\']').length > 0,
 
@@ -339,23 +341,23 @@ const finderComponent = {
 
   updateFocus (state) {
     switch (state) {
-    case 1:
-      this.$searchAddress.focus()
-      break
-    case 2:
-      this.$addressDropDown.focus()
-      break
-    case 3:
-      if (this.isRegionContainterPresent) this.$regionDropDown.focus()
-      break
-    case 4:
-      if (this.isRegionContainterPresent) this.$changeRegionLink.focus()
-      break
-    case 5:
-      this.$changeAddressLink.focus()
-      break
-    default:
-      break
+      case 1:
+        this.$searchAddress.focus()
+        break
+      case 2:
+        this.$addressDropDown.focus()
+        break
+      case 3:
+        if (this.isRegionContainterPresent) this.$regionDropDown.focus()
+        break
+      case 4:
+        if (this.isRegionContainterPresent) this.$changeRegionLink.focus()
+        break
+      case 5:
+        this.$changeAddressLink.focus()
+        break
+      default:
+        break
     }
   },
 

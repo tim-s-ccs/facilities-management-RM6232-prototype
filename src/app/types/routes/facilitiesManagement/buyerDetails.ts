@@ -1,16 +1,18 @@
-import { AddressData } from '../../models/facilitiesManagement/address'
-import { BuyerDetailData } from '../../models/facilitiesManagement/buyerDetail'
-import { FormParams } from '../formParams'
+import { AddressContainerParams } from '../../utils/pageSetup/addressContainerSetup'
+import { AddressData } from '../../models/active/facilitiesManagement/address'
+import { BuyerDetailData } from '../../models/active/facilitiesManagement/buyerDetail'
+import { ErrorParams } from '../formParams'
 
-type BuyerDetailParams = FormParams & {
-  buyerID: string
-}
-
-export type BuyerDetailEditParams = BuyerDetailParams & {
+export type BuyerDetailEditParams = {
   buyerDetailData: BuyerDetailData
-  addressContainerParams: object
+  addressContainerParams: AddressContainerParams
 }
 
-export type BuyerDetailEditAddressParams = BuyerDetailParams & {
+export type BuyerDetailUpdateParams = BuyerDetailEditParams & ErrorParams
+
+export type BuyerDetailEditAddressParams = {
+  buyerDetailData: BuyerDetailData
   addressData: AddressData
 }
+
+export type BuyerDetailUpdateAddressParams = ErrorParams & BuyerDetailEditAddressParams

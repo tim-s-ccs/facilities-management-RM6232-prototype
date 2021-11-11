@@ -1,14 +1,25 @@
+import ActiveModel from './activeModel'
 import Collection from '../collection'
-import Model from '../model'
+import { Condition } from '../../types/models/collection'
 import { ModelData } from '../../types/models/model'
+import { Tables } from '../../types/models/tables'
 
-class ActiveCollection extends Collection {
-  collection: Array<Model>
+abstract class ActiveCollection extends Collection {
+  abstract collection: Array<ActiveModel>
+  protected _collection: Array<ActiveModel>
 
-  constructor(data: Array<ModelData>, model: any) {
+  constructor(rows: Array<ModelData>, tables: Tables, model: any, conditions?: Array<Condition>) {
     super()
 
-    this.collection = data.map((record: {[key: string]: any}) => new model(record))
+    let collection: Array<ActiveModel> = rows.map(record => new model(record, tables))
+
+    if (conditions !== undefined) {
+      conditions.forEach(condition => {
+        collection = collection.filter(record => record.data[condition.attribute] === condition.value)
+      })
+    }
+
+    this._collection = collection
   }
 }
 

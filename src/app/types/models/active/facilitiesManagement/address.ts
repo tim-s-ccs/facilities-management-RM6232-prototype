@@ -4,6 +4,7 @@ export interface AddressInterface {
 }
 
 export type AddressData = {
+  id: number
   addressLine1: string
   addressLine2?: string
   city: string
