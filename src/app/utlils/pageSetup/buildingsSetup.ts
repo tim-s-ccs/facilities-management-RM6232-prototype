@@ -1,19 +1,15 @@
 import addressContainerSetup from './addressContainerSetup'
 import Building from '../../models/active/facilitiesManagement/building/model'
-import Buildings from '../../models/active/facilitiesManagement/building/collection'
 import BuildingType from '../../models/static/facilitiesManagement/buildingType/model'
-import BuildingTypes from '../../models/static/facilitiesManagement/buildingType/collection'
 import formatDate from '../formatDate'
 import regionContainerSetup from './regionContainerSetup'
 import SecurityClearance from '../../models/static/facilitiesManagement/securityClearance/model'
-import SecurityClearances from '../../models/static/facilitiesManagement/securityClearance/collection'
 import StaticModel from '../../../framework/models/static/staticModel'
 import { BuildingPageDescription, BuildingRowItems, RadioItem } from '../../types/utils/pageSetup/buildingsSetup'
 import { Request } from 'express'
-import { Tables } from '../../types/models/tables'
 
-const buildingRows = (buildings: Buildings): Array<BuildingRowItems> => {
-  return buildings.collection.map((building): BuildingRowItems => {
+const buildingRows = (buildings: Array<Building>): Array<BuildingRowItems> => {
+  return buildings.map((building): BuildingRowItems => {
     return [
       {
         html: `<a class="govuk-link" aria-label="View details for ${building.data.name}" href="/facilities-management/RM6232/buildings/${building.data.id}">${building.data.name}</a>`
@@ -22,7 +18,7 @@ const buildingRows = (buildings: Buildings): Array<BuildingRowItems> => {
         text: building.data.description !== undefined && String(building.data.description).length > 0 ? building.data.description : '-'
       },
       {
-        text: formatDate(building.data.updatedAt)
+        text: formatDate(new Date(building.data.updatedAt))
       },
       {
         html: building.data.status === 'completed' ? '<strong class="govuk-tag">completed</strong>' : '<strong class="govuk-tag govuk-tag--red">incomplete</strong>'
@@ -32,7 +28,7 @@ const buildingRows = (buildings: Buildings): Array<BuildingRowItems> => {
 }
 
 const getBuilding = (req: Request): Building => {
-  return Building.find(Number(req.params['id']), req.session.data.tables as Tables)
+  return Building.find(req, Number(req.params['id']))
 }
 
 const getRadioItem = (staticModel: StaticModel, id?: number): RadioItem => {
@@ -47,11 +43,11 @@ const getRadioItem = (staticModel: StaticModel, id?: number): RadioItem => {
 }
 
 const getBuildingTypeRadioItems = (currentBuildingTypeID?: number): Array<RadioItem> => {
-  return BuildingTypes.collection.map((buildingType: BuildingType) => getRadioItem(buildingType, currentBuildingTypeID))
+  return BuildingType.all().map((buildingType: BuildingType) => getRadioItem(buildingType, currentBuildingTypeID))
 }
 
 const getSecurityClearanceRadioItems = (currentSecurityClearanceID?: number): Array<RadioItem> => {
-  return SecurityClearances.collection.map((securityClearance: SecurityClearance) => getRadioItem(securityClearance, currentSecurityClearanceID))
+  return SecurityClearance.all().map((securityClearance: SecurityClearance) => getRadioItem(securityClearance, currentSecurityClearanceID))
 }
 
 const nextStepURL = (currentStep: string, id: number): string => {

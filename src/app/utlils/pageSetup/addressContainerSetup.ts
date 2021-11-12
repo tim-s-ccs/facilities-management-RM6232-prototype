@@ -1,7 +1,8 @@
 import Address from '../../models/active/facilitiesManagement/address/model'
-import addresses from '../../data/addresses'
+import ukAddresses from '../../data/static/ukAddresses'
 import { AddresListItem, AddressContainerParams, AddressContainerSetupOptions } from '../../types/utils/pageSetup/addressContainerSetup'
 import { ModelError } from '../../../framework/types/models/model'
+import { UKAddressRow } from '../../types/data/staticTables'
 
 const addressContainerSetup = (address: Address, errors: {[key: string]: ModelError}, options: AddressContainerSetupOptions): AddressContainerParams => {
   const postcode: string = address.data.postcode
@@ -22,7 +23,7 @@ const addressContainerSetup = (address: Address, errors: {[key: string]: ModelEr
       text: 'Please select an address',
       selected: true
     },
-    ...addresses.map((address: {[key: string]: string}) => {
+    ...ukAddresses.map((address: UKAddressRow) => {
       return {
         value: address.summary_line,
         text: address.summary_line,

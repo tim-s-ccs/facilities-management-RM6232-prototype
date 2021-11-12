@@ -1,27 +1,36 @@
 import ActiveModel from '../../../../../framework/models/active/activeModel'
 import addressSchema from './schema'
 import { AddressData, AddressInterface } from '../../../../types/models/active/facilitiesManagement/address'
-import { AddressRow, Tables } from '../../../../types/models/tables'
+import { AddressRow } from '../../../../types/data/activeTables'
+import { Condition } from '../../../../../framework/types/models/model'
+import { Request } from 'express'
 
 class Address extends ActiveModel implements AddressInterface {
+  static tableName: string = 'addresses'
   tableName: string = 'addresses'
-  data: AddressData
+  data: AddressData = this.data as AddressData
 
   constructor(data: AddressRow) {
-    super(addressSchema)
-
-    this.data = {
+    super({
       id: data.id,
       addressLine1: data.addressLine1,
       addressLine2: data.addressLine2,
       city: data.city,
       county: data.county,
       postcode: data.postcode
-    }
+    }, addressSchema)
   }
 
-  static find = (id: number, tables: Tables): Address => {
-    return new this(this._find(id, tables.addresses) as AddressRow)
+  static find = (req: Request, id: number): Address => {
+    return new this(this._find(req, this.tableName, id) as AddressRow)
+  }
+
+  static all = (req: Request): Array<Address> => {
+    return this._all(req, this.tableName).map(data => new this(data as AddressRow))
+  }
+
+  static where = (req: Request, condtitions: Array<Condition>): Array<Address> => {
+    return this._where(req, this.tableName, condtitions).map(data => new this(data as AddressRow))
   }
 
   fullAddress = (): string => {

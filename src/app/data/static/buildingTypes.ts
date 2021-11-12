@@ -1,6 +1,6 @@
-import { BuildingTypeData } from '../types/models/static/facilitiesManagement/buildingType'
+import { BuildingTypeRow } from '../../types/data/staticTables'
 
-export default [
+const buildingTypes: Array<BuildingTypeRow> = [
   {
     id: 1,
     name: 'General office - customer facing',
@@ -156,4 +156,6 @@ export default [
     name: 'Mothballed or vacant or disposal',
     description: 'Areas which are vacant or awaiting disposal where no services are being undertaken.'
   }
-] as Array<BuildingTypeData>
+]
+
+export default buildingTypes

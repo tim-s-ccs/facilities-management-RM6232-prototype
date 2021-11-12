@@ -1,6 +1,7 @@
 import Address from '../../models/active/facilitiesManagement/address/model'
 import Region from '../../models/active/facilitiesManagement/region/model'
-import regions from '../../data/regions'
+import ukRegions from '../../data/static/ukRegions'
+import { UKRegionRow } from '../../types/data/staticTables'
 
 const regionContainerSetup = (inputName: string, address: Address, region?: Region): object => {
   const addressLine1: string = address.data.addressLine1
@@ -18,7 +19,7 @@ const regionContainerSetup = (inputName: string, address: Address, region?: Regi
       text: 'Please select a region',
       selected: true
     },
-    ...regions.map((region: {[key: string]: string}) => {
+    ...ukRegions.map((region: UKRegionRow) => {
       return {
         value: region.code,
         text: region.region,

@@ -1,4 +1,4 @@
-import { DefaultRow } from '../../../framework/types/models/tables'
+import { DefaultRow } from '../../../framework/types/data/tables'
 
 export type AddressRow = DefaultRow & {
   addressLine1: string
@@ -37,7 +37,7 @@ export type RegionRow = DefaultRow & {
   code: string
 }
 
-export type Tables = {
+export type ActiveTables = {
   addresses: Array<AddressRow>
   buildings: Array<BuildingRow>
   buyerDetails: Array<BuyerDetailRow>

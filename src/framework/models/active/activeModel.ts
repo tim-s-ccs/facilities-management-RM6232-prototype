@@ -5,20 +5,33 @@ import Model from '../model'
 import StaticModel from '../static/staticModel'
 import StaticModelValidator from '../../validation/validators/staticModelValidator'
 import Validator from '../../validation/validator'
-import { ActiveModelInterface, ModelData, ModelError } from '../../types/models/model'
+import { ActiveModelInterface, Condition, ModelData, ModelError } from '../../types/models/model'
+import { getActiveRow, getActiveTable, setActiveRow } from '../../data/activeDataInterface'
 import { Request } from 'express'
 import { Schema, Scheme } from '../../types/validation/schema'
-import { TableRow, Tables } from '../../types/models/tables'
+import { TableRow } from '../../types/data/tables'
 
 abstract class ActiveModel extends Model implements ActiveModelInterface {
   abstract tableName: string
   schema: Schema
   errors: {[key: string]: ModelError} = {}
 
-  constructor(schema: Schema = {}) {
-    super()
+  constructor(data: ModelData, schema: Schema = {}) {
+    super(data)
 
     this.schema = schema
+  }
+
+  static _find = (req: Request, tableName: string, id: number): ModelData => {
+    return getActiveRow(req, tableName, id)
+  }
+
+  static _all = (req: Request, tableName: string): Array<ModelData> => {
+    return getActiveTable(req, tableName)
+  }
+
+  static _where = (req: Request, tableName: string, conditions: Array<Condition>): Array<ModelData> => {
+    return getActiveTable(req, tableName, conditions)
   }
 
   validate = (call: string) => {
@@ -112,11 +125,7 @@ abstract class ActiveModel extends Model implements ActiveModelInterface {
 
     activeModelAttributes.forEach(activeModelAttribute => (this.data[activeModelAttribute] as ActiveModel).save(req))
 
-    const tables: Tables = req.session.data.tables
-
-    const index: number = tables[this.tableName].map(row => row.id).indexOf(this.data.id)
-
-    tables[this.tableName][index] = this.attributes()
+    setActiveRow(req, this.tableName, this.data.id, this.attributes())
   }
 }
 

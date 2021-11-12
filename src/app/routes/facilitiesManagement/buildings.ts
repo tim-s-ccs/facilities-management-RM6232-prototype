@@ -1,14 +1,12 @@
 import Building from '../../models/active/facilitiesManagement/building/model'
-import Buildings from '../../models/active/facilitiesManagement/building/collection'
 import { buildingRows, getBuilding, nextStepURL, pageDescription } from '../../utlils/pageSetup/buildingsSetup'
 import { BuildingsEditParams, BuildingsIndexParams, BuildingsShowParams, BuildingsUpdateParams } from '../../types/routes/facilitiesManagement/buildings'
 import { Request, Response, Router } from 'express'
-import { Tables } from '../../types/models/tables'
 
 const router = Router()
 
 router.get('/', (req: Request, res: Response) => {
-  const buildings = new Buildings(req.session.data.tables as Tables, [{attribute: 'userID', value: req.session.data.user.id}])
+  const buildings: Array<Building> = Building.where(req, [{attribute: 'userID', value: req.session.data.user.id}])
 
   const params: BuildingsIndexParams = {
     buldingRows: buildingRows(buildings)
