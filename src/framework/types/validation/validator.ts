@@ -1,4 +1,5 @@
-import Model from '../../models/model'
+import ActiveModel from '../../models/active/activeModel'
+import StaticModel from '../../models/static/staticModel'
 
 export type ValidatorOptions = {
   on?: string[]
@@ -12,10 +13,14 @@ export type StringValidatorOptions = ValidatorOptions & {
 }
 
 export type InclusionValidatorOptions = ValidatorOptions & {
-  in: string[]
+  in: any[]
 }
 
-
+export type NumberValidatorOptions = ValidatorOptions & {
+  onlyInteger?: boolean
+  greaterThan?: number
+  lessThan?: number
+}
 export interface ValidatorInterface {
   options: ValidatorOptions
   condition: boolean
@@ -28,5 +33,9 @@ export interface InputValidatorInterface extends ValidatorInterface {
 }
 
 export interface CustomValidatorInterface extends ValidatorInterface {
-  model: Model
+  model: ActiveModel
+}
+
+export interface StaticModelValidatorInterface extends ValidatorInterface {
+  model: StaticModel
 }

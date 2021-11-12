@@ -21,7 +21,7 @@ class Address extends ActiveModel implements AddressInterface {
   }
 
   static find = (id: number, tables: Tables): Address => {
-    return new this(this._find(id, tables.addresses, this.name) as AddressRow)
+    return new this(this._find(id, tables.addresses) as AddressRow)
   }
 
   fullAddress = (): string => {

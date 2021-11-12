@@ -1,7 +1,7 @@
 import Building from '../../models/active/facilitiesManagement/building/model'
 import Buildings from '../../models/active/facilitiesManagement/building/collection'
-import { buildingRows, getBuilding, pageDescription } from '../../utlils/pageSetup/buildingsSetup'
-import { BuildingsEditParams, BuildingsIndexParams, BuildingsShowParams } from '../../types/routes/facilitiesManagement/buildings'
+import { buildingRows, getBuilding, nextStepURL, pageDescription } from '../../utlils/pageSetup/buildingsSetup'
+import { BuildingsEditParams, BuildingsIndexParams, BuildingsShowParams, BuildingsUpdateParams } from '../../types/routes/facilitiesManagement/buildings'
 import { Request, Response, Router } from 'express'
 import { Tables } from '../../types/models/tables'
 
@@ -9,7 +9,7 @@ const router = Router()
 
 router.get('/', (req: Request, res: Response) => {
   const buildings = new Buildings(req.session.data.tables as Tables, [{attribute: 'userID', value: req.session.data.user.id}])
-  
+
   const params: BuildingsIndexParams = {
     buldingRows: buildingRows(buildings)
   }
@@ -45,6 +45,36 @@ router.get('/:id/edit/:step', (req: Request, res: Response) => {
     'facilitiesManagement/buildings/edit.html',
     params
   )
+})
+
+router.post('/:id/edit/:step', (req: Request, res: Response) => {
+  const step: string = req.params['step']
+  const building: Building = getBuilding(req)
+
+  building.assignAttributes(req.body['building'])
+
+  if (building.validate(step)) {
+    building.save(req)
+
+    if (req.body['afterSave'] === 'Save and continue') {
+      res.redirect(nextStepURL(step, building.data.id))
+    } else {
+      res.redirect(`/facilities-management/RM6232/buildings/${building.data.id}`)
+    }
+  } else {
+    const params: BuildingsUpdateParams = {
+      building: building,
+      step: step,
+      pageDescription: pageDescription(building, step),
+      errors: building.errors,
+      errorList: building.errorList()
+    }
+
+    res.render(
+      'facilitiesManagement/buildings/edit.html',
+      params
+    )
+  }
 })
 
 export default router

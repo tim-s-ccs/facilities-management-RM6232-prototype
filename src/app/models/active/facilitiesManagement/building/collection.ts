@@ -4,12 +4,10 @@ import { Condition } from '../../../../../framework/types/models/collection'
 import { Tables } from '../../../../types/models/tables'
 
 class Buildings extends ActiveCollection {
-  collection: Array<Building>
+  collection: Array<Building> = this.collection as Array<Building>
 
   constructor(tables: Tables, conditions?: Array<Condition>) {
     super(tables.buildings, tables, Building, conditions)
-
-    this.collection = this._collection as Array<Building>
   }
 }
 

@@ -2,12 +2,12 @@ import Model from '../model'
 import { ModelData, StaticModelInterface } from '../../types/models/model'
 
 abstract class StaticModel extends Model implements StaticModelInterface {
-  protected _record: ModelData
+  data: ModelData
 
-  constructor(id: number, table: Array<ModelData>, tableName: string) {
+  constructor(id: number, table: Array<ModelData>) {
     super()
 
-    this._record = StaticModel._find(id, table, tableName) as ModelData
+    this.data = StaticModel._find(id, table) as ModelData
   }
 }
 

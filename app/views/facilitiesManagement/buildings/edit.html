@@ -10,6 +10,11 @@
     href: pageDescription.previousStep.href
   }) }}
 
+  {{ govukErrorSummary({
+    titleText: "There is a problem",
+    errorList: errorList
+  }) if errorList.length > 0 }}
+
   <h1 class="govuk-heading-xl" id="main_title">
     <span class="govuk-caption-m govuk-!-margin-bottom-1">
       Step {{ pageDescription.stepNumber }} of 4
@@ -29,13 +34,13 @@
       {{ govukButton({
         element: "input",
         text: "Save and continue",
-        name: "continue",
+        name: "afterSave",
         classes: "govuk-!-margin-right-4"
       }) if pageDescription.save_and_continue }}
       {{ govukButton({
         element: "input",
         text: "Save and return to building details summary",
-        name: "return",
+        name: "afterSave",
         classes: "govuk-button--secondary"
       }) if pageDescription.save_and_return }}
       {% if  pageDescription.nextStep !== undefined %}

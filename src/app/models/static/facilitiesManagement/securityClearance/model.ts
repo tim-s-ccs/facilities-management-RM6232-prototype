@@ -3,12 +3,10 @@ import StaticModel from '../../../../../framework/models/static/staticModel'
 import { SecurityClearanceData, SecurityClearanceInterface } from '../../../../types/models/static/facilitiesManagement/securityClearance'
 
 class SecurityClearance extends StaticModel implements SecurityClearanceInterface {
-  data: SecurityClearanceData
+  data: SecurityClearanceData = this.data as SecurityClearanceData
 
   constructor(id: number) {
-    super(id, securityClearances, 'SecurityClearance')
-
-    this.data = this._record as SecurityClearanceData
+    super(id, securityClearances)
   }
 }
 

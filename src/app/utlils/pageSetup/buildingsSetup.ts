@@ -54,6 +54,19 @@ const getSecurityClearanceRadioItems = (currentSecurityClearanceID?: number): Ar
   return SecurityClearances.collection.map((securityClearance: SecurityClearance) => getRadioItem(securityClearance, currentSecurityClearanceID))
 }
 
+const nextStepURL = (currentStep: string, id: number): string => {
+  switch (currentStep) {
+  case 'building-details':
+    return `/facilities-management/RM6232/buildings/${id}/edit/area`
+  case 'area':
+    return `/facilities-management/RM6232/buildings/${id}/edit/building-type`
+  case 'building-type':
+    return `/facilities-management/RM6232/buildings/${id}/edit/security-clearance`
+  default:
+    return `/facilities-management/RM6232/buildings/${id}`
+  }
+}
+
 const pageDescription = (building: Building, step: string): BuildingPageDescription | undefined => {
   const id: number = building.data.id
 
@@ -77,13 +90,13 @@ const pageDescription = (building: Building, step: string): BuildingPageDescript
           building.data.address,
           building.errors,
           {
-            inputName: 'facilitiesManagement[address]',
+            inputName: 'building[address]',
             enterAddressManuallyLink: `/facilities-management/RM6232/buildings/${id}/edit/building-address`,
             showAddressHeading: true
           }
         ),
         regionContainerParams: regionContainerSetup(
-          'facilitiesManagement[region]',
+          'building[region]',
           building.data.address,
           building.data.region
         )
@@ -130,8 +143,8 @@ const pageDescription = (building: Building, step: string): BuildingPageDescript
         href: `/facilities-management/RM6232/buildings/${id}/edit/security-clearance`
       },
       additionalDetails: {
-        buildingTypeRadioItems: getBuildingTypeRadioItems(building.data.buildingType?.data.id),
-        detailsOpen: (building.data.buildingType?.data.id as number) > 1
+        buildingTypeRadioItems: getBuildingTypeRadioItems(building.data.buildingType?.data?.id),
+        detailsOpen: (building.data.buildingType?.data?.id as number) > 2
       }
     }
   case 'security-clearance':
@@ -149,10 +162,10 @@ const pageDescription = (building: Building, step: string): BuildingPageDescript
         href: `/facilities-management/RM6232/buildings/${id}`
       },
       additionalDetails: {
-        securityClearanceRadioItems: getSecurityClearanceRadioItems(building.data.securityClearance?.data.id),
+        securityClearanceRadioItems: getSecurityClearanceRadioItems(building.data.securityClearance?.data?.id),
       }
     }
   }
 }
 
-export { buildingRows, getBuilding, pageDescription }
+export { buildingRows, getBuilding, pageDescription, nextStepURL }

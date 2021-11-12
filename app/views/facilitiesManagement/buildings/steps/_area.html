@@ -18,13 +18,16 @@
     '
   },
   classes: "govuk-input--width-5",
-  id: "gia",
-  name: "facilitiesManagementBuilding[gia]",
-  value: building.data.gia or "0",
+  id: "building_gia",
+  name: "building[gia]",
+  value: building.data.gia or "0" if building.data.gia !== undefined,
   suffix: {
     text: "sqm"
   },
-  type: 'number'
+  type: 'number',
+  errorMessage: {
+    text: errors.gia.errorMessage
+  } if errors.gia !== undefined
 }) }}
 
 {{ govukInput({
@@ -36,11 +39,14 @@
     html: 'An external area can be the grounds surrounding a building, or an area without any building for example a park, and is measured in square metres.<br> For example 18000 square metres.'
   },
   classes: "govuk-input--width-5",
-  id: "externalArea",
-  name: "facilitiesManagementBuilding[externalArea]",
-  value: building.data.externalArea or "0",
+  id: "building_externalArea",
+  name: "building[externalArea]",
+  value: building.data.externalArea or "0" if building.data.externalArea !== undefined,
   suffix: {
     text: "sqm"
   },
-  type: 'number'
+  type: 'number',
+  errorMessage: {
+    text: errors.externalArea.errorMessage
+  } if errors.externalArea !== undefined
 }) }}
