@@ -10,9 +10,12 @@
     text: "This will help you refer to your building or part of the building when selecting services. For example, Newbury office 3rd floor."
   },
   id: "name",
-  name: "facilitiesManagementBuilding[name]",
+  name: "building[name]",
   classes: "govuk-input--width-20",
-  value: building.data.name
+  value: building.data.name,
+  errorMessage: {
+    text: errors.name.errorMessage
+  } if errors.name !== undefined
 }) }}
 
 {{ govukInput({
@@ -24,9 +27,12 @@
     text: "Enter a description or reference, for example, some users put cost centres in this field."
   },
   id: "description",
-  name: "facilitiesManagementBuilding[description]",
+  name: "building[description]",
   classes: "govuk-input--width-20",
-  value: building.data.description
+  value: building.data.description,
+  errorMessage: {
+    text: errors.description.errorMessage
+  } if errors.description !== undefined
 }) }}
 
 

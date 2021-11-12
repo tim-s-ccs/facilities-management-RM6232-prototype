@@ -1,5 +1,6 @@
 import Building from '../../../models/active/facilitiesManagement/building/model'
 import { BuildingPageDescription, BuildingRowItems } from '../../utils/pageSetup/buildingsSetup'
+import { ErrorParams } from '../formParams'
 
 export type BuildingsIndexParams = {
   buldingRows: Array<BuildingRowItems>
@@ -14,3 +15,5 @@ export type BuildingsEditParams = {
   step: string,
   pageDescription?: BuildingPageDescription
 }
+
+export type BuildingsUpdateParams = ErrorParams & BuildingsEditParams

@@ -19,5 +19,5 @@ export type BuildingData = {
   buildingType?: BuildingType
   securityClearance?: SecurityClearance
   updatedAt: Date
-  status: string 
+  status: string
 }

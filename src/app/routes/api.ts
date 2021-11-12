@@ -7,7 +7,7 @@ const router = Router()
 router.get('/postcodes/:postcode', (_: Request, res: Response) => {
   res.setHeader('Content-Type', 'application/json')
   res.end(JSON.stringify({
-    status: 200, 
+    status: 200,
     result: addresses
   }))
 })
@@ -15,7 +15,7 @@ router.get('/postcodes/:postcode', (_: Request, res: Response) => {
 router.get('/find-region-postcode/:postcode', (_: Request, res: Response) => {
   res.setHeader('Content-Type', 'application/json')
   res.end(JSON.stringify({
-    status: 200, 
+    status: 200,
     result: regions
   }))
 })

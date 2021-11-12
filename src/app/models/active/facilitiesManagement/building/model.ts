@@ -26,12 +26,12 @@ class Building extends ActiveModel implements BuildingInterface {
       buildingType: data.buildingTypeID ? new BuildingType(data.buildingTypeID) : undefined,
       securityClearance: data.securityClearanceID ? new SecurityClearance(data.securityClearanceID) : undefined,
       updatedAt: new Date(data.updatedAt),
-      status: data.status 
+      status: data.status
     }
   }
 
   static find = (id: number, tables: Tables): Building => {
-    return new this(this._find(id, tables.buildings, this.name) as BuildingRow, tables)
+    return new this(this._find(id, tables.buildings) as BuildingRow, tables)
   }
 }
 

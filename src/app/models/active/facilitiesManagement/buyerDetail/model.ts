@@ -23,7 +23,7 @@ class BuyerDetail extends ActiveModel implements BuyerDetailInterface {
   }
 
   static find = (id: number, tables: Tables): BuyerDetail => {
-    return new this(this._find(id, tables.buyerDetails, this.name) as BuyerDetailRow, tables)
+    return new this(this._find(id, tables.buyerDetails) as BuyerDetailRow, tables)
   }
 }
 

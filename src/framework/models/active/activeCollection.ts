@@ -5,8 +5,7 @@ import { ModelData } from '../../types/models/model'
 import { Tables } from '../../types/models/tables'
 
 abstract class ActiveCollection extends Collection {
-  abstract collection: Array<ActiveModel>
-  protected _collection: Array<ActiveModel>
+  collection: Array<ActiveModel>
 
   constructor(rows: Array<ModelData>, tables: Tables, model: any, conditions?: Array<Condition>) {
     super()
@@ -19,7 +18,7 @@ abstract class ActiveCollection extends Collection {
       })
     }
 
-    this._collection = collection
+    this.collection = collection
   }
 }
 

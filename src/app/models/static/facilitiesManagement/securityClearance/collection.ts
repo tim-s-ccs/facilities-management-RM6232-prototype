@@ -4,12 +4,10 @@ import StaticCollection from '../../../../../framework/models/static/staticColle
 import { SecurityClearancesInterface } from '../../../../types/models/static/facilitiesManagement/securityClearance'
 
 class SecurityClearances extends StaticCollection implements SecurityClearancesInterface {
-  collection: Array<SecurityClearance>
+  collection: Array<SecurityClearance> = this.collection as Array<SecurityClearance>
 
   constructor() {
     super(securityClearances, SecurityClearance)
-
-    this.collection = this._collection as Array<SecurityClearance>
   }
 }
 

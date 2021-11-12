@@ -18,7 +18,7 @@ class Region extends ActiveModel implements RegionInterface {
   }
 
   static find = (id: number, tables: Tables): Region => {
-    return new this(this._find(id, tables.regions, this.name) as RegionRow)
+    return new this(this._find(id, tables.regions) as RegionRow)
   }
 }
 
