@@ -1,24 +1,33 @@
 import ActiveModel from '../../../../../framework/models/active/activeModel'
 import regionSchema from './schema'
+import { Condition } from '../../../../../framework/types/models/model'
 import { RegionData, RegionInterface } from '../../../../types/models/active/facilitiesManagement/region'
-import { RegionRow, Tables } from '../../../../types/models/tables'
+import { RegionRow } from '../../../../types/data/activeTables'
+import { Request } from 'express'
 
 class Region extends ActiveModel implements RegionInterface {
+  static tableName: string = 'regions'
   tableName: string = 'regions'
-  data: RegionData
+  data: RegionData = this.data as RegionData
 
   constructor(data: RegionRow) {
-    super(regionSchema)
-
-    this.data = {
+    super({
       id: data.id,
       name: data.name,
       code: data.code
-    }
+    },regionSchema)
   }
 
-  static find = (id: number, tables: Tables): Region => {
-    return new this(this._find(id, tables.regions) as RegionRow)
+  static find = (req: Request, id: number): Region => {
+    return new this(this._find(req, this.tableName, id) as RegionRow)
+  }
+
+  static all = (req: Request): Array<Region> => {
+    return this._all(req, this.tableName).map(data => new this(data as RegionRow))
+  }
+
+  static where = (req: Request, condtitions: Array<Condition>): Array<Region> => {
+    return this._where(req, this.tableName, condtitions).map(data => new this(data as RegionRow))
   }
 }
 

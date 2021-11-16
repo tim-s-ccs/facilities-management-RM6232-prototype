@@ -18,6 +18,6 @@ export type BuildingData = {
   externalArea?: number
   buildingType?: BuildingType
   securityClearance?: SecurityClearance
-  updatedAt: Date
+  updatedAt: string
   status: string
 }

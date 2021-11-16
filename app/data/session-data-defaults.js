@@ -17,7 +17,7 @@ Example usage:
 
 */
 
-const tables = require('../../dist/app/data/tables').default
+const tables = require('../../dist/app/data/activeData').default
 
 module.exports = {
   user: {

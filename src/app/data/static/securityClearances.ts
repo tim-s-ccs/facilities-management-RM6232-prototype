@@ -1,6 +1,6 @@
-import { SecurityClearanceData } from '../types/models/static/facilitiesManagement/securityClearance'
+import { SecurityClearanceRow } from '../../types/data/staticTables'
 
-export default [
+const securityClearances: Array<SecurityClearanceRow> =[
   {
     id: 1,
     name: 'No specific requirement',
@@ -76,4 +76,6 @@ export default [
     name: 'AccessNI - Enhanced',
     description: 'Contains the same information as a standard check and police records held locally. To work with children and vulnerable adults, the check may include information held by the Disclosure and barring service (DBS).'
   }
-] as Array<SecurityClearanceData>
+]
+
+export default securityClearances

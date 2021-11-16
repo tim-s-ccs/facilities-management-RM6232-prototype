@@ -1,13 +1,18 @@
 import Model from '../model'
-import { ModelData, StaticModelInterface } from '../../types/models/model'
+import { Condition, ModelData, StaticModelInterface } from '../../types/models/model'
+import { getStaticRow, getStaticTable } from '../../data/staticDataInterface'
 
 abstract class StaticModel extends Model implements StaticModelInterface {
-  data: ModelData
+  static _find = (tableName: string, id: number): ModelData => {
+    return getStaticRow(tableName, id)
+  }
 
-  constructor(id: number, table: Array<ModelData>) {
-    super()
+  static _all = (tableName: string): Array<ModelData> => {
+    return getStaticTable(tableName)
+  }
 
-    this.data = StaticModel._find(id, table) as ModelData
+  static _where = (tableName: string, conditions: Array<Condition>): Array<ModelData> => {
+    return getStaticTable(tableName, conditions)
   }
 }
 

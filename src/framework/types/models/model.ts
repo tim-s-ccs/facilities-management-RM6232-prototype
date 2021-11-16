@@ -32,3 +32,8 @@ export type ListError = {
   text: string
   href: string
 }
+
+export type Condition = {
+  attribute: string
+  value: any
+}
