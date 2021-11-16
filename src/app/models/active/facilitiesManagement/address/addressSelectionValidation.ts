@@ -1,6 +1,5 @@
 import Address from './model'
-import CustomValidator from '../../../../../framework/validation/validators/customValidator'
-import { ValidatorOptions } from '../../../../../framework/types/validation/validator'
+import { CustomValidator, ValidatorOptions } from 'ccs-prototype-kit-model-interface'
 
 class AddressSelectionValidation extends CustomValidator {
   constructor(model: Address, options: ValidatorOptions) {

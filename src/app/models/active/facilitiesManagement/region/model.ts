@@ -1,6 +1,5 @@
-import ActiveModel from '../../../../../framework/models/active/activeModel'
 import regionSchema from './schema'
-import { Condition } from '../../../../../framework/types/models/model'
+import { ActiveModel, Condition } from 'ccs-prototype-kit-model-interface'
 import { RegionData, RegionInterface } from '../../../../types/models/active/facilitiesManagement/region'
 import { RegionRow } from '../../../../types/data/activeTables'
 import { Request } from 'express'

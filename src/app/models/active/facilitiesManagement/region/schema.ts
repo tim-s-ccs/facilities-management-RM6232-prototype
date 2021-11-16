@@ -1,4 +1,4 @@
-import { Schema } from '../../../../../framework/types/validation/schema'
+import { Schema } from 'ccs-prototype-kit-model-interface'
 
 const regionSchema: Schema = {
 }

@@ -1,9 +1,8 @@
-import ActiveModel from '../../../../../framework/models/active/activeModel'
 import Address from '../address/model'
 import buyerDetailSchema from './schema'
+import { ActiveModel, Condition } from 'ccs-prototype-kit-model-interface'
 import { BuyerDetailData, BuyerDetailInterface } from '../../../../types/models/active/facilitiesManagement/buyerDetail'
 import { BuyerDetailRow } from '../../../../types/data/activeTables'
-import { Condition } from '../../../../../framework/types/models/model'
 import { Request } from 'express'
 
 class BuyerDetail extends ActiveModel implements BuyerDetailInterface {

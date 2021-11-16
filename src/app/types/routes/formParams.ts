@@ -1,4 +1,4 @@
-import { ListError, ModelError } from '../../../framework/types/models/model'
+import { ListError, ModelError } from 'ccs-prototype-kit-model-interface'
 
 export type ErrorParams = {
   errors: {[key: string]: ModelError}

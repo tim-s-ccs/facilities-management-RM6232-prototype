@@ -1,4 +1,4 @@
-import { DefaultRow } from '../../../framework/types/data/tables'
+import { DefaultRow } from 'ccs-prototype-kit-model-interface'
 
 export type BuildingTypeRow = DefaultRow & {
   name: string

@@ -1,7 +1,4 @@
-import InclusionValidator from '../../../../../framework/validation/validators/inputValidators/inclusionValidator'
-import StringValidator from '../../../../../framework/validation/validators/inputValidators/stringValidator'
-import { InclusionValidatorOptions, StringValidatorOptions } from '../../../../../framework/types/validation/validator'
-import { Schema } from '../../../../../framework/types/validation/schema'
+import { InclusionValidator, InclusionValidatorOptions, Schema, StringValidator, StringValidatorOptions } from 'ccs-prototype-kit-model-interface'
 
 const MAX_LENGTH: number = 255
 
