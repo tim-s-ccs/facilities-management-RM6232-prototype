@@ -1,5 +1,4 @@
-import StaticModel from '../../../../../framework/models/static/staticModel'
-import { Condition } from '../../../../../framework/types/models/model'
+import { Condition, StaticModel } from 'ccs-prototype-kit-model-interface'
 import { SecurityClearanceData, SecurityClearanceInterface } from '../../../../types/models/static/facilitiesManagement/securityClearance'
 
 class SecurityClearance extends StaticModel implements SecurityClearanceInterface {

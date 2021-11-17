@@ -1,7 +1,7 @@
 import Address from '../../models/active/facilitiesManagement/address/model'
 import ukAddresses from '../../data/static/ukAddresses'
 import { AddresListItem, AddressContainerParams, AddressContainerSetupOptions } from '../../types/utils/pageSetup/addressContainerSetup'
-import { ModelError } from '../../../framework/types/models/model'
+import { ModelError } from 'ccs-prototype-kit-model-interface'
 import { UKAddressRow } from '../../types/data/staticTables'
 
 const addressContainerSetup = (address: Address, errors: {[key: string]: ModelError}, options: AddressContainerSetupOptions): AddressContainerParams => {

@@ -1,12 +1,11 @@
-import ActiveModel from '../../../../../framework/models/active/activeModel'
 import Address from '../address/model'
 import buildingSchema from './schema'
 import BuildingType from '../../../static/facilitiesManagement/buildingType/model'
 import Region from '../region/model'
 import SecurityClearance from '../../../static/facilitiesManagement/securityClearance/model'
+import { ActiveModel, Condition } from 'ccs-prototype-kit-model-interface'
 import { BuildingData, BuildingInterface } from '../../../../types/models/active/facilitiesManagement/building'
 import { BuildingRow } from '../../../../types/data/activeTables'
-import { Condition } from '../../../../../framework/types/models/model'
 import { Request } from 'express'
 
 class Building extends ActiveModel implements BuildingInterface {

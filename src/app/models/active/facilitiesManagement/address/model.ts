@@ -1,8 +1,7 @@
-import ActiveModel from '../../../../../framework/models/active/activeModel'
 import addressSchema from './schema'
+import { ActiveModel, Condition } from 'ccs-prototype-kit-model-interface'
 import { AddressData, AddressInterface } from '../../../../types/models/active/facilitiesManagement/address'
 import { AddressRow } from '../../../../types/data/activeTables'
-import { Condition } from '../../../../../framework/types/models/model'
 import { Request } from 'express'
 
 class Address extends ActiveModel implements AddressInterface {

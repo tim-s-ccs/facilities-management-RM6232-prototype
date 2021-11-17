@@ -1,6 +1,5 @@
-import StaticModel from '../../../../../framework/models/static/staticModel'
 import { BuildingTypeData, BuildingTypeInterface } from '../../../../types/models/static/facilitiesManagement/buildingType'
-import { Condition } from '../../../../../framework/types/models/model'
+import { Condition, StaticModel } from 'ccs-prototype-kit-model-interface'
 
 class BuildingType extends StaticModel implements BuildingTypeInterface {
   static tableName: string = 'buildingTypes'

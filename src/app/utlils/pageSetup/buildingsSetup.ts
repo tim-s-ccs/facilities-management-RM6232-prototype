@@ -4,9 +4,9 @@ import BuildingType from '../../models/static/facilitiesManagement/buildingType/
 import formatDate from '../formatDate'
 import regionContainerSetup from './regionContainerSetup'
 import SecurityClearance from '../../models/static/facilitiesManagement/securityClearance/model'
-import StaticModel from '../../../framework/models/static/staticModel'
 import { BuildingPageDescription, BuildingRowItems, RadioItem } from '../../types/utils/pageSetup/buildingsSetup'
 import { Request } from 'express'
+import { StaticModel } from 'ccs-prototype-kit-model-interface'
 
 const buildingRows = (buildings: Array<Building>): Array<BuildingRowItems> => {
   return buildings.map((building): BuildingRowItems => {

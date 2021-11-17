@@ -1,7 +1,5 @@
 import AddressSelectionValidation from './addressSelectionValidation'
-import StringValidator from '../../../../../framework/validation/validators/inputValidators/stringValidator'
-import { Schema } from '../../../../../framework/types/validation/schema'
-import { StringValidatorOptions } from '../../../../../framework/types/validation/validator'
+import { Schema, StringValidator, StringValidatorOptions } from 'ccs-prototype-kit-model-interface'
 
 const MAX_LENGTH: number = 255
 

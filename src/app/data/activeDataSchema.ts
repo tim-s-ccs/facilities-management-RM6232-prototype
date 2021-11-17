@@ -1,4 +1,4 @@
-import { ActiveDataSchema, ActiveDataScheme } from '../../framework/types/data/activeDataSchema'
+import { ActiveDataSchema, ActiveDataScheme } from 'ccs-prototype-kit-model-interface'
 
 const addressSchema: ActiveDataScheme = {
   id: 'number',

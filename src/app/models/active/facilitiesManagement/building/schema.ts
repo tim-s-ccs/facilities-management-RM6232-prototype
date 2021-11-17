@@ -1,8 +1,5 @@
 import CombinedAreaValidation from './combinedAreaValidation'
-import NumberValidator from '../../../../../framework/validation/validators/inputValidators/numberValidator'
-import StringValidator from '../../../../../framework/validation/validators/inputValidators/stringValidator'
-import { NumberValidatorOptions, StringValidatorOptions } from '../../../../../framework/types/validation/validator'
-import { Schema } from '../../../../../framework/types/validation/schema'
+import { NumberValidator, NumberValidatorOptions, Schema, StringValidator, StringValidatorOptions } from 'ccs-prototype-kit-model-interface'
 
 const MAX_AREA: number = 1000000000
 const MIN_AREA: number = 0
