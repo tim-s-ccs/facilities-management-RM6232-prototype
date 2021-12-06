@@ -1,20 +1,25 @@
 import Address from '../address/model'
+import buildingModelSchema from './modelSchema'
 import BuildingType from '../../../static/facilitiesManagement/buildingType/model'
 import buildingValidationSchema from './validationSchema'
 import Region from '../region/model'
 import SecurityClearance from '../../../static/facilitiesManagement/securityClearance/model'
-import { ActiveModel, Condition, utils } from 'ccs-prototype-kit-model-interface'
+import { ActiveModel, Condition, ModelSchema, utils, ValidationSchema } from 'ccs-prototype-kit-model-interface'
 import { BuildingAttributes, BuildingData, BuildingInterface } from '../../../../types/models/active/facilitiesManagement/building'
 import { BuildingRow } from '../../../../types/data/activeTables'
 import { Request } from 'express'
 
 class Building extends ActiveModel implements BuildingInterface {
   static tableName: string = 'buildings'
+
   tableName: string = 'buildings'
+  modelSchema: ModelSchema = buildingModelSchema
+  validationSchema: ValidationSchema = buildingValidationSchema
+
   data: BuildingData = this.data as BuildingData
 
   constructor(data: BuildingRow, req: Request) {
-    super(Building.initBuildingData(data, req), buildingValidationSchema)
+    super(Building.initBuildingData(data, req))
   }
 
   static initBuildingData(data: BuildingRow, req: Request): BuildingData {

@@ -1,12 +1,17 @@
+import addressModelSchema from './modelSchema'
 import addressValidationSchema from './validationSchema'
-import { ActiveModel, Condition } from 'ccs-prototype-kit-model-interface'
+import { ActiveModel, Condition, ModelSchema, ValidationSchema } from 'ccs-prototype-kit-model-interface'
 import { AddressAttributes, AddressData, AddressInterface } from '../../../../types/models/active/facilitiesManagement/address'
 import { AddressRow } from '../../../../types/data/activeTables'
 import { Request } from 'express'
 
 class Address extends ActiveModel implements AddressInterface {
   static tableName: string = 'addresses'
+
   tableName: string = 'addresses'
+  modelSchema: ModelSchema = addressModelSchema
+  validationSchema: ValidationSchema = addressValidationSchema
+
   data: AddressData = this.data as AddressData
 
   constructor(data: AddressRow) {
@@ -17,7 +22,7 @@ class Address extends ActiveModel implements AddressInterface {
       city: data.city,
       county: data.county,
       postcode: data.postcode
-    }, addressValidationSchema)
+    })
   }
 
   static find = (req: Request, id: number): Address => {

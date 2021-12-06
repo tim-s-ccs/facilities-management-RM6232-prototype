@@ -1,13 +1,18 @@
 import Address from '../address/model'
+import buyerDetailModelSchema from './modelSchema'
 import buyerDetailValidationSchema from './validationSchema'
-import { ActiveModel, Condition } from 'ccs-prototype-kit-model-interface'
+import { ActiveModel, Condition, ModelSchema, ValidationSchema } from 'ccs-prototype-kit-model-interface'
 import { BuyerDetailData, BuyerDetailInterface } from '../../../../types/models/active/facilitiesManagement/buyerDetail'
 import { BuyerDetailRow } from '../../../../types/data/activeTables'
 import { Request } from 'express'
 
 class BuyerDetail extends ActiveModel implements BuyerDetailInterface {
   static tableName: string = 'buyerDetails'
+
   tableName: string = 'buyerDetails'
+  modelSchema: ModelSchema = buyerDetailModelSchema
+  validationSchema: ValidationSchema = buyerDetailValidationSchema
+
   data: BuyerDetailData = this.data as BuyerDetailData
 
   constructor(data: BuyerDetailRow, req: Request) {
@@ -20,7 +25,7 @@ class BuyerDetail extends ActiveModel implements BuyerDetailInterface {
       organisationName: data.organisationName,
       organisationAddress: Address.find(req, data.organisationAddressID),
       centralGovernment: data.centralGovernment
-    }, buyerDetailValidationSchema)
+    })
   }
 
   static find = (req: Request, id: number): BuyerDetail => {

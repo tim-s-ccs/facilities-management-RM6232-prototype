@@ -1,12 +1,17 @@
+import regionModelSchema from './modelSchema'
 import regionValidationSchema from './validationSchema'
-import { ActiveModel, Condition } from 'ccs-prototype-kit-model-interface'
+import { ActiveModel, Condition, ModelSchema, ValidationSchema } from 'ccs-prototype-kit-model-interface'
 import { RegionAttributes, RegionData, RegionInterface } from '../../../../types/models/active/facilitiesManagement/region'
 import { RegionRow } from '../../../../types/data/activeTables'
 import { Request } from 'express'
 
 class Region extends ActiveModel implements RegionInterface {
   static tableName: string = 'regions'
+
   tableName: string = 'regions'
+  modelSchema: ModelSchema = regionModelSchema
+  validationSchema: ValidationSchema = regionValidationSchema
+
   data: RegionData = this.data as RegionData
 
   constructor(data: RegionRow) {
@@ -14,7 +19,7 @@ class Region extends ActiveModel implements RegionInterface {
       id: data.id,
       name: data.name,
       code: data.code
-    },regionValidationSchema)
+    })
   }
 
   static find = (req: Request, id: number): Region => {
