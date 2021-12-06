@@ -8,13 +8,13 @@ const MAX_LENGTH: number = 50
 const nameOptions: StringValidatorOptions = {
   maxLength: MAX_LENGTH,
   required: true,
-  on: ['building-details']
+  on: ['new', 'building-details']
 }
 
 const descriptionOptions: StringValidatorOptions = {
   maxLength: MAX_LENGTH,
   required: false,
-  on: ['building-details']
+  on: ['new', 'building-details']
 }
 
 const areaOptions: NumberValidatorOptions = {
@@ -24,7 +24,7 @@ const areaOptions: NumberValidatorOptions = {
   on: ['area']
 }
 
-const buildingSchema: ValidationSchema = {
+const buildingValidationSchema: ValidationSchema = {
   inputValidations: [
     {
       attribute: 'name',
@@ -101,4 +101,4 @@ const buildingSchema: ValidationSchema = {
   ]
 }
 
-export default buildingSchema
+export default buildingValidationSchema

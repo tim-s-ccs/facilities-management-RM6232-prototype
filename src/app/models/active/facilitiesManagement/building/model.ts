@@ -1,10 +1,10 @@
 import Address from '../address/model'
-import buildingSchema from './validationSchema'
 import BuildingType from '../../../static/facilitiesManagement/buildingType/model'
+import buildingValidationSchema from './validationSchema'
 import Region from '../region/model'
 import SecurityClearance from '../../../static/facilitiesManagement/securityClearance/model'
-import { ActiveModel, Condition } from 'ccs-prototype-kit-model-interface'
-import { BuildingData, BuildingInterface } from '../../../../types/models/active/facilitiesManagement/building'
+import { ActiveModel, Condition, utils } from 'ccs-prototype-kit-model-interface'
+import { BuildingAttributes, BuildingData, BuildingInterface } from '../../../../types/models/active/facilitiesManagement/building'
 import { BuildingRow } from '../../../../types/data/activeTables'
 import { Request } from 'express'
 
@@ -14,12 +14,16 @@ class Building extends ActiveModel implements BuildingInterface {
   data: BuildingData = this.data as BuildingData
 
   constructor(data: BuildingRow, req: Request) {
-    super({
+    super(Building.initBuildingData(data, req), buildingValidationSchema)
+  }
+
+  static initBuildingData(data: BuildingRow, req: Request): BuildingData {
+    return {
       id: data.id,
       userID: data.userID,
       name: data.name,
       description: data.description,
-      address: Address.find(req, data.addressID),
+      address: data.addressID ? Address.find(req, data.addressID) : undefined,
       region: data.regionID ? Region.find(req, data.regionID) : undefined,
       gia: data.gia,
       externalArea: data.externalArea,
@@ -27,7 +31,25 @@ class Building extends ActiveModel implements BuildingInterface {
       securityClearance: data.securityClearanceID ? SecurityClearance.find(data.securityClearanceID) : undefined,
       updatedAt: data.updatedAt,
       status: data.status
-    } as BuildingData, buildingSchema)
+    }
+  }
+
+  static build = (req: Request, data?: BuildingAttributes): Building => {
+    if (data === undefined) { return new this({} as BuildingRow, req) }
+
+    const building = new this({
+      id: this.nextID(req, this.tableName),
+      userID: req.session.data.user.id,
+      name: data.name,
+      description: data.description,
+      updatedAt: utils.getUpdatedAt(),
+      status: 'incomplete'
+    } as BuildingRow, req)
+
+    building.data.address = Address.build(req, data.address)
+    building.data.region = Region.build(req, data.region)
+
+    return building
   }
 
   static find = (req: Request, id: number): Building => {

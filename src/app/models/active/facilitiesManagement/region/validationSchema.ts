@@ -1,6 +1,6 @@
 import { ValidationSchema } from 'ccs-prototype-kit-model-interface'
 
-const regionSchema: ValidationSchema = {
+const regionValidationSchema: ValidationSchema = {
 }
 
-export default regionSchema
+export default regionValidationSchema

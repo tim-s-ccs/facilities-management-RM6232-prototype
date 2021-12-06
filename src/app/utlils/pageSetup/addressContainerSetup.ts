@@ -4,9 +4,9 @@ import { AddresListItem, AddressContainerParams, AddressContainerSetupOptions } 
 import { ModelError } from 'ccs-prototype-kit-model-interface'
 import { UKAddressRow } from '../../types/data/staticTables'
 
-const addressContainerSetup = (address: Address, errors: {[key: string]: ModelError}, options: AddressContainerSetupOptions): AddressContainerParams => {
-  const postcode: string = address.data.postcode
-  const addressLine1: string = address.data.addressLine1
+const addressContainerSetup = (errors: {[key: string]: ModelError}, options: AddressContainerSetupOptions, address?: Address): AddressContainerParams => {
+  const postcode: string = address ? address.data.postcode : ''
+  const addressLine1: string = address ? address.data.addressLine1 : ''
 
   const isPostcodeSearchVisible: boolean = postcode === '' || errors.postcode !== undefined
   const isPostcodeChangeVisible: boolean = postcode !== '' && addressLine1 === '' && errors.postcode === undefined

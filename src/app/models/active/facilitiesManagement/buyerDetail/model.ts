@@ -1,5 +1,5 @@
 import Address from '../address/model'
-import buyerDetailSchema from './validationSchema'
+import buyerDetailValidationSchema from './validationSchema'
 import { ActiveModel, Condition } from 'ccs-prototype-kit-model-interface'
 import { BuyerDetailData, BuyerDetailInterface } from '../../../../types/models/active/facilitiesManagement/buyerDetail'
 import { BuyerDetailRow } from '../../../../types/data/activeTables'
@@ -20,7 +20,7 @@ class BuyerDetail extends ActiveModel implements BuyerDetailInterface {
       organisationName: data.organisationName,
       organisationAddress: Address.find(req, data.organisationAddressID),
       centralGovernment: data.centralGovernment
-    }, buyerDetailSchema)
+    }, buyerDetailValidationSchema)
   }
 
   static find = (req: Request, id: number): BuyerDetail => {

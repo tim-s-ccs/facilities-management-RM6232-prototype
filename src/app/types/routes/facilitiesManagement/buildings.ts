@@ -11,7 +11,8 @@ export type BuildingsShowParams = {
 }
 
 export type BuildingsNewParams = {
-  building: Building
+  building: Building,
+  pageDescription?: BuildingPageDescription
 }
 
 export type BuildingsEditParams = {
@@ -20,4 +21,5 @@ export type BuildingsEditParams = {
   pageDescription?: BuildingPageDescription
 }
 
+export type BuildingsCreateParams = ErrorParams & BuildingsNewParams
 export type BuildingsUpdateParams = ErrorParams & BuildingsEditParams

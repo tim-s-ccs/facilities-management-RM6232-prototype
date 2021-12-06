@@ -31,10 +31,10 @@ const postCodeOptions: StringValidatorOptions = {
   maxLength: 8,
   required: true,
   pattern: '^(([A-Za-z][A-Za-z]{0,1})([0-9][A-Za-z0-9]{0,1})) {0,}(([0-9])([A-Za-z]{2}))$',
-  on: ['update', 'update_address', 'building-details']
+  on: ['new', 'update', 'update_address', 'building-details']
 }
 
-const addressSchema: ValidationSchema = {
+const addressValidationSchema: ValidationSchema = {
   inputValidations: [
     {
       attribute: 'addressLine1',
@@ -90,7 +90,7 @@ const addressSchema: ValidationSchema = {
       attribute: 'base',
       validator: AddressSelectionValidation,
       options: {
-        on: ['update', 'building-details']
+        on: ['new', 'update', 'building-details']
       },
       errorMessages: {
         notSelected: 'You must select an address to save your details',
@@ -99,4 +99,4 @@ const addressSchema: ValidationSchema = {
   ]
 }
 
-export default addressSchema
+export default addressValidationSchema

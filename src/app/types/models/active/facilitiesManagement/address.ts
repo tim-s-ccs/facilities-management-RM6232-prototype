@@ -11,3 +11,11 @@ export type AddressData = {
   county?: string
   postcode: string
 }
+
+export type AddressAttributes = {
+  addressLine1: string
+  addressLine2?: string
+  city: string
+  county?: string
+  postcode: string
+}

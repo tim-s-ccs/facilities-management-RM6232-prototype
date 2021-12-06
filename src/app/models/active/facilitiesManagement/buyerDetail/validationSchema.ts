@@ -32,7 +32,7 @@ const centralGovernmentOptions: InclusionValidatorOptions = {
   on: ['update']
 }
 
-const buyerDetailSchema: ValidationSchema = {
+const buyerDetailValidationSchema: ValidationSchema = {
   inputValidations: [
     {
       attribute: 'fullName',
@@ -86,4 +86,4 @@ const buyerDetailSchema: ValidationSchema = {
   ]
 }
 
-export default buyerDetailSchema
+export default buyerDetailValidationSchema

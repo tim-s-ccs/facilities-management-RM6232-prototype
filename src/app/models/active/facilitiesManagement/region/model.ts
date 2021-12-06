@@ -1,6 +1,6 @@
-import regionSchema from './validationSchema'
+import regionValidationSchema from './validationSchema'
 import { ActiveModel, Condition } from 'ccs-prototype-kit-model-interface'
-import { RegionData, RegionInterface } from '../../../../types/models/active/facilitiesManagement/region'
+import { RegionAttributes, RegionData, RegionInterface } from '../../../../types/models/active/facilitiesManagement/region'
 import { RegionRow } from '../../../../types/data/activeTables'
 import { Request } from 'express'
 
@@ -14,7 +14,7 @@ class Region extends ActiveModel implements RegionInterface {
       id: data.id,
       name: data.name,
       code: data.code
-    },regionSchema)
+    },regionValidationSchema)
   }
 
   static find = (req: Request, id: number): Region => {
@@ -27,6 +27,16 @@ class Region extends ActiveModel implements RegionInterface {
 
   static where = (req: Request, condtitions: Array<Condition>): Array<Region> => {
     return this._where(req, this.tableName, condtitions).map(data => new this(data as RegionRow))
+  }
+
+  static build = (req: Request, data?: RegionAttributes): Region => {
+    if (data === undefined) { return new this({} as RegionRow) }
+
+    return new this({
+      id: this.nextID(req, this.tableName),
+      name: data.name,
+      code: data.code
+    })
   }
 }
 
