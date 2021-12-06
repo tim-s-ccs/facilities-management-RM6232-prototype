@@ -1,4 +1,4 @@
-import regionSchema from './schema'
+import regionSchema from './validationSchema'
 import { ActiveModel, Condition } from 'ccs-prototype-kit-model-interface'
 import { RegionData, RegionInterface } from '../../../../types/models/active/facilitiesManagement/region'
 import { RegionRow } from '../../../../types/data/activeTables'

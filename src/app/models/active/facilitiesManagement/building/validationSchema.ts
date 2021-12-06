@@ -1,5 +1,5 @@
 import CombinedAreaValidation from './combinedAreaValidation'
-import { NumberValidator, NumberValidatorOptions, Schema, StringValidator, StringValidatorOptions } from 'ccs-prototype-kit-model-interface'
+import { NumberValidator, NumberValidatorOptions, StringValidator, StringValidatorOptions, ValidationSchema } from 'ccs-prototype-kit-model-interface'
 
 const MAX_AREA: number = 1000000000
 const MIN_AREA: number = 0
@@ -24,7 +24,7 @@ const areaOptions: NumberValidatorOptions = {
   on: ['area']
 }
 
-const buildingSchema: Schema = {
+const buildingSchema: ValidationSchema = {
   inputValidations: [
     {
       attribute: 'name',

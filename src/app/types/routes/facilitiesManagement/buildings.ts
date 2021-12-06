@@ -10,6 +10,10 @@ export type BuildingsShowParams = {
   building: Building
 }
 
+export type BuildingsNewParams = {
+  building: Building
+}
+
 export type BuildingsEditParams = {
   building: Building
   step: string,

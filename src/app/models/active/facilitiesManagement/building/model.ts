@@ -1,5 +1,5 @@
 import Address from '../address/model'
-import buildingSchema from './schema'
+import buildingSchema from './validationSchema'
 import BuildingType from '../../../static/facilitiesManagement/buildingType/model'
 import Region from '../region/model'
 import SecurityClearance from '../../../static/facilitiesManagement/securityClearance/model'

@@ -1,4 +1,4 @@
-import addressSchema from './schema'
+import addressSchema from './validationSchema'
 import { ActiveModel, Condition } from 'ccs-prototype-kit-model-interface'
 import { AddressData, AddressInterface } from '../../../../types/models/active/facilitiesManagement/address'
 import { AddressRow } from '../../../../types/data/activeTables'

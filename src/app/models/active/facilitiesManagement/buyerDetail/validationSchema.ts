@@ -1,4 +1,4 @@
-import { InclusionValidator, InclusionValidatorOptions, Schema, StringValidator, StringValidatorOptions } from 'ccs-prototype-kit-model-interface'
+import { InclusionValidator, InclusionValidatorOptions, StringValidator, StringValidatorOptions, ValidationSchema } from 'ccs-prototype-kit-model-interface'
 
 const MAX_LENGTH: number = 255
 
@@ -32,7 +32,7 @@ const centralGovernmentOptions: InclusionValidatorOptions = {
   on: ['update']
 }
 
-const buyerDetailSchema: Schema = {
+const buyerDetailSchema: ValidationSchema = {
   inputValidations: [
     {
       attribute: 'fullName',

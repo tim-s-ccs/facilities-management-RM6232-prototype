@@ -1,6 +1,7 @@
 import Building from '../../models/active/facilitiesManagement/building/model'
+import { BuildingRow } from '../../types/data/activeTables'
 import { buildingRows, getBuilding, nextStepURL, pageDescription } from '../../utlils/pageSetup/buildingsSetup'
-import { BuildingsEditParams, BuildingsIndexParams, BuildingsShowParams, BuildingsUpdateParams } from '../../types/routes/facilitiesManagement/buildings'
+import { BuildingsEditParams, BuildingsIndexParams, BuildingsNewParams, BuildingsShowParams, BuildingsUpdateParams } from '../../types/routes/facilitiesManagement/buildings'
 import { Request, Response, Router } from 'express'
 
 const router = Router()
@@ -14,6 +15,19 @@ router.get('/', (req: Request, res: Response) => {
 
   res.render(
     'facilitiesManagement/buildings/index.html',
+    params
+  )
+})
+
+router.get('/new', (req: Request, res: Response) => {
+  const building: Building = new Building({} as BuildingRow, req)
+
+  const params: BuildingsNewParams = {
+    building: building
+  }
+
+  res.render(
+    'facilitiesManagement/buildings/new.html',
     params
   )
 })

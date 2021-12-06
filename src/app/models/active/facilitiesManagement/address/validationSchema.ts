@@ -1,5 +1,5 @@
 import AddressSelectionValidation from './addressSelectionValidation'
-import { Schema, StringValidator, StringValidatorOptions } from 'ccs-prototype-kit-model-interface'
+import { StringValidator, StringValidatorOptions, ValidationSchema } from 'ccs-prototype-kit-model-interface'
 
 const MAX_LENGTH: number = 255
 
@@ -34,7 +34,7 @@ const postCodeOptions: StringValidatorOptions = {
   on: ['update', 'update_address', 'building-details']
 }
 
-const addressSchema: Schema = {
+const addressSchema: ValidationSchema = {
   inputValidations: [
     {
       attribute: 'addressLine1',

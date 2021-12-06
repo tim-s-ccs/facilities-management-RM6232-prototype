@@ -1,5 +1,5 @@
 import Address from '../address/model'
-import buyerDetailSchema from './schema'
+import buyerDetailSchema from './validationSchema'
 import { ActiveModel, Condition } from 'ccs-prototype-kit-model-interface'
 import { BuyerDetailData, BuyerDetailInterface } from '../../../../types/models/active/facilitiesManagement/buyerDetail'
 import { BuyerDetailRow } from '../../../../types/data/activeTables'
