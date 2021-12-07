@@ -56,6 +56,48 @@ router.post('/create', (req: Request, res: Response) => {
   }
 })
 
+router.get('/new/building-address', (req: Request, res: Response) => {
+  const building: Building = Building.build(req)
+
+  const params: BuildingsNewParams = {
+    building: building,
+    pageDescription: pageDescription(building, 'new-address')
+  }
+
+  res.render(
+    'facilitiesManagement/buildings/new-address.html',
+    params
+  )
+})
+
+router.post('/create/building-address', (req: Request, res: Response) => {
+  const building: Building = Building.build(req, req.body['building'])
+
+  if (building.validate('new-address')) {
+    const params: BuildingsNewParams = {
+      building: building,
+      pageDescription: pageDescription(building, 'new')
+    }
+
+    res.render(
+      'facilitiesManagement/buildings/new.html',
+      params
+    )
+  } else {
+    const params: BuildingsCreateParams = {
+      building: building,
+      pageDescription: pageDescription(building, 'new-address'),
+      errors: building.errors,
+      errorList: building.errorList()
+    }
+
+    res.render(
+      'facilitiesManagement/buildings/new-address.html',
+      params
+    )
+  }
+})
+
 router.get('/:id', (req: Request, res: Response) => {
   const params: BuildingsShowParams = {
     building: getBuilding(req)

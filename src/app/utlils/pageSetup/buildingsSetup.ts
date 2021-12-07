@@ -189,6 +189,17 @@ const pageDescription = (building: Building, step: string): BuildingPageDescript
         )
       }
     }
+  case 'new-address':
+    return {
+      pageTitle: 'Add building address',
+      stepNumber: 1,
+      save_and_continue: true,
+      save_and_return: false,
+      previousStep: {
+        text: 'Return to building details',
+        href: '/facilities-management/RM6232/buildings/new'
+      }
+    }
   }
 }
 

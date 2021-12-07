@@ -13,10 +13,13 @@
       text: "Building and street line 1 of 2"
     },
     id: "addressLine1",
-    name: "facilitiesManagementBuilding[address][addressLine1]",
+    name: "building[address][addressLine1]",
     classes: "govuk-input--width-20",
     autocomplete: "addressLine1",
-    value: building.data.address.data.addressLine1
+    value: building.data.address.data.addressLine1,
+    errorMessage: {
+      text: errors.addressLine1.errorMessage
+    } if errors.addressLine1 !== undefined
   }) }}
 
   {{ govukInput({
@@ -25,9 +28,12 @@
     },
     id: "addressLine1",
     classes: "govuk-input--width-20",
-    name: "facilitiesManagementBuilding[address][addressLine2]",
+    name: "building[address][addressLine2]",
     autocomplete: "addressLine2",
-    value: building.data.address.data.addressLine2
+    value: building.data.address.data.addressLine2,
+    errorMessage: {
+      text: errors.addressLine2.errorMessage
+    } if errors.addressLine2 !== undefined
   }) }}
 
   {{ govukInput({
@@ -35,10 +41,13 @@
       text: "Town or city"
     },
     id: "city",
-    name: "facilitiesManagement[organisationAddress][city]",
+    name: "building[address][city]",
     classes: "govuk-input--width-10",
     autocomplete: "city",
-    value: building.data.address.data.city
+    value: building.data.address.data.city,
+    errorMessage: {
+      text: errors.city.errorMessage
+    } if errors.city !== undefined
   }) }}
 
   {{ govukInput({
@@ -46,10 +55,13 @@
       text: "Postcode"
     },
     id: "postcode",
-    name: "facilitiesManagement[organisationAddress][postcode]",
+    name: "building[address][postcode]",
     classes: "govuk-input--width-10",
     autocomplete: "postcode",
-    value: building.data.address.data.postcode
+    value: building.data.address.data.postcode,
+    errorMessage: {
+      text: errors.postcode.errorMessage
+    } if errors.postcode !== undefined
   }) }}
   
 {% endcall %}

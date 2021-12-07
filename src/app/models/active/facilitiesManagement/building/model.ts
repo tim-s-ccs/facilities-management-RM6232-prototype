@@ -51,8 +51,13 @@ class Building extends ActiveModel implements BuildingInterface {
       status: 'incomplete'
     } as BuildingRow, req)
 
-    building.data.address = Address.build(req, data.address)
-    building.data.region = Region.build(req, data.region)
+    if (data.address !== undefined) {
+      building.data.address = Address.build(req, data.address)
+    }
+
+    if (data.region !== undefined) {
+      building.data.region = Region.build(req, data.region)
+    }
 
     return building
   }

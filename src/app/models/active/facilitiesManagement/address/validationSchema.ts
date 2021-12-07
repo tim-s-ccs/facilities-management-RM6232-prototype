@@ -6,32 +6,32 @@ const MAX_LENGTH: number = 255
 const addressLine1Options: StringValidatorOptions = {
   maxLength: MAX_LENGTH,
   required: true,
-  on: ['update_address']
+  on: ['new-address', 'update_address']
 }
 
 const addressLine2Options: StringValidatorOptions = {
   maxLength: MAX_LENGTH,
   required: false,
-  on: ['update_address']
+  on: ['new-address', 'update_address']
 }
 
 const cityOptions: StringValidatorOptions = {
   maxLength: MAX_LENGTH,
   required: true,
-  on: ['update_address']
+  on: ['new-address', 'update_address']
 }
 
 const countyOptions: StringValidatorOptions = {
   maxLength: MAX_LENGTH,
   required: false,
-  on: ['update_address']
+  on: ['new-address', 'update_address']
 }
 
 const postCodeOptions: StringValidatorOptions = {
   maxLength: 8,
   required: true,
   pattern: '^(([A-Za-z][A-Za-z]{0,1})([0-9][A-Za-z0-9]{0,1})) {0,}(([0-9])([A-Za-z]{2}))$',
-  on: ['new', 'update', 'update_address', 'building-details']
+  on: ['new', 'new-address', 'update', 'update_address', 'building-details']
 }
 
 const addressValidationSchema: ValidationSchema = {
@@ -90,7 +90,7 @@ const addressValidationSchema: ValidationSchema = {
       attribute: 'base',
       validator: AddressSelectionValidation,
       options: {
-        on: ['new', 'update', 'building-details']
+        on: ['new', 'new-address', 'update', 'building-details']
       },
       errorMessages: {
         notSelected: 'You must select an address to save your details',
