@@ -1,5 +1,5 @@
 import CombinedAreaValidation from './combinedAreaValidation'
-import { NumberValidator, NumberValidatorOptions, Schema, StringValidator, StringValidatorOptions } from 'ccs-prototype-kit-model-interface'
+import { NumberValidator, NumberValidatorOptions, StringValidator, StringValidatorOptions, ValidationSchema } from 'ccs-prototype-kit-model-interface'
 
 const MAX_AREA: number = 1000000000
 const MIN_AREA: number = 0
@@ -8,13 +8,13 @@ const MAX_LENGTH: number = 50
 const nameOptions: StringValidatorOptions = {
   maxLength: MAX_LENGTH,
   required: true,
-  on: ['building-details']
+  on: ['new', 'building-details']
 }
 
 const descriptionOptions: StringValidatorOptions = {
   maxLength: MAX_LENGTH,
   required: false,
-  on: ['building-details']
+  on: ['new', 'building-details']
 }
 
 const areaOptions: NumberValidatorOptions = {
@@ -24,7 +24,7 @@ const areaOptions: NumberValidatorOptions = {
   on: ['area']
 }
 
-const buildingSchema: Schema = {
+const buildingValidationSchema: ValidationSchema = {
   inputValidations: [
     {
       attribute: 'name',
@@ -101,4 +101,4 @@ const buildingSchema: Schema = {
   ]
 }
 
-export default buildingSchema
+export default buildingValidationSchema

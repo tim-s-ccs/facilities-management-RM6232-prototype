@@ -2,6 +2,8 @@ import Address from '../../../../models/active/facilitiesManagement/address/mode
 import BuildingType from '../../../../models/static/facilitiesManagement/buildingType/model'
 import Region from '../../../../models/active/facilitiesManagement/region/model'
 import SecurityClearance from '../../../../models/static/facilitiesManagement/securityClearance/model'
+import { AddressAttributes } from './address'
+import { RegionAttributes } from './region'
 
 export interface BuildingInterface {
   data: BuildingData
@@ -10,9 +12,9 @@ export interface BuildingInterface {
 export type BuildingData = {
   id: number
   userID: number
-  name: string
+  name?: string
   description?: string
-  address: Address
+  address?: Address
   region?: Region
   gia?: number
   externalArea?: number
@@ -20,4 +22,11 @@ export type BuildingData = {
   securityClearance?: SecurityClearance
   updatedAt: string
   status: string
+}
+
+export type BuildingAttributes = {
+  name: string
+  description: string
+  address: AddressAttributes
+  region: RegionAttributes
 }

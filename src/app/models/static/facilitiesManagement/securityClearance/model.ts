@@ -13,8 +13,8 @@ class SecurityClearance extends StaticModel implements SecurityClearanceInterfac
     return this._all(this.tableName).map(data => new this(data))
   }
 
-  static where = (condtitions: Array<Condition>): Array<SecurityClearance> => {
-    return this._where(this.tableName, condtitions).map(data => new this(data))
+  static where = (conditions: Array<Condition>): Array<SecurityClearance> => {
+    return this._where(this.tableName, conditions).map(data => new this(data))
   }
 }
 

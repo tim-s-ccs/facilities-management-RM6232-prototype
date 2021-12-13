@@ -10,10 +10,16 @@ export type BuildingsShowParams = {
   building: Building
 }
 
+export type BuildingsNewParams = {
+  building: Building,
+  pageDescription?: BuildingPageDescription
+}
+
 export type BuildingsEditParams = {
   building: Building
   step: string,
   pageDescription?: BuildingPageDescription
 }
 
+export type BuildingsCreateParams = ErrorParams & BuildingsNewParams
 export type BuildingsUpdateParams = ErrorParams & BuildingsEditParams

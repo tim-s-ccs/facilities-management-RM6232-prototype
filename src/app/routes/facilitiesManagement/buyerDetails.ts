@@ -11,13 +11,13 @@ router.get('/:id/edit', (req: Request, res: Response) => {
   const params: BuyerDetailEditParams = {
     buyerDetailData: buyerDetail.data,
     addressContainerParams: addressContainerSetup(
-      buyerDetail.data.organisationAddress,
       buyerDetail.errors,
       {
         inputName: 'buyerDetail[organisationAddress]',
         enterAddressManuallyLink: `/facilities-management/RM6232/buyer-details/${buyerDetail.data.id}/edit-address`,
         showAddressHeading: false
-      }
+      },
+      buyerDetail.data.organisationAddress
     )
   }
 
@@ -40,13 +40,13 @@ router.post('/:id', (req: Request, res: Response) => {
     const params: BuyerDetailUpdateParams = {
       buyerDetailData: buyerDetail.data,
       addressContainerParams: addressContainerSetup(
-        buyerDetail.data.organisationAddress,
         buyerDetail.errors,
         {
           inputName: 'buyerDetail[organisationAddress]',
           enterAddressManuallyLink: `/facilities-management/RM6232/buyer-details/${buyerDetail.data.id}/edit-address`,
           showAddressHeading: false
-        }
+        },
+        buyerDetail.data.organisationAddress
       ),
       errors: buyerDetail.errors,
       errorList: buyerDetail.errorList()

@@ -1,40 +1,40 @@
 import AddressSelectionValidation from './addressSelectionValidation'
-import { Schema, StringValidator, StringValidatorOptions } from 'ccs-prototype-kit-model-interface'
+import { StringValidator, StringValidatorOptions, ValidationSchema } from 'ccs-prototype-kit-model-interface'
 
 const MAX_LENGTH: number = 255
 
 const addressLine1Options: StringValidatorOptions = {
   maxLength: MAX_LENGTH,
   required: true,
-  on: ['update_address']
+  on: ['new-address', 'update_address']
 }
 
 const addressLine2Options: StringValidatorOptions = {
   maxLength: MAX_LENGTH,
   required: false,
-  on: ['update_address']
+  on: ['new-address', 'update_address']
 }
 
 const cityOptions: StringValidatorOptions = {
   maxLength: MAX_LENGTH,
   required: true,
-  on: ['update_address']
+  on: ['new-address', 'update_address']
 }
 
 const countyOptions: StringValidatorOptions = {
   maxLength: MAX_LENGTH,
   required: false,
-  on: ['update_address']
+  on: ['new-address', 'update_address']
 }
 
 const postCodeOptions: StringValidatorOptions = {
   maxLength: 8,
   required: true,
   pattern: '^(([A-Za-z][A-Za-z]{0,1})([0-9][A-Za-z0-9]{0,1})) {0,}(([0-9])([A-Za-z]{2}))$',
-  on: ['update', 'update_address', 'building-details']
+  on: ['new', 'new-address', 'update', 'update_address', 'building-details']
 }
 
-const addressSchema: Schema = {
+const addressValidationSchema: ValidationSchema = {
   inputValidations: [
     {
       attribute: 'addressLine1',
@@ -90,7 +90,7 @@ const addressSchema: Schema = {
       attribute: 'base',
       validator: AddressSelectionValidation,
       options: {
-        on: ['update', 'building-details']
+        on: ['new', 'new-address', 'update', 'building-details']
       },
       errorMessages: {
         notSelected: 'You must select an address to save your details',
@@ -99,4 +99,4 @@ const addressSchema: Schema = {
   ]
 }
 
-export default addressSchema
+export default addressValidationSchema

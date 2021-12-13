@@ -20,7 +20,7 @@ export type AddresListItem ={
 }
 
 export type AddressContainerParams = {
-  addressObject: Address,
+  addressObject?: Address,
   inputName: string,
   enterAddressManuallyLink: string,
   showAddressHeading: boolean,

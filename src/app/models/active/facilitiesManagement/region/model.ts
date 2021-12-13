@@ -1,12 +1,17 @@
-import regionSchema from './schema'
-import { ActiveModel, Condition } from 'ccs-prototype-kit-model-interface'
-import { RegionData, RegionInterface } from '../../../../types/models/active/facilitiesManagement/region'
+import regionModelSchema from './modelSchema'
+import regionValidationSchema from './validationSchema'
+import { ActiveModel, Condition, ModelSchema, ValidationSchema } from 'ccs-prototype-kit-model-interface'
+import { RegionAttributes, RegionData, RegionInterface } from '../../../../types/models/active/facilitiesManagement/region'
 import { RegionRow } from '../../../../types/data/activeTables'
 import { Request } from 'express'
 
 class Region extends ActiveModel implements RegionInterface {
   static tableName: string = 'regions'
+
   tableName: string = 'regions'
+  modelSchema: ModelSchema = regionModelSchema
+  validationSchema: ValidationSchema = regionValidationSchema
+
   data: RegionData = this.data as RegionData
 
   constructor(data: RegionRow) {
@@ -14,7 +19,7 @@ class Region extends ActiveModel implements RegionInterface {
       id: data.id,
       name: data.name,
       code: data.code
-    },regionSchema)
+    })
   }
 
   static find = (req: Request, id: number): Region => {
@@ -25,8 +30,18 @@ class Region extends ActiveModel implements RegionInterface {
     return this._all(req, this.tableName).map(data => new this(data as RegionRow))
   }
 
-  static where = (req: Request, condtitions: Array<Condition>): Array<Region> => {
-    return this._where(req, this.tableName, condtitions).map(data => new this(data as RegionRow))
+  static where = (req: Request, conditions: Array<Condition>): Array<Region> => {
+    return this._where(req, this.tableName, conditions).map(data => new this(data as RegionRow))
+  }
+
+  static build = (req: Request, data?: RegionAttributes): Region => {
+    if (data === undefined) { return new this({} as RegionRow) }
+
+    return new this({
+      id: this.nextID(req, this.tableName),
+      name: data.name,
+      code: data.code
+    })
   }
 }
 

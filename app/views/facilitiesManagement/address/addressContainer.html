@@ -88,7 +88,7 @@
           </span>
         {% endif %}
         <div class="govuk-body govuk-!-margin-bottom-2" id="address-text">
-          {{ params.addressObject.fullAddress() }}
+          {{  params.addressObject.fullAddress() if params.addressObject !== undefined }}
         </div>
         <a href="#postcode-search" id="change-input-2" class="govuk-link" tabindex="{{ '0' if params.isFullAddressVisible else '-1' }}">
           Change

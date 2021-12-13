@@ -7,3 +7,8 @@ export type RegionData = {
   name: string
   code: string
 }
+
+export type RegionAttributes = {
+  name: string
+  code: string
+}

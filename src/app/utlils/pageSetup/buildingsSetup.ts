@@ -1,3 +1,4 @@
+import Address from '../../models/active/facilitiesManagement/address/model'
 import addressContainerSetup from './addressContainerSetup'
 import Building from '../../models/active/facilitiesManagement/building/model'
 import BuildingType from '../../models/static/facilitiesManagement/buildingType/model'
@@ -83,18 +84,18 @@ const pageDescription = (building: Building, step: string): BuildingPageDescript
       },
       additionalDetails: {
         addressContainerParams: addressContainerSetup(
-          building.data.address,
           building.errors,
           {
             inputName: 'building[address]',
             enterAddressManuallyLink: `/facilities-management/RM6232/buildings/${id}/edit/building-address`,
             showAddressHeading: true
-          }
+          },
+          building.data.address as Address
         ),
         regionContainerParams: regionContainerSetup(
           'building[region]',
-          building.data.address,
-          building.data.region
+          building.data.region,
+          building.data.address as Address
         )
       }
     }
@@ -159,6 +160,44 @@ const pageDescription = (building: Building, step: string): BuildingPageDescript
       },
       additionalDetails: {
         securityClearanceRadioItems: getSecurityClearanceRadioItems(building.data.securityClearance?.data?.id),
+      }
+    }
+  case 'new':
+    return {
+      pageTitle: 'Add a building',
+      stepNumber: 1,
+      save_and_continue: true,
+      save_and_return: true,
+      previousStep: {
+        text: 'Return to buildings',
+        href: '/facilities-management/RM6232/buildings/'
+      },
+      additionalDetails: {
+        addressContainerParams: addressContainerSetup(
+          building.errors,
+          {
+            inputName: 'building[address]',
+            enterAddressManuallyLink: '/facilities-management/RM6232/buildings/new/building-address',
+            showAddressHeading: true
+          },
+          building.data.address as Address
+        ),
+        regionContainerParams: regionContainerSetup(
+          'building[region]',
+          building.data.region,
+          building.data.address as Address
+        )
+      }
+    }
+  case 'new-address':
+    return {
+      pageTitle: 'Add building address',
+      stepNumber: 1,
+      save_and_continue: true,
+      save_and_return: false,
+      previousStep: {
+        text: 'Return to building details',
+        href: '/facilities-management/RM6232/buildings/new'
       }
     }
   }

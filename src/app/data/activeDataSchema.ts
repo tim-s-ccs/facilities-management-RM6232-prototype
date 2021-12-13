@@ -1,6 +1,6 @@
 import { ActiveDataSchema, ActiveDataScheme } from 'ccs-prototype-kit-model-interface'
 
-const addressSchema: ActiveDataScheme = {
+const addressDataSchema: ActiveDataScheme = {
   id: 'number',
   addressLine1: 'string',
   addressLine2: 'string',
@@ -9,7 +9,7 @@ const addressSchema: ActiveDataScheme = {
   postcode: 'string'
 }
 
-const buildingSchema: ActiveDataScheme = {
+const buildingDataSchema: ActiveDataScheme = {
   id: 'number',
   userID: 'number',
   name: 'string',
@@ -24,7 +24,7 @@ const buildingSchema: ActiveDataScheme = {
   status: 'string',
 }
 
-const buyerDetailSchema: ActiveDataScheme = {
+const buyerDetailDataSchema: ActiveDataScheme = {
   id: 'number',
   userID: 'number',
   fullName: 'string',
@@ -35,17 +35,17 @@ const buyerDetailSchema: ActiveDataScheme = {
   centralGovernment: 'boolean'
 }
 
-const regionSchema: ActiveDataScheme = {
+const regionDataSchema: ActiveDataScheme = {
   id: 'number',
   name: 'string',
   code: 'string'
 }
 
 const activeDataSchema: ActiveDataSchema = {
-  addresses: addressSchema,
-  buildings: buildingSchema,
-  buyerDetails: buyerDetailSchema,
-  regions: regionSchema
+  addresses: addressDataSchema,
+  buildings: buildingDataSchema,
+  buyerDetails: buyerDetailDataSchema,
+  regions: regionDataSchema
 }
 
 export default activeDataSchema
