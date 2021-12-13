@@ -36,8 +36,8 @@ class BuyerDetail extends ActiveModel implements BuyerDetailInterface {
     return this._all(req, this.tableName).map(data => new this(data as BuyerDetailRow, req))
   }
 
-  static where = (req: Request, condtitions: Array<Condition>): Array<BuyerDetail> => {
-    return this._where(req, this.tableName, condtitions).map(data => new this(data as BuyerDetailRow, req))
+  static where = (req: Request, conditions: Array<Condition>): Array<BuyerDetail> => {
+    return this._where(req, this.tableName, conditions).map(data => new this(data as BuyerDetailRow, req))
   }
 }
 

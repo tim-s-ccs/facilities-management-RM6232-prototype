@@ -70,8 +70,8 @@ class Building extends ActiveModel implements BuildingInterface {
     return this._all(req, this.tableName).map(data => new this(data as BuildingRow, req))
   }
 
-  static where = (req: Request, condtitions: Array<Condition>): Array<Building> => {
-    return this._where(req, this.tableName, condtitions).map(data => new this(data as BuildingRow, req))
+  static where = (req: Request, conditions: Array<Condition>): Array<Building> => {
+    return this._where(req, this.tableName, conditions).map(data => new this(data as BuildingRow, req))
   }
 }
 

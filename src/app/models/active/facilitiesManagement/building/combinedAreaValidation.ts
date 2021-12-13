@@ -1,11 +1,11 @@
 import Building from './model'
-import { CustomValidator, ValidatorOptions } from 'ccs-prototype-kit-model-interface'
+import { ActiveModel, CustomValidator, ErrorMessages, ValidatorOptions } from 'ccs-prototype-kit-model-interface'
 
 class CombinedAreaValidation extends CustomValidator {
   model: Building = this.model as Building
 
-  constructor(model: Building, options: ValidatorOptions) {
-    super(model, options)
+  constructor(model: ActiveModel, attribute: string, errorMessages: ErrorMessages, options: ValidatorOptions) {
+    super(model, attribute, errorMessages, options)
   }
 
   _validate = () => {

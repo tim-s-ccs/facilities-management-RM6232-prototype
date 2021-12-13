@@ -33,8 +33,8 @@ class Address extends ActiveModel implements AddressInterface {
     return this._all(req, this.tableName).map(data => new this(data as AddressRow))
   }
 
-  static where = (req: Request, condtitions: Array<Condition>): Array<Address> => {
-    return this._where(req, this.tableName, condtitions).map(data => new this(data as AddressRow))
+  static where = (req: Request, conditions: Array<Condition>): Array<Address> => {
+    return this._where(req, this.tableName, conditions).map(data => new this(data as AddressRow))
   }
 
   static build = (req: Request, data?: AddressAttributes): Address => {
