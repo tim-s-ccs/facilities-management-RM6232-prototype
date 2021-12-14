@@ -23,9 +23,41 @@ export type UKRegionRow = DefaultRow & {
   code: string
 }
 
+export type WorkPackageRow = {
+  code: string
+  name: string
+  selectable: boolean
+}
+
+export type ServiceRow = {
+  code: string
+  name: string
+  description: string
+  work_package_code: string
+  total: boolean
+  hard: boolean
+  soft: boolean
+  sort_order: number
+}
+
+export type PrimaryRegionRow = {
+  code: string
+  name: string
+}
+
+export type SecondaryRegionRow = {
+  code: string
+  name: string
+  primary_region_code: string
+}
+
 export type StaticTables = {
   buildingTypes: Array<BuildingTypeRow>
   securityClearances: Array<SecurityClearanceRow>
   ukAddresses: Array<UKAddressRow>
   ukRegions: Array<UKRegionRow>
+  workPackages: Array<WorkPackageRow>
+  services: Array<ServiceRow>
+  primaryRegions: Array<PrimaryRegionRow>
+  secondaryRegions: Array<SecondaryRegionRow>
 }

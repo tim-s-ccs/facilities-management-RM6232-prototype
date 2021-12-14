@@ -1,0 +1,107 @@
+%clearfix {
+  &::after {
+    content : '';
+    clear   : both;
+    display : table;
+  }
+}
+
+body.js-enabled #ccs-accordion-with-basket {
+  .basket,
+  .govuk-checkboxes .ccs-select-all,
+  .govuk-checkboxes > div + p {
+    display : block;
+  }
+}
+
+.chooser-component {
+  .basket {
+    display : none;
+
+    .govuk-heading-m {
+      margin-left   : govuk-spacing(2);
+      margin-bottom : 0;
+      }
+
+    #removeAll {
+      margin  : govuk-spacing(2) 0 govuk-spacing(3) govuk-spacing(2);
+      display : inline-block;
+
+      & .ccs-remove {
+        margin : 0;
+        }
+      }
+
+    & > .govuk-button {
+      width : 100%;
+      }
+
+    & > div {
+      background-color : #f8f8f8;
+      padding          : govuk-spacing(3);
+      }
+
+    ul.govuk-list {
+      margin : 0;
+
+      li {
+        background-color : govuk-colour("white");
+        margin-bottom    : 0;
+        padding          : govuk-spacing(2) govuk-spacing(2);
+        border-top       : 1px solid #bfc1c3;
+
+        &:first-child {
+          border-top : none;
+          }
+
+        @extend %clearfix;
+
+        span {
+          text-align  : left;
+          font-size   : 1rem;
+          top         : 0;
+          top         : 0;
+          float       : left;
+          padding-top : 2px;
+          }
+
+        a {
+          text-align : right;
+          font-size  : 14px;
+          font-size  : 0.9rem;
+          position   : relative;
+          top        : -2px;
+          display    : inline-block;
+          color      : $govuk-link-colour;
+
+          &:hover {
+            color : $govuk-link-hover-colour;
+          }
+
+          &:focus {
+            color: #000000;
+          }
+        }
+      }
+
+      li:first-child {
+        border-bottom : none;
+        }
+
+      @media (max-width : 768px) {
+        li {
+          span, a {
+            width      : 100% !important;
+            text-align : left !important;
+            }
+          }
+        }
+      }
+    }
+
+  @media (max-width : 641px) {
+    & > .govuk-button {
+      display : inline-block;
+    }
+  }
+}
