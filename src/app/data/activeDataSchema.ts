@@ -41,11 +41,21 @@ const regionDataSchema: ActiveDataScheme = {
   code: 'string'
 }
 
+const procurementDataSchema: ActiveDataScheme = {
+  id: 'number',
+  userID: 'number',
+  serviceCodes: 'object',
+  regionCodes: 'object',
+  estimatedAnnualCost: 'number'
+}
+
+
 const activeDataSchema: ActiveDataSchema = {
   addresses: addressDataSchema,
   buildings: buildingDataSchema,
   buyerDetails: buyerDetailDataSchema,
-  regions: regionDataSchema
+  regions: regionDataSchema,
+  procurements: procurementDataSchema
 }
 
 export default activeDataSchema

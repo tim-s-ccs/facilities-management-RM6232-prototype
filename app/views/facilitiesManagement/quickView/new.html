@@ -1,0 +1,47 @@
+{% extends "application.html" %}
+
+{% block pageTitle %}
+  {{ pageDescription.pageTitle }}: {{ super() }}
+{% endblock %}
+
+{% block content %}
+  {{ govukBackLink({
+    text: pageDescription.backText,
+    href: pageDescription.backLink
+  }) }}
+
+  {{ govukErrorSummary({
+    titleText: "There is a problem",
+    errorList: errorList
+  }) if errorList.length > 0 }}
+
+  <form action="/facilities-management/RM6232/quick-view/{{ step }}" method="post" class="form" novalidate>
+    {% if step !== 'choose-services' and procurement.data.serviceCodes.length > 0 %}
+      {% for serviceCode in procurement.data.serviceCodes %}
+        <input type="hidden" name="procurement[serviceCodes][]" value="{{ serviceCode }}" />
+      {% endfor %}
+    {% endif %}
+
+    {% if step !== 'choose-regions' and procurement.data.regionCodes.length > 0 %}
+      {% for regionCode in procurement.data.regionCodes %}
+        <input type="hidden" name="procurement[regionCodes][]" value="{{ regionCode }}" />
+      {% endfor %}
+    {% endif %}
+
+    {% if step !== 'annual-contract-value' and procurement.data.estimatedAnnualCost !== undefined %}
+      <input type="hidden" name="procurement[estimatedAnnualCost]" value="{{ procurement.data.estimatedAnnualCost }}" />
+    {% endif %}
+
+    {% include 'facilitiesManagement/quickView/steps/_' + step + '.html' %}
+
+    {{ govukButton({
+      element: "input",
+      text: "Continue"
+    }) }}
+    <br/>
+    <a href="/facilities-management/RM6232" class="govuk-body govuk-link--no-visited-state">
+      Return to your account
+    </a>
+  </form>
+
+{% endblock %}

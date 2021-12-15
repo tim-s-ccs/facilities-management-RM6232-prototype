@@ -116,7 +116,7 @@ ChooserComponent.prototype.GetSelectedCount = function () {
 }
 ChooserComponent.prototype.PrimeBasket = function () {
   let selectedItems = []
-  console.log(this.GetSelectedCount())
+
   if (this.GetSelectedCount() > 0) {
     for (let index = 0; index < this._sections.length; index++) {
       const sectionItem = this._sections[index]

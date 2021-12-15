@@ -1,0 +1,16 @@
+{% from "../accordionSelection.html" import accordionSelection %}
+
+{{ accordionSelection({
+  attribute: 'regions',
+  attributeID: 'regionCodes',
+  title: 'Regions',
+  heading: 'Where are your buildings located?',
+  caption: "Choose one or more regions, based on building's location where you require facilities management services.",
+  errors: errors,
+  accordionItems: pageDescription.accordionItems,
+  data: {
+    text0: 'No regions selected',
+    text1: 'region selected',
+    text2: 'regions selected'
+  }
+})}}

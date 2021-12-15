@@ -11,9 +11,7 @@ class RegionSelectionValidation extends CustomValidator {
 
   _validate = () => {
     if (this.model.errors.postcode === undefined) {
-      const regionModel = this.model as Region
-
-      if (regionModel.data.name === '' || regionModel.data.code === '') {
+      if (this.model.data.name === '' || this.model.data.code === '') {
         this.error = 'notSelected'
 
         return false
