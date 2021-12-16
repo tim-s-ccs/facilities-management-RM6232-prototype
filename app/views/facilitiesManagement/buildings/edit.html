@@ -25,7 +25,7 @@
     {{ pageDescription.pageTitle }}
   </h1>
 
-  <form action="/facilities-management/RM6232/buildings/{{building.data.id}}/edit/{{ step }}" method="post" class="form">
+  <form action="/facilities-management/RM6232/buildings/{{building.data.id}}/edit/{{ step }}" method="post" class="form" novalidate>
     <div class="govuk-!-width-two-thirds">
       {% include 'facilitiesManagement/buildings/steps/_' + step + '.html' %}
     </div>

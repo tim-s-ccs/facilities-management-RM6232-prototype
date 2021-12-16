@@ -1,9 +1,11 @@
-import { AccordionItem } from '../../utils/pageSetup/quickViewSetup'
+import Procurement from '../../../models/active/facilitiesManagement/procurement/model'
+import { ErrorParams } from '../formParams'
+import { QuickViewPageDescription } from '../../utils/pageSetup/quickViewSetup'
 
-export type ChooseServicesParams = {
-  accordionItems: Array<AccordionItem>
+export type QuickViewParams = {
+  procurement: Procurement
+  step: string
+  pageDescription?: QuickViewPageDescription
 }
 
-export type ChooseRegionsParams = {
-  accordionItems: Array<AccordionItem>
-}
+export type QuickViewCreateParams = ErrorParams & QuickViewParams

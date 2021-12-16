@@ -1,6 +1,7 @@
 import utils from './utils.js'
 import { finderComponent } from './fmFindAddress.js'
 import { ChooserComponent } from './chooserComponent.js'
+import { numberInput } from './numberInput.js'
 
 $(() => {
   if (document.querySelectorAll('[data-module=\'find-address\']').length) {
@@ -57,5 +58,15 @@ $(() => {
     } catch (e) {
       console.log('No location chooser component found')
     }
+  }
+})
+
+$(() => {
+  if ($('.ccs-number-field').length) {
+    numberInput.showNumberWithCommas()
+  }
+
+  if ($('.ccs-integer-field').length) {
+    numberInput.limitInputToInteger()
   }
 })

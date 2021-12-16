@@ -1,31 +1,48 @@
-import { chooseRegionsAccordionItems, chooseServicesAccordionItems } from '../../utlils/pageSetup/quickViewSetup'
-import { ChooseRegionsParams, ChooseServicesParams } from '../../types/routes/facilitiesManagement/quickView'
+import Procurement from '../../models/active/facilitiesManagement/procurement/model'
+import { nextStep, pageDescription, urlFormatter } from '../../utlils/pageSetup/quickViewSetup'
+import { QuickViewCreateParams, QuickViewParams } from '../../types/routes/facilitiesManagement/quickView'
 import { Request, Response, Router } from 'express'
 
 const router = Router()
 
-router.get('/choose-services', (_req: Request, res: Response) => {
+router.get('/:step', (req: Request, res: Response) => {
+  const step: string = req.params['step']
+  const procurement: Procurement = Procurement.build(req, req.query)
 
-  const params: ChooseServicesParams = {
-    accordionItems: chooseServicesAccordionItems(),
+  const params: QuickViewParams = {
+    procurement: procurement,
+    step: step,
+    pageDescription: pageDescription(procurement, step)
   }
 
   res.render(
-    'facilitiesManagement/quickView/chooseServices.html',
+    'facilitiesManagement/quickView/new.html',
     params
   )
 })
 
-router.get('/choose-regions', (_req: Request, res: Response) => {
+router.post('/:step', (req: Request, res: Response) => {
+  const step: string = req.params['step']
 
-  const params: ChooseRegionsParams = {
-    accordionItems: chooseRegionsAccordionItems(),
+  const procurement: Procurement = Procurement.build(req, req.body['procurement'])
+
+  if (procurement.validate(step)) {
+    res.redirect(urlFormatter(nextStep(step), procurement))
+  } else {
+
+    const params: QuickViewCreateParams = {
+      procurement: procurement,
+      step: step,
+      pageDescription: pageDescription(procurement, step),
+      errors: procurement.errors,
+      errorList: procurement.errorList()
+    }
+
+    res.render(
+      'facilitiesManagement/quickView/new.html',
+      params
+    )
   }
-
-  res.render(
-    'facilitiesManagement/quickView/chooseRegions.html',
-    params
-  )
 })
 
 export default router

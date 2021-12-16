@@ -7,7 +7,7 @@
 {% block content %}
   <div class="govuk-body govuk-grid-row buyer-details">
     <div class="govuk-grid-column-two-thirds" id="edit-contact-detail-address">
-      <form action="/facilities-management/RM6232/buyer-details/{{buyerDetailData.id }}/edit-address" method="post" class="form">
+      <form action="/facilities-management/RM6232/buyer-details/{{buyerDetailData.id }}/edit-address" method="post" class="form" novalidate>
         {{ govukBackLink({
           text: "Return to manage your details",
           href: '/facilities-management/RM6232/buyer-details/' +buyerDetailData.id + '/edit'

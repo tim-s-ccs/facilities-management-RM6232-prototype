@@ -37,9 +37,17 @@ export type RegionRow = DefaultRow & {
   code: string
 }
 
+export type ProcurementRow = DefaultRow & {
+  userID: number
+  serviceCodes: Array<string>
+  regionCodes: Array<string>
+  estimatedAnnualCost: number
+}
+
 export type ActiveTables = {
   addresses: Array<AddressRow>
   buildings: Array<BuildingRow>
   buyerDetails: Array<BuyerDetailRow>
   regions: Array<RegionRow>
+  procurements: Array<ProcurementRow>
 }

@@ -1,141 +1,69 @@
-import PrimaryRegion from '../../models/static/facilitiesManagement/primaryRegion/model'
-import SecondaryRegion from '../../models/static/facilitiesManagement/secondaryRegion/model'
-import Service from '../../models/static/facilitiesManagement/service/model'
-import WorkPackage from '../../models/static/facilitiesManagement/workPackage/model'
-import { AccordionItem } from '../../types/utils/pageSetup/quickViewSetup'
-import { ServiceData } from '../../types/models/static/facilitiesManagement/service'
+import Procurement from '../../models/active/facilitiesManagement/procurement/model'
+import { chooseRegionsAccordionItems, chooseServicesAccordionItems } from './quickViewAccordionSetup'
+import { QuickViewPageDescription } from '../../types/utils/pageSetup/quickViewSetup'
 
-const serviceTypes: string[] = ['Total', 'Hard', 'Soft']
 
-const getAvailableLots = (service: Service): string => {
-  const availableLots: string[] = []
-  serviceTypes.forEach(serviceType => {
-    const key: string = serviceType.toLowerCase()
-
-    if (service.data[key as keyof ServiceData]) {
-      availableLots.push(`
-        <div class="govuk-grid-column-one-third">
-          <p class="govuk-body"><strong class="govuk-tag govuk-tag--grey">${serviceType} FM</strong></p>
-        </div>
-      `)
-    }
-  })
-
-  return `<div class="govuk-grid-row">${availableLots.join('')}</div>`
+const arrayToParams = (attribute: string, codes: string[]): string => {
+  return codes.map(code => `${attribute}[]=${code}`).join('&')
 }
 
-const getServiceAccordionItem = (workPackage: WorkPackage, service: Service): string => {
-  return `
-    <div class="govuk-form-group chooser-input" sectionname="${workPackage.data.name}" section="${workPackage.data.code}">
-      <div aria-describedby="service_${service.hyphenateCode()}">
-        <div class="govuk-checkboxes">
-          <div class="govuk-checkboxes__item">
-            <input type="checkbox" name="service_codes[]" id="service_${service.hyphenateCode()}" value="${service.data.code}" title="${service.data.name}" class="govuk-checkboxes__input" sectionid="${workPackage.data.code}">
-            <label style="padding-top:0" class="govuk-label govuk-checkboxes__label" for="service_${service.hyphenateCode()}">
-              ${service.data.name}
-              <br>
-              <span class="govuk-hint">
-                ${service.data.description}
-              </span>
-              <div>
-                Availiable lots:
-                ${getAvailableLots(service)}
-              </div>
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-  `
-}
+const urlFormatter = (baseURL: string, procurement: Procurement): string => {
+  const query: string[] = []
 
-const getServiceAccordionItems = (workPackage: WorkPackage): string => {
-  const services: Service[] = workPackage.services()
-  const serviceCheckboxes: string = services.map(service => getServiceAccordionItem(workPackage, service)).join('')
-
-  let selectAll: string = ''
-
-  if (services.length > 1 && workPackage.data.code !== 'P') {
-    selectAll = `
-    <p>or</p>
-    <div class="govuk-checkboxes">
-      <div class="govuk-checkboxes__item">
-        <input title="Select all code-${workPackage.data.code} services" style="margin-top:4px" class="govuk-checkboxes__input" id="${workPackage.data.code}_all" name="section-checkbox_select_all" forserviceid="${workPackage.data.code}" type="checkbox" value="${workPackage.data.code}">
-        <label class="govuk-label govuk-checkboxes__label" for="${workPackage.data.code}_all">
-          Select all
-        </label>
-      </div>
-    </div>
-    `
+  if (procurement.data.serviceCodes.length !== 0) {
+    query.push(arrayToParams('serviceCodes',procurement.data.serviceCodes))
   }
 
-  return serviceCheckboxes + selectAll
+  if (procurement.data.regionCodes.length !== 0) {
+    query.push(arrayToParams('regionCodes',procurement.data.regionCodes))
+  }
+
+  if (procurement.data.estimatedAnnualCost !== undefined) {
+    query.push(`estimatedAnnualCost=${procurement.data.estimatedAnnualCost}`)
+  }
+
+  if (query.length > 0) {
+    return `${baseURL}?${query.join('&')}`
+
+  } else {
+    return baseURL
+  }
 }
 
-const getRegionAccordionItem = (primaryRegion: PrimaryRegion, secondaryRegion: SecondaryRegion): string => {
-  return `
-    <div class="govuk-form-group chooser-input" sectionname="${primaryRegion.data.name}" section="${primaryRegion.data.code}">
-      <div aria-describedby="region_${secondaryRegion.data.code}">
-        <div class="govuk-checkboxes">
-          <div class="govuk-checkboxes__item">
-            <input type="checkbox" name="region_codes[]" id="region_${secondaryRegion.data.code}" value="${secondaryRegion.data.code}" title="${secondaryRegion.data.name}" class="govuk-checkboxes__input" sectionid="${primaryRegion.data.code}">
-            <label style="padding-top:0" class="govuk-label govuk-checkboxes__label" for="region_${secondaryRegion.data.code}">
-              ${secondaryRegion.data.name}
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-  `
+const nextStep = (currentStep: string): string => {
+  switch(currentStep) {
+  case 'choose-services':
+    return '/facilities-management/RM6232/quick-view/choose-regions'
+  case 'choose-regions':
+    return '/facilities-management/RM6232/quick-view/annual-contract-value'
+  default:
+    return '/facilities-management/RM6232/procurements/new'
+  }
 }
 
-
-const getRegionsAccordionItems = (primaryRegion: PrimaryRegion): string => {
-  const secondaryRegions: SecondaryRegion[] = primaryRegion.secondaryRegions()
-  const secondaryRegionsCheckboxes: string = secondaryRegions.map(secondaryRegion => getRegionAccordionItem(primaryRegion, secondaryRegion)).join('')
-
-  const selectAll: string = `
-    <p>or</p>
-    <div class="govuk-checkboxes">
-      <div class="govuk-checkboxes__item">
-        <input title="Select all code-${primaryRegion.data.code} regions" style="margin-top:4px" class="govuk-checkboxes__input" id="${primaryRegion.data.code}_all" name="section-checkbox_select_all" forregionid="${primaryRegion.data.code}" type="checkbox" value="${primaryRegion.data.code}">
-        <label class="govuk-label govuk-checkboxes__label" for="${primaryRegion.data.code}_all">
-          Select all
-        </label>
-      </div>
-    </div>
-  `
-  return secondaryRegionsCheckboxes + selectAll
-}
-
-const chooseServicesAccordionItems = (): Array<AccordionItem> => {
-  const workPackages = WorkPackage.selectable()
-
-  return workPackages.map(workPackage => {
+const pageDescription = (procurement: Procurement, step: string): QuickViewPageDescription | undefined => {
+  switch (step) {
+  case 'choose-services':
     return {
-      heading: {
-        text: workPackage.data.name
-      },
-      content: {
-        html: getServiceAccordionItems(workPackage)
-      }
+      pageTitle: 'Services',
+      backText: 'Return to your account',
+      backLink: '/facilities-management/RM6232',
+      accordionItems: chooseServicesAccordionItems(procurement)
     }
-  })
-}
-
-const chooseRegionsAccordionItems = (): Array<AccordionItem> => {
-  const primaryRegions = PrimaryRegion.all()
-
-  return primaryRegions.map(primaryRegion => {
+  case 'choose-regions':
     return {
-      heading: {
-        text: primaryRegion.data.name
-      },
-      content: {
-        html: getRegionsAccordionItems(primaryRegion)
-      }
+      pageTitle: 'Regions',
+      backText: 'Return to services',
+      backLink: urlFormatter('/facilities-management/RM6232/quick-view/choose-services', procurement),
+      accordionItems: chooseRegionsAccordionItems(procurement)
     }
-  })
+  case 'annual-contract-value':
+    return {
+      pageTitle: 'What is your estimate for the annual contract value?',
+      backText: 'Return to regions',
+      backLink: urlFormatter('/facilities-management/RM6232/quick-view/choose-regions', procurement)
+    }
+  }
 }
 
-export { chooseServicesAccordionItems, chooseRegionsAccordionItems }
+export { urlFormatter, nextStep, pageDescription }
