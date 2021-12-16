@@ -51,6 +51,30 @@ export type SecondaryRegionRow = {
   primary_region_code: string
 }
 
+export type SupplierRow = DefaultRow & {
+  supplier_name: string
+  contact_name: string
+  contact_email: string
+  contact_phone: string
+  sme: boolean,
+  duns: string,
+  registration_number: string,
+  address_line_1: string,
+  address_line_2: string,
+  address_town: string,
+  address_county: string,
+  address_postcode: string,
+  active: boolean
+}
+
+export type SupplierLotDataRow = DefaultRow & {
+  supplier_id: number
+  lot_number: string,
+  service_codes: string[]
+  region_codes: string[]
+}
+
+
 export type StaticTables = {
   buildingTypes: Array<BuildingTypeRow>
   securityClearances: Array<SecurityClearanceRow>
@@ -60,4 +84,6 @@ export type StaticTables = {
   services: Array<ServiceRow>
   primaryRegions: Array<PrimaryRegionRow>
   secondaryRegions: Array<SecondaryRegionRow>
+  suppliers: Array<SupplierRow>
+  supplierLotData: Array<SupplierLotDataRow>
 }
