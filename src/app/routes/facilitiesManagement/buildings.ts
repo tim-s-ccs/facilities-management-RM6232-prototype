@@ -128,7 +128,7 @@ router.get('/:id/edit/:step', (req: Request, res: Response) => {
 router.post('/:id/edit/:step', (req: Request, res: Response) => {
   const step: string = req.params['step']
   const building: Building = getBuilding(req)
-
+  // TODO: Fix issuse when active model does not exist
   building.assignAttributes(req.body['building'])
 
   if (building.validate(step)) {
