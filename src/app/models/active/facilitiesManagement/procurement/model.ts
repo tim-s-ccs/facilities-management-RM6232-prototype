@@ -1,5 +1,7 @@
 import procurementModelSchema from './modelSchema'
 import procurementValidationSchema from './validationSchema'
+import SecondaryRegion from '../../../static/facilitiesManagement/secondaryRegion/model'
+import Service from '../../../static/facilitiesManagement/service/model'
 import { ActiveModel, Condition, ModelSchema, utils, ValidationSchema } from 'ccs-prototype-kit-model-interface'
 import { ProcurementAttributes, ProcurementData, ProcurementInterface } from '../../../../types/models/active/facilitiesManagement/procurement'
 import { ProcurementRow } from '../../../../types/data/activeTables'
@@ -50,6 +52,14 @@ class Procurement extends ActiveModel implements ProcurementInterface {
 
   static where = (req: Request, conditions: Array<Condition>): Array<Procurement> => {
     return this._where(req, this.tableName, conditions).map(data => new this(data as ProcurementRow))
+  }
+
+  services = (): Service[] => {
+    return Service.where([{attribute: 'code', values: this.data.serviceCodes}])
+  }
+
+  regions = (): SecondaryRegion[] => {
+    return SecondaryRegion.where([{attribute: 'code', values: this.data.regionCodes}])
   }
 }
 
