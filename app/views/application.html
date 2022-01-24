@@ -1,7 +1,7 @@
 {#- We can't mount GOV.UK Frontend's assets at root as it's done automatically by the extensions framework. -#}
-{%- set assetPath = '/govuk/assets' -%}
+{%- set assetPath = '/extension-assets/ts-ccs-components/ccs/assets' -%}
 
-{% extends "govuk/template.njk" %}
+{% extends "ccs/template.njk" %}
 
 {% from "govuk/components/accordion/macro.njk"           import govukAccordion %}
 {% from "govuk/components/back-link/macro.njk"           import govukBackLink %}
@@ -41,19 +41,32 @@
 
 {% block header %}
   {# Set serviceName in config.js. #}
-  {{ govukHeader({
+  {{ ccsHeader({
     homepageUrl: "/",
     serviceName: serviceName,
-    serviceUrl: "/",
-    containerClasses: "govuk-width-container"
+    serviceUrl: "/facilities-management/RM6232",
+    navigationPrimary: [
+      {
+        text: "My Account",
+        href: "/facilities-management/RM6232"
+      }
+    ]
   }) }}
+  <div class="govuk-width-container ">
+    {{ govukPhaseBanner({
+      tag: {
+        text: "Alpha"
+      },
+      html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.'
+    }) }}
+  </div>
 {% endblock %}
 
 {% set mainClasses = mainClasses | default("govuk-main-wrapper--auto-spacing") %}
 
 {% if useAutoStoreData %}
   {% block footer %}
-    {{ govukFooter({
+    {{ ccsFooter({
       meta: {
         items: [
           {
