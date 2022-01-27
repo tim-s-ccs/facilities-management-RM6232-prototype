@@ -59,7 +59,7 @@ const procurementValidationSchema: ValidationSchema = {
         invalidCleaning: '\'Mobile cleaning\' and \'Routine cleaning\' are the same, but differ by delivery method. Please choose one of these services only',
         invalidCafmHelpdeskBillable: 'You must select another service to include \'CAFM system\', \'Helpdesk services\' and/or \'Management of billable works\'',
         invalidMultipleCafm: 'Select only one CAFM service',
-        invalidCafm: '\'Generic CAFM Services\' can only be selected when all other services are of type Soft FM'
+        invalidCafm: '\'CAFM – Soft FM Requirements\' can only be selected when all other services are of type Soft FM'
       }
     }
   ]

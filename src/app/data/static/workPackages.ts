@@ -18,12 +18,12 @@ const workPackages: Array<WorkPackageRow> = [
   },
   {
     code: 'D',
-    name: 'Net Zero Carbon',
+    name: 'Carbon Net Zero',
     selectable: false
   },
   {
     code: 'E',
-    name: 'Maintenance Services',
+    name: 'Maintenance Services - Generic Requirements',
     selectable: true
   },
   {
@@ -53,7 +53,7 @@ const workPackages: Array<WorkPackageRow> = [
   },
   {
     code: 'K',
-    name: 'Administrative support Services',
+    name: 'Visitor Support Services',
     selectable: true
   },
   {
@@ -78,18 +78,24 @@ const workPackages: Array<WorkPackageRow> = [
   },
   {
     code: 'P',
-    name: 'Computer-aided facilities management (CAFM)',
+    name: 'Occupancy and Property Management Services',
     selectable: true
   },
   {
     code: 'Q',
-    name: 'Helpdesk Services',
+    name: 'Computer-aided facilities management (CAFM)',
     selectable: true
   },
   {
     code: 'R',
+    name: 'Helpdesk Services',
+    selectable: true
+  },
+  {
+    code: 'S',
     name: 'Management of Billable Works',
-    selectable: true}
+    selectable: true
+  }
 ]
 
 export default workPackages

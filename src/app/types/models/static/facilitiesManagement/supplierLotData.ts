@@ -5,7 +5,7 @@ export interface SupplierLotDataInterface {
 export type SupplierLotDataData = {
   id: number
   supplier_id: number
-  lot_number: string,
+  lot_code: string,
   service_codes: string[]
   region_codes: string[]
 }

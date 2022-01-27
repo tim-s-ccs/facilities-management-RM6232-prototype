@@ -66,7 +66,7 @@ const getServiceAccordionItems = (workPackage: WorkPackage, selectedServices: st
 
   let selectAll: string = ''
 
-  if (services.length > 1 && workPackage.data.code !== 'P') {
+  if (services.length > 1 && workPackage.data.code !== 'Q') {
     selectAll = getSelectAll('service', workPackage.data.code)
   }
 
