@@ -1,41 +1,57 @@
-# GOV.UK Prototype Kit
+# Facilities Management RM6232 Prototype
 
-Go to the [GOV.UK Prototype Kit site](https://govuk-prototype-kit.herokuapp.com/docs) to download the latest version and read the documentation.
+This was created using the [GOV.UK Prototype Kit](https://github.com/alphagov/govuk-prototype-kit).
+You can go to the [GOV.UK Prototype Kit site](https://govuk-prototype-kit.herokuapp.com/docs) to read the documentation on how it can be used to create prototypes.
 
-## About the Prototype Kit
+This specific project hosts the code for the Facilities Management RM6232 prototype.
+This is the next framework of Facilities Management which is building on the work done from the [previous framework](https://github.com/Crown-Commercial-Service/crown-marketplace).
 
-The Prototype Kit provides a simple way to make interactive prototypes that look like pages on GOV.UK. These prototypes can be used to show ideas to people you work with, and to do user research.
+## About the Prototype
 
-Read the [project principles](https://govuk-prototype-kit.herokuapp.com/docs/principles).
+The intention for this prototype is for it to be used in some user testing activities so that we can get feedback and make improvements.
+This should result in an overall better experience for our customers when the new framework goes live.
 
-## Make sure prototypes are password-protected
 
-If you publish your prototypes online, they **must** be protected by a [username and password](https://govuk-prototype-kit.herokuapp.com/docs/publishing-on-heroku). This is to prevent members of the public finding prototypes and thinking they are real services.
+As an added bonus, it should also make development easier as we are able get a better idea of how the application should be laid out before development starts.
 
-You must protect user privacy at all times, even when using prototypes. Prototypes made with the kit look like GOV.UK, but do not have the same security provisions. Always make sure you are handling user data appropriately.
+## Access
 
-## Installation instructions
+This prototype is hosted on Heroku on [https://ccs-fm-rm6232-prototype.herokuapp.com/facilities-management/RM6232](https://ccs-fm-rm6232-prototype.herokuapp.com/facilities-management/RM6232).
 
-- [Installation guide for new users (non technical)](https://govuk-prototype-kit.herokuapp.com/docs/install/introduction)
-- [Installation guide for developers (technical)](https://govuk-prototype-kit.herokuapp.com/docs/install/developer-install-instructions)
+You will need a username and password to access it.
+To obtain these credentials you will need to contact a member of the Facilities Management prototype project.
 
-## Support
+## Technologies and additional projects
 
-The GOV.UK Prototype Kit is maintained by the Government Digital Service. If you’ve got a question or need support you can:
+### TypeScript
 
-* email [govuk-design-system-support@digital.cabinet-office.gov.uk](mailto:govuk-design-system-support@digital.cabinet-office.gov.uk)
-* [get in touch on Slack](https://ukgovernmentdigital.slack.com/messages/prototype-kit)([open in app](slack://channel?team=T04V6EBTR&amp;id=C0647LW4R))
-* [view known issues on GitHub](https://github.com/alphagov/govuk-prototype-kit/issues)
+It was decided that we would adapt the GOV.UK Prototype Kit to use TypeScript.
+This was because some of the logic that is in Facilities Management was quite complicated and it was thought using TypeScript would help make writing and debugging easier.
 
-## Contributing
+### CCS Prototype Kit Model Interface
 
-If you’ve got an idea or suggestion you can:
+Because Facilities Management is quite data intensive, an additional project was created called [CCS Prototype Kit Model Interface](https://github.com/tim-s-ccs/ccs-prototype-kit-model-interface/).
+This project is designed to work with the GOV.UK Prototype Kit and add features such as:
+- Models
+- Validations
+- A data structure and interface to work with the prototype
 
-* [get in touch on the developer Slack channel](https://ukgovernmentdigital.slack.com/messages/prototype-kit-dev)([open in app](slack://channel?team=T04V6EBTR&amp;id=C0E1063DW))
-* [create a GitHub issue](https://github.com/alphagov/govuk-prototype-kit/issues)
+This has allowed us to make the prototype more similar to the real application.
 
-### Security
+It should be noted that this project is still a **work in progress** and it is undecided if it will be maintained beyond this prototype.
 
-GDS is an advocate of responsible vulnerability disclosure. If you’ve found a vulnerability, we would like to know so we can fix it.
+### CCS Frontend
 
-For full details on how to tell us about vulnerabilities, [see our security policy](https://github.com/alphagov/govuk-prototype-kit/security/policy).
+In order to add the CCS stylings to the application, another project was created called [CCS Frontend](https://github.com/tim-s-ccs/ts-ccs-frontend).
+This is based on the [GOV.UK Frontend](https://github.com/alphagov/govuk-frontend) and is very easy to integrate into this project.
+This allows us to have the CCS stylings for the header and footer without much issue.
+
+It should be noted that this project is still a **work in progress** and it is undecided if it will be maintained beyond this prototype, however the author is hopeful that it will be.
+
+## Security
+
+CCS is an advocate of responsible vulnerability disclosure. If you’ve found a vulnerability, we would like to know so we can fix it.
+
+If you have discovered a security vulnerability in this code, we appreciate your help in disclosing it to us in a responsible manner.
+
+Please follow the [CCS vulnerability reporting steps](https://www.crowncommercial.gov.uk/about-ccs/vulnerability-disclosure-policy/), giving details of any issue you find. Appropriate credit will be given to those reporting confirmed issues.
