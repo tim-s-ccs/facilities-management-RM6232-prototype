@@ -24,7 +24,7 @@ class Supplier extends StaticModel implements SupplierInterface {
 
   static selectSuppliers = (lotNumber: string, serviceCodes: string[], regionCodes: string[]): Array<Supplier> => {
     const selectedSupplierIDs: number[] = SupplierLotData.where([
-      {attribute: 'lot_number', value: lotNumber},
+      {attribute: 'lot_code', value: lotNumber[1]},
       {attribute: 'service_codes', contents: serviceCodes},
       {attribute: 'region_codes', contents: regionCodes}
     ]).map(supplierLotData => supplierLotData.data.supplier_id)

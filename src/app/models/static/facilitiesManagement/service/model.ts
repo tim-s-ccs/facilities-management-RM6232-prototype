@@ -70,10 +70,3 @@ class Service extends StaticModel implements ServiceInterface {
 }
 
 export default Service
-
-// def self.find_lot_number(service_codes, annual_contract_value)
-// lot_number = determine_lot_number(service_codes)
-
-// "#{lot_number}#{determine_lot_code(lot_number, annual_contract_value)}"
-// end
-
