@@ -46,7 +46,7 @@
     "portscanner": "^2.1.1",
     "require-dir": "^1.0.0",
     "sync-request": "^6.0.0",
-    "ts-ccs-frontend": "^0.4.1",
+    "ts-ccs-frontend": "^0.5.1",
     "universal-analytics": "^0.4.16",
     "uuid": "^8.3.2"
   },
