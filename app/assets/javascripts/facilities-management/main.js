@@ -2,6 +2,7 @@ import utils from './utils.js'
 import { finderComponent } from './fmFindAddress.js'
 import { ChooserComponent } from './chooserComponent.js'
 import { numberInput } from './numberInput.js'
+import { stepByStepNav } from './stepByStepNav.js'
 
 $(() => {
   if (document.querySelectorAll('[data-module=\'find-address\']').length) {
@@ -68,5 +69,11 @@ $(() => {
 
   if ($('.ccs-integer-field').length) {
     numberInput.limitInputToInteger()
+  }
+})
+
+$(() => {
+  if ($('#step-by-step-navigation').length > 0) {
+    stepByStepNav.init()
   }
 })

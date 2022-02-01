@@ -9,12 +9,14 @@ export type ProcurementNewParams = {
   selectedSuppliersNames: string[]
   summaries: {
     services: {
-      title: string
-      summaryContent: string
+      numberSelected: number,
+      summaryContent: string,
+      changeLink: string
     }
     regions: {
-      title: string
-      summaryContent: string
+      numberSelected: number,
+      summaryContent: string,
+      changeLink: string
     }
     estimatedAnnualCost: {
       value: string
