@@ -1,0 +1,85 @@
+{% extends "application.html" %}
+
+{% block pageTitle %}
+  Procurements dashboard: {{ super() }}
+{% endblock %}
+
+{% block content %}
+  {{ govukBackLink({
+    text: 'Return to your account',
+    href: "/facilities-management/RM6232"
+  }) }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <h1 class="govuk-heading-xl">
+        Procurements dashboard
+      </h1>
+      <p class="govuk-body">
+        Your saved searches and procurements are shown below. Click on the search/contract name to view the details or progress further.
+      </p>
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full ccs-info-panel">
+      {{ govukTable({
+        caption: "Searches",
+        captionClasses: "govuk-table__caption--m",
+        head: [
+          {
+            text: "Name",
+            attributes: {
+              style: "width: 25%"
+            }
+          },
+          {
+            text: "Date Saved",
+            attributes: {
+              style: "width: 25%"
+            }
+          },
+          {
+            text: "Stage",
+            attributes: {
+              style: "width: 25%"
+            }
+          },
+          {
+          }
+        ],
+        rows: searches
+      }) }}
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full ccs-info-panel">
+      {{ govukTable({
+        caption: "Advanced procurement activities",
+        captionClasses: "govuk-table__caption--m",
+        head: [
+          {
+            text: "Name",
+            attributes: {
+              style: "width: 25%"
+            }
+          },
+          {
+            text: "Ref number",
+            attributes: {
+              style: "width: 25%"
+            }
+          },
+          {
+            text: "Date Saved",
+            attributes: {
+              style: "width: 50%"
+            }
+          }
+        ],
+        rows: advancedProcurements
+      }) }}
+    </div>
+  </div>
+{% endblock %}
