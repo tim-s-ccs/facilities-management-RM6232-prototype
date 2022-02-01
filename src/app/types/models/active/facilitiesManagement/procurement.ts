@@ -13,6 +13,10 @@ export type ProcurementData = {
   serviceCodes: Array<string>
   regionCodes: Array<string>
   estimatedAnnualCost?: number
+  contractName?: string
+  referenceNumber?: string
+  state?: string
+  updatedAt?: string
 }
 
 export type ProcurementAttributes = {

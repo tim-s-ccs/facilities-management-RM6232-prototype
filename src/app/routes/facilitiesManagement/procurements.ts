@@ -1,9 +1,19 @@
 import Procurement from '../../models/active/facilitiesManagement/procurement/model'
-import { getProcurementNewParams } from '../../utlils/pageSetup/procurementSetup'
-import { ProcurementCreateParams, ProcurementNewParams } from '../../types/routes/facilitiesManagement/procurements'
+import { getProcurementIndexParams, getProcurementNewParams } from '../../utlils/pageSetup/procurementSetup'
+import { ProcurementCreateParams, ProcurementIndexParams, ProcurementNewParams } from '../../types/routes/facilitiesManagement/procurements'
 import { Request, Response, Router } from 'express'
 
 const router = Router()
+
+
+router.get('/', (req: Request, res: Response) => {
+  const params: ProcurementIndexParams = getProcurementIndexParams(req)
+
+  res.render(
+    'facilitiesManagement/procurements/index.html',
+    params
+  )
+})
 
 router.get('/new', (req: Request, res: Response) => {
   const procurement: Procurement = Procurement.build(req, req.query)
