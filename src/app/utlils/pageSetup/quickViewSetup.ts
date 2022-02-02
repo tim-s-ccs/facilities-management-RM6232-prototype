@@ -32,6 +32,8 @@ const urlFormatter = (baseURL: string, procurement: Procurement): string => {
 
 const nextStep = (currentStep: string): string => {
   switch(currentStep) {
+  case 'what-happens-next':
+    return '/facilities-management/RM6232/quick-view/choose-services'
   case 'choose-services':
     return '/facilities-management/RM6232/quick-view/choose-regions'
   case 'choose-regions':
@@ -43,6 +45,12 @@ const nextStep = (currentStep: string): string => {
 
 const pageDescription = (procurement: Procurement, step: string): QuickViewPageDescription | undefined => {
   switch (step) {
+  case 'what-happens-next':
+    return {
+      pageTitle: 'What happens next?',
+      backText: 'Return to your account',
+      backLink: '/facilities-management/RM6232',
+    }
   case 'choose-services':
     return {
       pageTitle: 'Services',
@@ -59,7 +67,7 @@ const pageDescription = (procurement: Procurement, step: string): QuickViewPageD
     }
   case 'annual-contract-value':
     return {
-      pageTitle: 'What is your estimate for the annual contract value?',
+      pageTitle: 'Annual contract value',
       backText: 'Return to regions',
       backLink: urlFormatter('/facilities-management/RM6232/quick-view/choose-regions', procurement)
     }

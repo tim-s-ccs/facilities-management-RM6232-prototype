@@ -17,15 +17,82 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-      <h1 class="govuk-heading-xl">Quick view results</h1>
-      <h2 class="govuk-heading govuk-heading-l govuk-!-width-two-thirds">Based on information provided, this procurement is eligible for the following sub-lot:</h2>
-      <h2 class="govuk-heading govuk-heading-l" id="contract-sub-lot">Sub-lot {{ lotNumber }} </h2>
-
-      <h3 class="govuk-heading govuk-heading-m govuk-!-margin-bottom-0">{{ selectedSuppliersNames.length }} supplier(s) shortlisted</h3>
-      <h3 class="govuk-heading govuk-heading-s govuk-!-margin-top-0">who can provide the services you require in your location(s)</h3>
+      <h1 class="govuk-heading-xl">Results</h1>
+      <p class="govuk-body-l">
+        Based on information provided, this procurement is eligible for the following sub-lot:
+      </p>
+    </div>
+  </div>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+      <h2 class="govuk-heading-m">
+        Selection summary
+      </h2>
+      <div class="ccs-summary-box">
+        <div class="ccs-summary-box__headings">
+          <span class="ccs-summary-box__title">
+            Services
+          </span>
+          <span class="ccs-summary-box__change">
+            <a class="govuk-link govuk-link--no-visited-state" href="{{ summaries.services.changeLink }}">
+              Change
+            </a>
+          </span>
+        </div>
+        <div class="ccs-summary-box__content">
+          {{ govukDetails({
+            summaryText: summaries.services.numberSelected + " selected",
+            html: summaries.services.summaryContent
+          }) }}
+        </div>
+      </div>
+      <div class="ccs-summary-box">
+        <div class="ccs-summary-box__headings">
+          <span class="ccs-summary-box__title">
+            Regions
+          </span>
+          <span class="ccs-summary-box__change">
+            <a class="govuk-link govuk-link--no-visited-state" href="{{ summaries.regions.changeLink }}">
+              Change
+            </a>
+          </span>
+        </div>
+        <div class="ccs-summary-box__content">
+          {{ govukDetails({
+            summaryText: summaries.regions.numberSelected + " selected",
+            html: summaries.regions.summaryContent
+          }) }}
+        </div>
+      </div>
+      <div class="ccs-summary-box">
+        <div class="ccs-summary-box__headings">
+          <div class="ccs-summary-box__title">
+            Estimated contract value
+          </div>
+          <div class="ccs-summary-box__change">
+            <a class="govuk-link govuk-link--no-visited-state" href="{{ summaries.estimatedAnnualCost.changeLink }}">
+              Change
+            </a>
+          </div>
+        </div>
+        <div class="ccs-summary-box__content">
+          {{ summaries.estimatedAnnualCost.value }}
+        </div>
+      </div>
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+      <h2 class="govuk-heading-l">
+        Sub-lot {{ lotNumber }}
+      </h2>
+      <h3 class="govuk-heading-m govuk-!-margin-bottom-0">
+        {{ selectedSuppliersNames.length }} supplier(s) shortlisted
+      </h3>
+      <p class="govuk-body govuk-!-font-weight-bold">
+        who can provide the services you require in your location(s)
+      </p>
       <ul class="govuk-list">
         {% for supplierName in selectedSuppliersNames %}
-          <li class="govuk-!-width-one-third">
+          <li class="govuk-!-width-one-half">
             {{ supplierName }}
             {% if not loop.last  %}
               <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
@@ -35,36 +102,12 @@
       </ul>
     </div>
   </div>
-  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible govuk-!-width-two-thirds govuk-!-margin-top-0"/>
+  <hr class="govuk-section-break govuk-section-break--l govuk-!-margin-top-0"/>
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
-      <h3 class="govuk-heading govuk-heading-m">Selection summary</h3>
-      <div class="govuk-!-margin-bottom-4">
-        {{ govukDetails({
-          summaryText: summaries.services.title,
-          html: summaries.services.summaryContent
-        }) }}
-      </div>
-      <div class="govuk-!-margin-bottom-4">
-        {{ govukDetails({
-          summaryText: summaries.regions.title,
-          html: summaries.regions.summaryContent
-        }) }}
-      </div>
-      <div class="govuk-body govuk-!-margin-bottom-4">
-        <p class="govuk-!-font-weight-bold govuk-!-margin-bottom-1">
-          Estimated annual contract value:
-        </p>
-        <p>
-          {{ summaries.estimatedAnnualCost.value }}
-          (<a href="{{ summaries.estimatedAnnualCost.changeLink }}" class="govuk-link--no-visited-state">change</a>)
-        </p>
-      </div>
-    </div>
-  </div>
-  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible govuk-!-width-two-thirds"/>
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
+    <div class="govuk-grid-column-two-thirds">
+      <p>
+        Phasellus at eros sem. Quisque ac ante in est dignissim feugiat. Etiam dignissim nibh tincidunt, euismod sem in, efficitur lorem. Morbi eu justo quis metus pellentesque ornare vitae quis urna. Proin malesuada risus id dolor vehicula, sit.
+      </p>
       <form action="/facilities-management/RM6232/procurements/new" method="post" class="form" novalidate>
         {% for serviceCode in procurement.data.serviceCodes %}
           <input type="hidden" name="procurement[serviceCodes][]" value="{{ serviceCode }}" />
@@ -95,7 +138,7 @@
 
         {{ govukButton({
           element: "input",
-          text: "Save and continue to procurement",
+          text: "Save and continue",
           name: "afterSave",
           classes: "govuk-!-margin-right-4"
         }) }}

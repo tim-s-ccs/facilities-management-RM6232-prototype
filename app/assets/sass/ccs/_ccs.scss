@@ -1,14 +1,35 @@
 // File for any extra CSS styles
 
+.fm-buyer-account-panel__container {
+  @include govuk-media-query ($from: tablet) {
+    display: flex;
+  }
+}
+
 .fm-buyer-account-panel {
   border: 1px #DEE0E2 solid;
   padding: 10px;
   background: #F8F8F8;
   margin-bottom: 30px;
+
+  @include govuk-media-query ($from: tablet) {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 }
 
 .ccs-info-panel {
   background-color: #f8f8f8;
   padding: govuk-spacing(3);
   margin: 0 0 govuk-spacing(7) 0;
+}
+
+$ccs-button-green: #007E8A;
+
+.govuk-button:not(.govuk-button--secondary):not(.govuk-button--warning) {
+  background-color: $ccs-button-green;
+
+  &:hover {
+    background-color: darken($ccs-button-green, 5%);
+  }
 }
