@@ -29,16 +29,24 @@ router.get('/new', (req: Request, res: Response) => {
 router.post('/new', (req: Request, res: Response) => {
   const procurement: Procurement = Procurement.build(req, req.body['procurement'])
 
-  const params: ProcurementCreateParams = {
-    errors: procurement.errors,
-    errorList: procurement.errorList(),
-    ...getProcurementNewParams(procurement)
-  }
+  if (procurement.create(req)) {
+    if (req.body['afterSave'] === 'Save and continue') {
+      res.redirect(`/facilities-management/RM6232/procurements/${procurement.data.id}`)
+    } else {
+      res.redirect('/facilities-management/RM6232/procurements')
+    }
+  } else {
+    const params: ProcurementCreateParams = {
+      errors: procurement.errors,
+      errorList: procurement.errorList(),
+      ...getProcurementNewParams(procurement)
+    }
 
-  res.render(
-    'facilitiesManagement/procurements/new.html',
-    params
-  )
+    res.render(
+      'facilitiesManagement/procurements/new.html',
+      params
+    )
+  }
 })
 
 export default router

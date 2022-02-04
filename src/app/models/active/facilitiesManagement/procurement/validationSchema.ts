@@ -1,21 +1,27 @@
 import ServiceSelectionValidation from './customValidators/serviceSelectionValidation'
-import { LengthValidator, LengthValidatorOptions, NumberValidator, NumberValidatorOptions, ValidationSchema } from 'ccs-prototype-kit-model-interface'
+import { LengthValidator, LengthValidatorOptions, NumberValidator, NumberValidatorOptions, StringValidator, StringValidatorOptions, ValidationSchema } from 'ccs-prototype-kit-model-interface'
 
 const serviceCodeLengthOptions: LengthValidatorOptions = {
-  on: ['choose-services'],
+  on: ['new', 'choose-services'],
   min: 1
 }
 
 const regionCodeLengthOptions: LengthValidatorOptions = {
-  on: ['choose-regions'],
+  on: ['new', 'choose-regions'],
   min: 1
 }
 
 const estimatedAnnualCostOptions: NumberValidatorOptions = {
-  on: ['annual-contract-value'],
+  on: ['new', 'annual-contract-value'],
   onlyInteger: true,
   greaterThan: 0,
   lessThan: 1_000_000_000_000
+}
+
+const contractNameOptions: StringValidatorOptions = {
+  on: ['new', 'contract-name'],
+  required: true,
+  maxLength: 100
 }
 
 const procurementValidationSchema: ValidationSchema = {
@@ -45,6 +51,15 @@ const procurementValidationSchema: ValidationSchema = {
         notAnInteger: 'The annual contract value must be a whole number greater than 0',
         greaterThan: 'The annual contract value must be a whole number greater than 0',
         lessThan: 'The annual contract value must be less than 1,000,000,000,000 (1 trillion)'
+      }
+    },
+    {
+      attribute: 'contractName',
+      validator: StringValidator,
+      options: contractNameOptions,
+      errorMessages: {
+        required: 'You must enter the contract name',
+        tooLong: 'The contract name must be 100 characters or less',
       }
     }
   ],

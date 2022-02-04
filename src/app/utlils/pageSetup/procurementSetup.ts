@@ -1,4 +1,3 @@
-import formatDateTime from '../formatDateTime'
 import Procurement from '../../models/active/facilitiesManagement/procurement/model'
 import SuppliersSelector from '../../services/suppliersSelector'
 import { ProcurementAdvancedRowItems, ProcurementSearchRowItems } from '../../types/utils/pageSetup/procurementSetup'
@@ -28,7 +27,7 @@ const procurementSearchRows = (procurements: Array<Procurement>): Array<Procurem
         html: `<a class="govuk-link" href="/facilities-management/RM6232/procurements/${procurement.data.id}">${procurement.data.contractName}</a>`
       },
       {
-        text: formatDateTime(new Date(procurement.data.updatedAt as string))
+        text: utils.formatDate(new Date(procurement.data.updatedAt as string), true)
       },
       {
         text: stateToDisplayName(procurement.data.state as string)
@@ -50,7 +49,7 @@ const procurementAdvancedRows = (procurements: Array<Procurement>): Array<Procur
         text: procurement.data.referenceNumber as string
       },
       {
-        text: formatDateTime(new Date(procurement.data.updatedAt as string))
+        text: utils.formatDate(new Date(procurement.data.updatedAt as string), true)
       }
     ]
   })

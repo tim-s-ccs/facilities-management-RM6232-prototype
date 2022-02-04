@@ -1,12 +1,12 @@
 import { ModelSchema } from 'ccs-prototype-kit-model-interface'
 
 const addressModelSchema: ModelSchema = {
-  id: Number,
-  addressLine1: String,
-  addressLine2: String,
-  city: String,
-  county: String,
-  postcode: String
+  id: {constructor: Number},
+  addressLine1: {constructor: String},
+  addressLine2: {constructor: String},
+  city: {constructor: String},
+  county: {constructor: String},
+  postcode: {constructor: String}
 }
 
 export default addressModelSchema

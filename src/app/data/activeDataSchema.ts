@@ -46,9 +46,12 @@ const procurementDataSchema: ActiveDataScheme = {
   userID: 'number',
   serviceCodes: 'object',
   regionCodes: 'object',
-  estimatedAnnualCost: 'number'
+  estimatedAnnualCost: 'number',
+  contractName: 'string',
+  referenceNumber: 'string',
+  state: 'string',
+  updatedAt: 'string'
 }
-
 
 const activeDataSchema: ActiveDataSchema = {
   addresses: addressDataSchema,

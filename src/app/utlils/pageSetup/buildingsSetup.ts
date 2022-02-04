@@ -2,12 +2,11 @@ import Address from '../../models/active/facilitiesManagement/address/model'
 import addressContainerSetup from './addressContainerSetup'
 import Building from '../../models/active/facilitiesManagement/building/model'
 import BuildingType from '../../models/static/facilitiesManagement/buildingType/model'
-import formatDate from '../formatDate'
 import regionContainerSetup from './regionContainerSetup'
 import SecurityClearance from '../../models/static/facilitiesManagement/securityClearance/model'
 import { BuildingPageDescription, BuildingRowItems, RadioItem } from '../../types/utils/pageSetup/buildingsSetup'
 import { Request } from 'express'
-import { StaticModel } from 'ccs-prototype-kit-model-interface'
+import { StaticModel, utils } from 'ccs-prototype-kit-model-interface'
 
 const buildingRows = (buildings: Array<Building>): Array<BuildingRowItems> => {
   return buildings.map((building): BuildingRowItems => {
@@ -19,7 +18,7 @@ const buildingRows = (buildings: Array<Building>): Array<BuildingRowItems> => {
         text: building.data.description !== undefined && String(building.data.description).length > 0 ? building.data.description : '-'
       },
       {
-        text: formatDate(new Date(building.data.updatedAt))
+        text: utils.formatDate(new Date(building.data.updatedAt))
       },
       {
         html: building.data.status === 'completed' ? '<strong class="govuk-tag">completed</strong>' : '<strong class="govuk-tag govuk-tag--red">incomplete</strong>'

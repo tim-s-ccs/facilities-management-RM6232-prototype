@@ -2,14 +2,14 @@ import Address from '../address/model'
 import { ModelSchema } from 'ccs-prototype-kit-model-interface'
 
 const buyerDetailModelSchema: ModelSchema = {
-  id: Number,
-  userID: Number,
-  fullName: String,
-  jobTitle: String,
-  telephoneNumber: String,
-  organisationName: String,
-  organisationAddress: Address,
-  centralGovernment: Boolean
+  id: {constructor: Number},
+  userID: {constructor: Number},
+  fullName: {constructor: String},
+  jobTitle: {constructor: String},
+  telephoneNumber: {constructor: String},
+  organisationName: {constructor: String},
+  organisationAddress: {constructor: Address},
+  centralGovernment: {constructor: Boolean}
 }
 
 export default buyerDetailModelSchema
