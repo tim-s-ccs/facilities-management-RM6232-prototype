@@ -37,13 +37,14 @@ class Procurement extends ActiveModel implements ProcurementInterface {
   static build = (req: Request, data?: ProcurementAttributes): Procurement => {
     if (data === undefined) { return new this({} as ProcurementRow) }
 
-    return new this({
+    const newProcurement = new this({
       id: this.nextID(req, this.tableName),
       userID: req.session.data.user.id,
-      serviceCodes: data.serviceCodes,
-      regionCodes: data.regionCodes,
-      estimatedAnnualCost: data.estimatedAnnualCost === undefined ? undefined : utils.cast(String(data.estimatedAnnualCost), Number)
     } as ProcurementRow)
+
+    newProcurement.assignAttributes(data as ProcurementData)
+
+    return newProcurement
   }
 
   static find = (req: Request, id: number): Procurement => {
@@ -68,6 +69,10 @@ class Procurement extends ActiveModel implements ProcurementInterface {
     return SecondaryRegion.where([{attribute: 'code', values: this.data.regionCodes}])
   }
 
+  beforeCreate = (): void => {
+    this.data.state = Procurement.states[0]
+    this.data.referenceNumber = `RM6232-${utils.addLeadingZeros(Math.floor(Math.random() * 1000000), 6)}-2022`
+  }
 }
 
 export default Procurement

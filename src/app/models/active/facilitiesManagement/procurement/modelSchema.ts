@@ -1,11 +1,15 @@
 import { ModelSchema } from 'ccs-prototype-kit-model-interface'
 
 const procurementModelSchema: ModelSchema = {
-  id: Number,
-  userID: Number,
-  serviceCodes: Array,
-  regionCodes: Array,
-  estimatedContractCost: Number
+  id: {constructor: Number},
+  userID: {constructor: Number},
+  serviceCodes: {constructor: Array, arrayItemConstuctor: String},
+  regionCodes: {constructor: Array, arrayItemConstuctor: String},
+  estimatedAnnualCost: {constructor: Number},
+  contractName: {constructor: String},
+  referenceNumber: {constructor: String},
+  state: {constructor: String},
+  updatedAt: {constructor: String}
 }
 
 export default procurementModelSchema

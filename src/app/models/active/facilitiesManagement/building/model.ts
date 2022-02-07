@@ -4,7 +4,7 @@ import BuildingType from '../../../static/facilitiesManagement/buildingType/mode
 import buildingValidationSchema from './validationSchema'
 import Region from '../region/model'
 import SecurityClearance from '../../../static/facilitiesManagement/securityClearance/model'
-import { ActiveModel, Condition, ModelSchema, utils, ValidationSchema } from 'ccs-prototype-kit-model-interface'
+import { ActiveModel, Condition, ModelSchema, ValidationSchema } from 'ccs-prototype-kit-model-interface'
 import { BuildingAttributes, BuildingData, BuildingInterface } from '../../../../types/models/active/facilitiesManagement/building'
 import { BuildingRow } from '../../../../types/data/activeTables'
 import { Request } from 'express'
@@ -47,7 +47,6 @@ class Building extends ActiveModel implements BuildingInterface {
       userID: req.session.data.user.id,
       name: data.name,
       description: data.description,
-      updatedAt: utils.getUpdatedAt(),
       status: 'incomplete'
     } as BuildingRow, req)
 

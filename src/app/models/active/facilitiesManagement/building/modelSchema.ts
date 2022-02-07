@@ -5,18 +5,18 @@ import SecurityClearance from '../../../static/facilitiesManagement/securityClea
 import { ModelSchema } from 'ccs-prototype-kit-model-interface'
 
 const buildingModelSchema: ModelSchema = {
-  id: Number,
-  userID: Number,
-  name: String,
-  description: String,
-  address: Address,
-  region: Region,
-  gia: Number,
-  externalArea: Number,
-  buildingType: BuildingType,
-  securityClearance: SecurityClearance,
-  updatedAt: String,
-  status: String,
+  id: {constructor: Number},
+  userID: {constructor: Number},
+  name: {constructor: String},
+  description: {constructor: String},
+  address: {constructor: Address},
+  region: {constructor: Region},
+  gia: {constructor: Number},
+  externalArea: {constructor: Number},
+  buildingType: {constructor: BuildingType},
+  securityClearance: {constructor: SecurityClearance},
+  updatedAt: {constructor: String},
+  status: {constructor: String},
 }
 
 export default buildingModelSchema
