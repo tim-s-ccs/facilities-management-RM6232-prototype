@@ -7,6 +7,7 @@ import { RegionAttributes } from './region'
 
 export interface BuildingInterface {
   data: BuildingData
+  isBuildingComplete(): boolean
 }
 
 export type BuildingData = {
@@ -21,7 +22,7 @@ export type BuildingData = {
   buildingType?: BuildingType
   securityClearance?: SecurityClearance
   updatedAt: string
-  status: string
+  buildingComplete: boolean
 }
 
 export type BuildingAttributes = {

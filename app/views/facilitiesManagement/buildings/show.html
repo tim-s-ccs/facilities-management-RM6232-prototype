@@ -21,10 +21,10 @@
     <div class="govuk-grid-column-two-thirds">
       <span class="govuk-!-font-weight-bold">Status:</span>
       {{govukTag({
-        text: building.data.status,
-        classes: "" if building.data.status === 'completed' else "govuk-tag--red"
+        text: 'completed' if building.data.buildingComplete else 'incomplete',
+        classes: "" if building.data.buildingComplete else "govuk-tag--red"
       })}}
-      {% if building.data.status === 'completed' %}
+      {% if building.data.buildingComplete %}
         {{ govukInsetText({
           text: "This building is ready to use in procurements."
         }) }}

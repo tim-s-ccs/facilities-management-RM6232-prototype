@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  View application data: {{ super() }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-width-container">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">
+          View application data
+        </h1>
+      </div>
+    </div>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <form action="/data/view" method="post" class="form" novalidate>
+          {{ govukSelect({
+            id: "table",
+            name: "table",
+            label: {
+              text: "Select a table"
+            },
+            items: tables
+          }) }}
+
+          {{ govukButton({
+            element: "input",
+            text: "View table"
+          }) }}
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

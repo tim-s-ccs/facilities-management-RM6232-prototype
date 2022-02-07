@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  View data for {{ tableName }}: {{ super() }}
+{% endblock %}
+
+{% block content %}
+  {{ govukBackLink({
+    text: "Return to select a different table",
+    href: "/data/view"
+  }) }}
+  <div class="govuk-width-container">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">
+          View data for {{ tableName }}
+        </h1>
+      </div>
+    </div>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-full">
+        <div style="overflow: scroll; border-style: solid; border-radius: 2px; border-color: black; padding: 2px;">
+          {{ govukTable({
+            head: head,
+            rows: rows
+          }) }}
+        </div>
+
+        <a class="govuk-link govuk-link--no-visited-state" href="/data/view">
+          Return to select a different table
+        </a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

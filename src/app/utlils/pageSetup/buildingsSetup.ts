@@ -21,7 +21,7 @@ const buildingRows = (buildings: Array<Building>): Array<BuildingRowItems> => {
         text: utils.formatDate(new Date(building.data.updatedAt))
       },
       {
-        html: building.data.status === 'completed' ? '<strong class="govuk-tag">completed</strong>' : '<strong class="govuk-tag govuk-tag--red">incomplete</strong>'
+        html: building.data.buildingComplete ? '<strong class="govuk-tag">completed</strong>' : '<strong class="govuk-tag govuk-tag--red">incomplete</strong>'
       }
     ]
   })

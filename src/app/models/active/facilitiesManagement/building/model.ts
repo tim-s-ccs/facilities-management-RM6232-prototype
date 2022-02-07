@@ -35,7 +35,7 @@ class Building extends ActiveModel implements BuildingInterface {
       buildingType: data.buildingTypeID ? BuildingType.find(data.buildingTypeID) : undefined,
       securityClearance: data.securityClearanceID ? SecurityClearance.find(data.securityClearanceID) : undefined,
       updatedAt: data.updatedAt,
-      status: data.status
+      buildingComplete: data.buildingComplete
     }
   }
 
@@ -47,7 +47,6 @@ class Building extends ActiveModel implements BuildingInterface {
       userID: req.session.data.user.id,
       name: data.name,
       description: data.description,
-      status: 'incomplete'
     } as BuildingRow, req)
 
     if (data.address !== undefined) {
@@ -71,6 +70,14 @@ class Building extends ActiveModel implements BuildingInterface {
 
   static where = (req: Request, conditions: Array<Condition>): Array<Building> => {
     return this._where(req, this.tableName, conditions).map(data => new this(data as BuildingRow, req))
+  }
+
+  beforeSave = () => {
+    this.data.buildingComplete = this.isBuildingComplete()
+  }
+
+  isBuildingComplete = (): boolean => {
+    return [this.data.name, this.data.address, this.data.region, this.data.gia, this.data.buildingType, this.data.securityClearance].every(attribute => attribute !== undefined)
   }
 }
 
