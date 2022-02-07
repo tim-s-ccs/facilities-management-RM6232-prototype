@@ -10,3 +10,8 @@ export type ProcurementAdvancedRowItems = [
   {text: string},
   {text: string}
 ]
+
+export type ProcurementShowPageDescription = {
+  pageTitle: string
+  additionalDetails?: {[key: string]: any}
+}

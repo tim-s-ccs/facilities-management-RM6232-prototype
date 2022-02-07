@@ -1,22 +1,22 @@
 import Procurement from '../../models/active/facilitiesManagement/procurement/model'
 import SuppliersSelector from '../../services/suppliersSelector'
-import { ProcurementAdvancedRowItems, ProcurementSearchRowItems } from '../../types/utils/pageSetup/procurementSetup'
+import { ProcurementAdvancedRowItems, ProcurementSearchRowItems, ProcurementShowPageDescription } from '../../types/utils/pageSetup/procurementSetup'
 import { ProcurementIndexParams, ProcurementNewParams } from '../../types/routes/facilitiesManagement/procurements'
 import { Request } from 'express'
 import { urlFormatter } from './quickViewSetup'
 import { utils } from 'ccs-prototype-kit-model-interface'
 
-const SEARCH_STATES = ['search', 'entering_requirements']
+const SEARCH_STATES = ['completed_search', 'entering_requirements']
 const ADVANCED_PROCUREMENT_STATES = ['final_results']
 
 const stateToDisplayName = (state: string): string => {
   switch(state) {
-  case 'search':
-    return 'Search'
+  case 'completed_search':
+    return 'Completed search'
   case 'entering_requirements':
     return 'Entering requirements'
   default:
-    return 'Search'
+    return 'Completed search'
   }
 }
 
@@ -104,4 +104,17 @@ const getProcurementNewParams = (procurement: Procurement): ProcurementNewParams
   }
 }
 
-export { getProcurementNewParams, getProcurementIndexParams }
+const getProcurement = (req: Request): Procurement => {
+  return Procurement.find(req, Number(req.params['id']))
+}
+
+const showPageDescription = (procurement: Procurement, state: string): ProcurementShowPageDescription | undefined=> {
+  switch (state) {
+  case 'completed_search':
+    return {
+      pageTitle: 'What happens next?'
+    }
+  }
+}
+
+export { getProcurementNewParams, getProcurementIndexParams, getProcurement, showPageDescription }

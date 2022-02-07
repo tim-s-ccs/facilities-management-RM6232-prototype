@@ -1,6 +1,6 @@
 import Procurement from '../../models/active/facilitiesManagement/procurement/model'
-import { getProcurementIndexParams, getProcurementNewParams } from '../../utlils/pageSetup/procurementSetup'
-import { ProcurementCreateParams, ProcurementIndexParams, ProcurementNewParams } from '../../types/routes/facilitiesManagement/procurements'
+import { getProcurement, getProcurementIndexParams, getProcurementNewParams, showPageDescription } from '../../utlils/pageSetup/procurementSetup'
+import { ProcurementCreateParams, ProcurementIndexParams, ProcurementNewParams, ProcurementShowParams, ProcurementShowPostParams } from '../../types/routes/facilitiesManagement/procurements'
 import { Request, Response, Router } from 'express'
 
 const router = Router()
@@ -44,6 +44,47 @@ router.post('/new', (req: Request, res: Response) => {
 
     res.render(
       'facilitiesManagement/procurements/new.html',
+      params
+    )
+  }
+})
+
+router.get('/:id', (req: Request, res: Response) =>{
+  const procurement: Procurement = getProcurement(req)
+  const state: string = procurement.data.state as string
+
+  const params: ProcurementShowParams = {
+    procurement: procurement,
+    state: state,
+    pageDescription: showPageDescription(procurement, state)
+  }
+
+  res.render(
+    'facilitiesManagement/procurements/show.html',
+    params
+  )
+})
+
+router.post('/:id', (req: Request, res: Response) =>{
+  const procurement: Procurement = getProcurement(req)
+  const state: string = procurement.data.state as string
+
+  if (procurement.validate(state)) {
+    procurement.goToNextState()
+    procurement.save(req)
+
+    res.redirect(`/facilities-management/RM6232/procurements/${procurement.data.id}`)
+  } else {
+    const params: ProcurementShowPostParams = {
+      procurement: procurement,
+      state: state,
+      pageDescription: showPageDescription(procurement, state),
+      errors: procurement.errors,
+      errorList: procurement.errorList()
+    }
+
+    res.render(
+      'facilitiesManagement/procurements/show.html',
       params
     )
   }
