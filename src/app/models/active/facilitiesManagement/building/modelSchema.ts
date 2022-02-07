@@ -16,7 +16,7 @@ const buildingModelSchema: ModelSchema = {
   buildingType: {constructor: BuildingType},
   securityClearance: {constructor: SecurityClearance},
   updatedAt: {constructor: String},
-  status: {constructor: String},
+  buildingComplete: {constructor: Boolean},
 }
 
 export default buildingModelSchema

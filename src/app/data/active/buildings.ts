@@ -13,7 +13,7 @@ const buildings: Array<BuildingRow> = [
     buildingTypeID: 1,
     securityClearanceID: 8,
     updatedAt: '2021-10-25',
-    status: 'completed'
+    buildingComplete: true
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const buildings: Array<BuildingRow> = [
     buildingTypeID: 2,
     securityClearanceID: 7,
     updatedAt: '2021-10-26',
-    status: 'completed'
+    buildingComplete: true
   },
   {
     id: 3,
@@ -41,7 +41,7 @@ const buildings: Array<BuildingRow> = [
     buildingTypeID: 3,
     securityClearanceID: 6,
     updatedAt: '2021-10-26',
-    status: 'completed'
+    buildingComplete: true
   },
   {
     id: 4,
@@ -55,7 +55,7 @@ const buildings: Array<BuildingRow> = [
     buildingTypeID: 4,
     securityClearanceID: 5,
     updatedAt: '2021-10-27',
-    status: 'completed'
+    buildingComplete: true
   },
   {
     id: 5,
@@ -69,7 +69,7 @@ const buildings: Array<BuildingRow> = [
     buildingTypeID: 5,
     securityClearanceID: 4,
     updatedAt: '2021-09-01',
-    status: 'completed'
+    buildingComplete: true
   },
   {
     id: 6,
@@ -78,7 +78,7 @@ const buildings: Array<BuildingRow> = [
     description: '',
     addressID: 7,
     updatedAt: '2021-10-24',
-    status: 'incomplete'
+    buildingComplete: false
   }
 ]
 

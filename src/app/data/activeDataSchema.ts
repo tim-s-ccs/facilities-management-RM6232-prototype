@@ -21,7 +21,7 @@ const buildingDataSchema: ActiveDataScheme = {
   buildingTypeID: 'number',
   securityClearanceID: 'number',
   updatedAt: 'string',
-  status: 'string',
+  buildingComplete: 'boolean',
 }
 
 const buyerDetailDataSchema: ActiveDataScheme = {

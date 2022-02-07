@@ -19,7 +19,7 @@ export type BuildingRow = DefaultRow & {
   buildingTypeID?: number
   securityClearanceID?: number
   updatedAt: string
-  status: string
+  buildingComplete: boolean
 }
 
 export type BuyerDetailRow = DefaultRow & {
