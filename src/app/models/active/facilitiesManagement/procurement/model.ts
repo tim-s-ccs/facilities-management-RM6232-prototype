@@ -59,14 +59,23 @@ class Procurement extends ActiveModel implements ProcurementInterface {
     return this._where(req, this.tableName, conditions).map(data => new this(data as ProcurementRow))
   }
 
-  static states = ['search', 'entering_requirements', 'final_results']
-
   services = (): Service[] => {
     return Service.where([{attribute: 'code', values: this.data.serviceCodes}])
   }
 
   regions = (): SecondaryRegion[] => {
     return SecondaryRegion.where([{attribute: 'code', values: this.data.regionCodes}])
+  }
+
+  static states = ['completed_search', 'entering_requirements', 'final_results']
+
+  goToNextState = (): void => {
+    const currentStateIndex: number = Procurement.states.indexOf(this.data.state as string)
+    const nextSateIndex: number = currentStateIndex + 1
+
+    if (nextSateIndex < Procurement.states.length) {
+      this.data.state = Procurement.states[nextSateIndex]
+    }
   }
 
   beforeCreate = (): void => {

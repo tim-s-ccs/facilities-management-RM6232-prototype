@@ -1,0 +1,49 @@
+{% extends "application.html" %}
+
+{% block pageTitle %}
+  {{ pageDescription.pageTitle }}: {{ super() }}
+{% endblock %}
+
+{% block content %}
+  {{ govukBackLink({
+    text: "Return to procurement dashboard",
+    href: "/facilities-management/RM6232/procurements"
+  }) }}
+
+  {{ govukErrorSummary({
+    titleText: "There is a problem",
+    errorList: errorList
+  }) if errorList.length > 0 }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <h1 class="govuk-heading-xl">
+        {{ pageDescription.pageTitle }}
+      </h1>
+    </div>
+  </div>
+
+  <form action="/facilities-management/RM6232/procurements/{{ procurement.data.id }}" method="post" class="form" novalidate>
+    {% include 'facilitiesManagement/procurements/showSteps/_' + state + '.html' %}
+
+    <div class="govuk-!-margin-top-5">
+      {{ govukButton({
+        element: "input",
+        text: "Save and continue",
+        name: "afterSave",
+        classes: "govuk-!-margin-right-4"
+      }) }}
+      {{ govukButton({
+        element: "a",
+        text: "Save and return to dashboard",
+        href: "/facilities-management/RM6232/procurements",
+        classes: "govuk-button--secondary"
+      }) }}
+      <br/>
+      <a href="/facilities-management/RM6232" class="govuk-body govuk-link--no-visited-state">
+        Return to your account
+      </a>
+    </div>
+  </form>
+    
+{% endblock %}

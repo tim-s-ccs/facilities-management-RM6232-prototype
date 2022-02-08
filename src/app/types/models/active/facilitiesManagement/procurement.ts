@@ -5,6 +5,7 @@ export interface ProcurementInterface {
   data: ProcurementData
   services: () => Service[]
   regions: () => SecondaryRegion[]
+  goToNextState: () => void
 }
 
 export type ProcurementData = {

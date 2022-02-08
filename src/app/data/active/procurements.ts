@@ -9,7 +9,7 @@ const procurements: Array<ProcurementRow> = [
     estimatedAnnualCost: 123_456,
     contractName: 'Test 1',
     referenceNumber: 'RM6232-820103-2022',
-    state: 'search',
+    state: 'completed_search',
     updatedAt: '2022-01-28T16:26:00'
   },
   {
