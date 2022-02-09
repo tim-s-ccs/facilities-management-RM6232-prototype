@@ -1,6 +1,6 @@
 import Procurement from '../../models/active/facilitiesManagement/procurement/model'
-import { getProcurement, getProcurementIndexParams, getProcurementNewParams, showPageDescription } from '../../utlils/pageSetup/procurementSetup'
-import { ProcurementCreateParams, ProcurementIndexParams, ProcurementNewParams, ProcurementShowParams, ProcurementShowPostParams } from '../../types/routes/facilitiesManagement/procurements'
+import { editPageDescription, getProcurement, getProcurementIndexParams, getProcurementNewParams, showPageDescription } from '../../utlils/pageSetup/procurementSetup'
+import { ProcurementCreateParams, ProcurementEditParams, ProcurementIndexParams, ProcurementNewParams, ProcurementShowParams, ProcurementShowPostParams, ProcurementUpdateParams } from '../../types/routes/facilitiesManagement/procurements'
 import { Request, Response, Router } from 'express'
 
 const router = Router()
@@ -85,6 +85,49 @@ router.post('/:id', (req: Request, res: Response) =>{
 
     res.render(
       'facilitiesManagement/procurements/show.html',
+      params
+    )
+  }
+})
+
+router.get('/:id/edit/:step', (req: Request, res: Response) =>{
+  const procurement: Procurement = getProcurement(req)
+  const step: string = req.params['step']
+
+  const params: ProcurementEditParams = {
+    procurement: procurement,
+    step: step,
+    pageDescription: editPageDescription(procurement, step)
+  }
+
+  res.render(
+    'facilitiesManagement/procurements/edit.html',
+    params
+  )
+})
+
+router.post('/:id/edit/:step', (req: Request, res: Response) =>{
+  const step: string = req.params['step']
+  const procurement: Procurement = getProcurement(req)
+
+  // TODO: Fix issuse when active model does not exist
+  procurement.assignAttributes(req.body['procurement'])
+
+  if (procurement.validate(step)) {
+    procurement.save(req)
+
+    res.redirect(`/facilities-management/RM6232/procurements/${procurement.data.id}`)
+  } else {
+    const params: ProcurementUpdateParams = {
+      procurement: procurement,
+      step: step,
+      pageDescription: editPageDescription(procurement, step),
+      errors: procurement.errors,
+      errorList: procurement.errorList()
+    }
+
+    res.render(
+      'facilitiesManagement/procurements/edit.html',
       params
     )
   }

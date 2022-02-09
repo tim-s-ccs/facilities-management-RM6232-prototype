@@ -16,6 +16,8 @@ export type ProcurementShowPageDescription = {
   additionalDetails?: {[key: string]: any}
 }
 
+export type ProcurementEditPageDescription = ProcurementShowPageDescription
+
 export type ContractDetailsTable = {
   text: string
   link: string

@@ -1,0 +1,24 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    {{ govukInput({
+      label: {
+        text: "What is your estimate for the annual contract value?",
+        classes: "govuk-label--m"
+      },
+      hint: {
+        text: 'Enter your estimate for the annual contract value. Include everything in your calculation.'
+      },
+      classes: "govuk-input--width-20 ccs-number-field ccs-integer-field",
+      id: "procurement_estimatedAnnualCost",
+      name: "procurement[estimatedAnnualCost]",
+      value: procurement.data.estimatedAnnualCost,
+      prefix: {
+        text: "£"
+      },
+      type: 'text',
+      errorMessage: {
+        text: errors.estimatedAnnualCost.errorMessage
+      } if errors.estimatedAnnualCost !== undefined
+    }) }}
+  </div>
+</div>

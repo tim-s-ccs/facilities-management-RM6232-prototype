@@ -1,6 +1,6 @@
 import Procurement from '../../../models/active/facilitiesManagement/procurement/model'
 import { ErrorParams } from '../formParams'
-import { ProcurementAdvancedRowItems, ProcurementSearchRowItems, ProcurementShowPageDescription } from '../../utils/pageSetup/procurementSetup'
+import { ProcurementAdvancedRowItems, ProcurementEditPageDescription, ProcurementSearchRowItems, ProcurementShowPageDescription } from '../../utils/pageSetup/procurementSetup'
 
 export type ProcurementNewParams = {
   procurement: Procurement
@@ -36,5 +36,12 @@ export type ProcurementShowParams = {
   pageDescription?: ProcurementShowPageDescription
 }
 
+export type ProcurementEditParams = {
+  procurement: Procurement,
+  step: string,
+  pageDescription?: ProcurementEditPageDescription
+}
+
 export type ProcurementCreateParams = ErrorParams & ProcurementNewParams
 export type ProcurementShowPostParams = ErrorParams & ProcurementShowParams
+export type ProcurementUpdateParams = ErrorParams & ProcurementEditParams

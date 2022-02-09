@@ -1,6 +1,7 @@
 import Procurement from '../../models/active/facilitiesManagement/procurement/model'
 import SuppliersSelector from '../../services/suppliersSelector'
-import { ContractDetailsTable, ProcurementAdvancedRowItems, ProcurementSearchRowItems, ProcurementShowPageDescription } from '../../types/utils/pageSetup/procurementSetup'
+import { chooseServicesAccordionItems } from './quickViewAccordionSetup'
+import { ContractDetailsTable, ProcurementAdvancedRowItems, ProcurementEditPageDescription, ProcurementSearchRowItems, ProcurementShowPageDescription } from '../../types/utils/pageSetup/procurementSetup'
 import { ProcurementIndexParams, ProcurementNewParams } from '../../types/routes/facilitiesManagement/procurements'
 import { Request } from 'express'
 import { urlFormatter } from './quickViewSetup'
@@ -180,4 +181,25 @@ const showPageDescription = (procurement: Procurement, state: string): Procureme
   }
 }
 
-export { getProcurementNewParams, getProcurementIndexParams, getProcurement, showPageDescription }
+const editPageDescription = (procurement: Procurement, step: string): ProcurementEditPageDescription | undefined=> {
+  switch (step) {
+  case 'contract-name':
+    return {
+      pageTitle: 'Contract name'
+    }
+  case 'annual-contract-value':
+    return {
+      pageTitle: 'Annual contract value'
+    }
+  case 'services':
+    return {
+      pageTitle: 'Services',
+      additionalDetails: {
+        accordionItems: chooseServicesAccordionItems(procurement)
+      }
+    }
+  }
+}
+
+
+export { getProcurementNewParams, getProcurementIndexParams, getProcurement, showPageDescription, editPageDescription }
