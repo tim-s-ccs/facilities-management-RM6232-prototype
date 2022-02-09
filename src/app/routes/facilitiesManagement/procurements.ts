@@ -1,5 +1,5 @@
 import Procurement from '../../models/active/facilitiesManagement/procurement/model'
-import { editPageDescription, getProcurement, getProcurementIndexParams, getProcurementNewParams, showPageDescription } from '../../utlils/pageSetup/procurementSetup'
+import { editPageDescription, getContractName, getProcurement, getProcurementIndexParams, getProcurementNewParams, showPageDescription } from '../../utlils/pageSetup/procurementSetup'
 import { ProcurementCreateParams, ProcurementEditParams, ProcurementIndexParams, ProcurementNewParams, ProcurementShowParams, ProcurementShowPostParams, ProcurementUpdateParams } from '../../types/routes/facilitiesManagement/procurements'
 import { Request, Response, Router } from 'express'
 
@@ -97,6 +97,7 @@ router.get('/:id/edit/:step', (req: Request, res: Response) =>{
   const params: ProcurementEditParams = {
     procurement: procurement,
     step: step,
+    contractName: getContractName(req),
     pageDescription: editPageDescription(procurement, step)
   }
 
@@ -121,6 +122,7 @@ router.post('/:id/edit/:step', (req: Request, res: Response) =>{
     const params: ProcurementUpdateParams = {
       procurement: procurement,
       step: step,
+      contractName: getContractName(req),
       pageDescription: editPageDescription(procurement, step),
       errors: procurement.errors,
       errorList: procurement.errorList()

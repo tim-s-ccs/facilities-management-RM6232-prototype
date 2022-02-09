@@ -181,6 +181,10 @@ const showPageDescription = (procurement: Procurement, state: string): Procureme
   }
 }
 
+const getContractName = (req: Request): string => {
+  return getProcurement(req).data.contractName as string
+}
+
 const editPageDescription = (procurement: Procurement, step: string): ProcurementEditPageDescription | undefined=> {
   switch (step) {
   case 'contract-name':
@@ -198,8 +202,12 @@ const editPageDescription = (procurement: Procurement, step: string): Procuremen
         accordionItems: chooseServicesAccordionItems(procurement)
       }
     }
+  case 'tupe':
+    return {
+      pageTitle: 'TUPE'
+    }
   }
 }
 
 
-export { getProcurementNewParams, getProcurementIndexParams, getProcurement, showPageDescription, editPageDescription }
+export { getProcurementNewParams, getProcurementIndexParams, getProcurement, showPageDescription, getContractName, editPageDescription }

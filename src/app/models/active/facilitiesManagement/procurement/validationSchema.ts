@@ -1,5 +1,5 @@
 import ServiceSelectionValidation from './customValidators/serviceSelectionValidation'
-import { LengthValidator, LengthValidatorOptions, NumberValidator, NumberValidatorOptions, StringValidator, StringValidatorOptions, ValidationSchema } from 'ccs-prototype-kit-model-interface'
+import { InclusionValidator, InclusionValidatorOptions, LengthValidator, LengthValidatorOptions, NumberValidator, NumberValidatorOptions, StringValidator, StringValidatorOptions, ValidationSchema } from 'ccs-prototype-kit-model-interface'
 
 const serviceCodeLengthOptions: LengthValidatorOptions = {
   on: ['new', 'choose-services', 'services'],
@@ -22,6 +22,11 @@ const contractNameOptions: StringValidatorOptions = {
   on: ['new', 'contract-name'],
   required: true,
   maxLength: 100
+}
+
+const tupeOptions: InclusionValidatorOptions = {
+  on: ['tupe'],
+  in: [true, false]
 }
 
 const procurementValidationSchema: ValidationSchema = {
@@ -59,7 +64,15 @@ const procurementValidationSchema: ValidationSchema = {
       options: contractNameOptions,
       errorMessages: {
         required: 'You must enter the contract name',
-        tooLong: 'The contract name must be 100 characters or less',
+        tooLong: 'The contract name must be 100 characters or less'
+      }
+    },
+    {
+      attribute: 'tupe',
+      validator: InclusionValidator,
+      options: tupeOptions,
+      errorMessages: {
+        invalid: 'Select one option'
       }
     }
   ],
