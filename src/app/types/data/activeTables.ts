@@ -45,6 +45,24 @@ export type ProcurementRow = DefaultRow & {
   contractName: string
   referenceNumber: string
   tupe?: boolean
+  initialCallOffPeriodYears?: number
+  initialCallOffPeriodMonths?: number
+  initialCallOffPeriodStartDate?: string
+  mobilisationPeriodRequired?: boolean
+  mobilisationPeriod?: number
+  optionalCallOffRequired?: boolean
+  extensionPeriodRequired0?: boolean
+  extensionPeriodYears0?: number
+  extensionPeriodMonths0?: number
+  extensionPeriodRequired1?: boolean
+  extensionPeriodYears1?: number
+  extensionPeriodMonths1?: number
+  extensionPeriodRequired2?: boolean
+  extensionPeriodYears2?: number
+  extensionPeriodMonths2?: number
+  extensionPeriodRequired3?: boolean
+  extensionPeriodYears3?: number
+  extensionPeriodMonths3?: number
   state: string
   updatedAt: string
 }

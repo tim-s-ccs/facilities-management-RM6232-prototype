@@ -1,0 +1,66 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-three-quarters">
+    <div class="govuk-!-margin-top-5">
+      <div class="govuk-form-group {{ 'govuk-form-group--error' if pageDescription.additionalDetails.totalContractLengthError }}">
+        {% set mobilisationPeriodHtml %}
+        {{ govukInput({
+          id: "mobilisationPeriod",
+          name: "procurement[mobilisationPeriod]",
+          classes: "periodInput govuk-input--width-4",
+          value: procurement.data.mobilisationPeriod or "0" if procurement.data.mobilisationPeriod !== undefined,
+          label: {
+            text: "Enter mobilisation length"
+          },
+          hint: {
+            text: "A minimum of 4 weeks required if TUPE is involved."
+          },
+          suffix: {
+            text: "weeks"
+          },
+          errorMessage: {
+            text: errors.mobilisationPeriod.errorMessage
+          } if errors.mobilisationPeriod !== undefined
+        }) }}
+        {% endset -%}
+
+
+        {{ govukRadios({
+          idPrefix: "mobilisationPeriodRequired",
+          name: "procurement[mobilisationPeriodRequired]",
+          fieldset: {
+            legend: {
+              text: "Do you need a mobilisation period?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          hint: {
+            html: '
+              This is the period in which the supplier gets ready to start providing the services.<br>
+              A mobilisation period of between 3 to 6 months is recommended depending on the complexity of services and buildings. A shorter term can be entered if required, however enough time should be allowed for suitable mobilisation ready for service delivery.
+            '
+          },
+          items: [
+            {
+              value: "true",
+              text: "Yes",
+              id: "mobilisationPeriodRequiredTrue",
+              checked: procurement.data.mobilisationPeriodRequired,
+              conditional: {
+                html: mobilisationPeriodHtml
+              }
+            },
+            {
+              value: "false",
+              text: "No",
+              id: "mobilisationPeriodRequiredFalse",
+              checked: procurement.data.mobilisationPeriodRequired === false
+            }
+          ],
+          errorMessage: {
+            text: errors.mobilisationPeriodRequired.errorMessage
+          } if errors.mobilisationPeriodRequired !== undefined
+        }) }}
+      </div>
+    </div>
+  </div>
+</div>

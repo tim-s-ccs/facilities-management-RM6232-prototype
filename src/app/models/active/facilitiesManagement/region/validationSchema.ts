@@ -1,4 +1,4 @@
-import RegionSelectionValidation from './regionSelectionValidation'
+import RegionSelectionValidation, { regionSelectionValidationCondition } from './regionSelectionValidation'
 import { ValidationSchema } from 'ccs-prototype-kit-model-interface'
 
 const regionValidationSchema: ValidationSchema = {
@@ -8,7 +8,7 @@ const regionValidationSchema: ValidationSchema = {
       validator: RegionSelectionValidation,
       options: {
         on: ['new', 'building-details'],
-        conditions: []
+        conditions: [regionSelectionValidationCondition]
       },
       errorMessages: {
         notSelected: 'You must select a region for your address',
