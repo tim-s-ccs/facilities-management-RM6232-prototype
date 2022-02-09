@@ -1,6 +1,6 @@
 import Procurement from '../../models/active/facilitiesManagement/procurement/model'
 import SuppliersSelector from '../../services/suppliersSelector'
-import { ProcurementAdvancedRowItems, ProcurementSearchRowItems, ProcurementShowPageDescription } from '../../types/utils/pageSetup/procurementSetup'
+import { ContractDetailsTable, ProcurementAdvancedRowItems, ProcurementSearchRowItems, ProcurementShowPageDescription } from '../../types/utils/pageSetup/procurementSetup'
 import { ProcurementIndexParams, ProcurementNewParams } from '../../types/routes/facilitiesManagement/procurements'
 import { Request } from 'express'
 import { urlFormatter } from './quickViewSetup'
@@ -8,6 +8,10 @@ import { utils } from 'ccs-prototype-kit-model-interface'
 
 const SEARCH_STATES = ['completed_search', 'entering_requirements']
 const ADVANCED_PROCUREMENT_STATES = ['final_results']
+
+const getProcurement = (req: Request): Procurement => {
+  return Procurement.find(req, Number(req.params['id']))
+}
 
 const stateToDisplayName = (state: string): string => {
   switch(state) {
@@ -104,8 +108,59 @@ const getProcurementNewParams = (procurement: Procurement): ProcurementNewParams
   }
 }
 
-const getProcurement = (req: Request): Procurement => {
-  return Procurement.find(req, Number(req.params['id']))
+const getContractDetailsSection = (procurement: Procurement): Array<ContractDetailsTable> => {
+  return [
+    {
+      text: 'Contract name',
+      link: `/facilities-management/RM6232/procurements/${procurement.data.id}/edit/contract-name`,
+      status: 'completed',
+      hasError: false
+    },
+    {
+      text: 'Annual contract value',
+      link: `/facilities-management/RM6232/procurements/${procurement.data.id}/edit/annual-contract-value`,
+      status: 'completed',
+      hasError: false
+    },
+    {
+      text: 'TUPE',
+      link: `/facilities-management/RM6232/procurements/${procurement.data.id}/edit/tupe`,
+      status: 'not started',
+      // status: procurement.data.tupe === undefined ? 'not started' : 'completed',
+      hasError: false
+    },
+    {
+      text: 'Contract period',
+      link: `/facilities-management/RM6232/procurements/${procurement.data.id}/edit/contract-period`,
+      status: 'not started',
+      // status: procurement.data.tupe === undefined ? 'not started' : 'completed',
+      hasError: false
+    }
+  ]
+}
+
+const getBuildingDetailsSection = (procurement: Procurement): Array<ContractDetailsTable> => {
+  return [
+    {
+      text: 'Services',
+      link: `/facilities-management/RM6232/procurements/${procurement.data.id}/edit/services`,
+      status: 'completed',
+      hasError: false
+    },
+    {
+      text: 'Buildings',
+      link: `/facilities-management/RM6232/procurements/${procurement.data.id}/edit/buildings`,
+      status: 'not started',
+      hasError: false
+    },
+    {
+      text: 'Assigning services to buildings',
+      link: `/facilities-management/RM6232/procurements/${procurement.data.id}/edit/assigning-services-to-buildings`,
+      status: 'cannot start',
+      // status: procurement.data.tupe === undefined ? 'not started' : 'completed',
+      hasError: false
+    }
+  ]
 }
 
 const showPageDescription = (procurement: Procurement, state: string): ProcurementShowPageDescription | undefined=> {
@@ -113,6 +168,14 @@ const showPageDescription = (procurement: Procurement, state: string): Procureme
   case 'completed_search':
     return {
       pageTitle: 'What happens next?'
+    }
+  case 'entering_requirements':
+    return {
+      pageTitle: 'Further service and contract requirements',
+      additionalDetails:{
+        contractDetailsSection: getContractDetailsSection(procurement),
+        buildingDetailsSection: getBuildingDetailsSection(procurement)
+      }
     }
   }
 }

@@ -17,6 +17,9 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
+      <span class="govuk-caption-m govuk-!-font-size-24">
+       {{ procurement.data.contractName }} - {{ procurement.data.referenceNumber }}
+      </span>
       <h1 class="govuk-heading-xl">
         {{ pageDescription.pageTitle }}
       </h1>
@@ -32,12 +35,6 @@
         text: "Save and continue",
         name: "afterSave",
         classes: "govuk-!-margin-right-4"
-      }) }}
-      {{ govukButton({
-        element: "a",
-        text: "Save and return to dashboard",
-        href: "/facilities-management/RM6232/procurements",
-        classes: "govuk-button--secondary"
       }) }}
       <br/>
       <a href="/facilities-management/RM6232" class="govuk-body govuk-link--no-visited-state">
