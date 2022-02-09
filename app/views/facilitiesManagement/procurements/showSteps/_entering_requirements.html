@@ -1,0 +1,81 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-three-quarters">
+    <p>
+      Please complete each section below by clicking on each link and answering the questions.
+      <br>
+      Once all sections are complete, click on the 'Save and continue' button to see your supplier shortlist and procurement options.
+    </p>
+    <div>
+      <h2 class="govuk-heading-m govuk-!-margin-bottom-1">
+        1. Contract details
+      </h2>
+      <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-left-5" style="width: 95%">
+      <table class="govuk-table govuk-!-margin-left-5" style="width: 95%">
+        <tbody class="govuk-table__body">
+          {% for section in pageDescription.additionalDetails.contractDetailsSection %}
+            <tr class="govuk-table__row {{ 'govuk-form-group--error' if section.hasError }}">
+              <td class="govuk-table__cell govuk-!-padding-right-2 {{ 'govuk-border-bottom_none govuk-!-padding-left-2' if section.hasError }}">
+                {% if section.status in ['cannot start', 'not required'] %}
+                  {{ section.text }}
+                {% else %}
+                  <a class="govuk-link" href="{{ section.link }}">
+                    {{ section.text }}
+                  </a>
+                {% endif %}
+              </td>
+              <td class="govuk-table__cell {{ 'govuk-border-bottom_none' if section.hasError }}" style="text-align: right">
+                {{ govukTag({
+                  text: section.status,
+                  classes: "govuk-tag--grey" if section.status !== 'completed'
+                }) }}
+              </td>
+            </tr>
+            {% if section.hasError %}
+              <tr class="govuk-table__row govuk-form-group--error">
+                <td class="govuk-table__cell govuk-!-padding-left-2" colspan="2">
+                  <%= display_all_errors(requirements_errors_list, section_errors(section))%>
+                </td>
+              </tr>
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h2 class="govuk-heading-m govuk-!-margin-bottom-1">
+        2. Services and buildings
+      </h2>
+      <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-left-5" style="width: 95%">
+      <table class="govuk-table govuk-!-margin-left-5" style="width: 95%">
+        <tbody class="govuk-table__body">
+          {% for section in pageDescription.additionalDetails.buildingDetailsSection %}
+            <tr class="govuk-table__row {{ 'govuk-form-group--error' if section.hasError }}">
+              <td class="govuk-table__cell govuk-!-padding-right-2 {{ 'govuk-border-bottom_none govuk-!-padding-left-2' if section.hasError }}">
+                {% if section.status in ['cannot start', 'not required'] %}
+                  {{ section.text }}
+                {% else %}
+                  <a class="govuk-link" href="{{ section.link }}">
+                    {{ section.text }}
+                  </a>
+                {% endif %}
+              </td>
+              <td class="govuk-table__cell {{ 'govuk-border-bottom_none' if section.hasError }}" style="text-align: right">
+                {{ govukTag({
+                  text: section.status,
+                  classes: "govuk-tag--grey" if section.status !== 'completed'
+                }) }}
+              </td>
+            </tr>
+            {% if section.hasError %}
+              <tr class="govuk-table__row govuk-form-group--error">
+                <td class="govuk-table__cell govuk-!-padding-left-2" colspan="2">
+                  <%= display_all_errors(requirements_errors_list, section_errors(section))%>
+                </td>
+              </tr>
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
