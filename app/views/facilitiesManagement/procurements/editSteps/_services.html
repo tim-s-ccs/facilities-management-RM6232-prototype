@@ -1,0 +1,15 @@
+{% from "../../quickView/accordionSelection.html" import accordionSelection %}
+
+{{ accordionSelection({
+  attribute: 'services',
+  attributeID: 'serviceCodes',
+  heading: 'Select the facilities management services that you need',
+  caption: 'Choose all facilities management services required within your estate, even if you want services in just one building.',
+  errors: errors,
+  accordionItems: pageDescription.additionalDetails.accordionItems,
+  data: {
+    text0: 'No services selected',
+    text1: 'service selected',
+    text2: 'services selected'
+  }
+})}}

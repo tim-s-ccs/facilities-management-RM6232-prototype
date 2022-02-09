@@ -1,0 +1,41 @@
+{% extends "application.html" %}
+
+{% block pageTitle %}
+  {{ pageDescription.pageTitle }}: {{ super() }}
+{% endblock %}
+
+{% block content %}
+  {{ govukErrorSummary({
+    titleText: "There is a problem",
+    errorList: errorList
+  }) if errorList.length > 0 }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <span class="govuk-caption-m govuk-!-font-size-24">
+       {{ procurement.data.contractName }} - {{ procurement.data.referenceNumber }}
+      </span>
+      <h1 class="govuk-heading-xl">
+        {{ pageDescription.pageTitle }}
+      </h1>
+    </div>
+  </div>
+
+  <form action="/facilities-management/RM6232/procurements/{{ procurement.data.id }}/edit/{{ step }}" method="post" class="form" novalidate>
+    {% include 'facilitiesManagement/procurements/editSteps/_' + step + '.html' %}
+
+    <div class="govuk-!-margin-top-5">
+      {{ govukButton({
+        element: "input",
+        text: "Save and return",
+        name: "afterSave",
+        classes: "govuk-!-margin-right-4"
+      }) }}
+      <br/>
+      <a href="/facilities-management/RM6232/procurements/{{ procurement.data.id }}" class="govuk-body govuk-link--no-visited-state">
+        Return to requirements
+      </a>
+    </div>
+  </form>
+    
+{% endblock %}

@@ -2,7 +2,7 @@ import ServiceSelectionValidation from './customValidators/serviceSelectionValid
 import { LengthValidator, LengthValidatorOptions, NumberValidator, NumberValidatorOptions, StringValidator, StringValidatorOptions, ValidationSchema } from 'ccs-prototype-kit-model-interface'
 
 const serviceCodeLengthOptions: LengthValidatorOptions = {
-  on: ['new', 'choose-services'],
+  on: ['new', 'choose-services', 'services'],
   min: 1
 }
 
@@ -68,7 +68,7 @@ const procurementValidationSchema: ValidationSchema = {
       attribute: 'serviceCodes',
       validator: ServiceSelectionValidation,
       options: {
-        on: ['choose-services']
+        on: ['choose-services', 'services']
       },
       errorMessages: {
         invalidCleaning: '\'Mobile cleaning\' and \'Routine cleaning\' are the same, but differ by delivery method. Please choose one of these services only',
