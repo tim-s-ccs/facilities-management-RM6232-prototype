@@ -8,6 +8,7 @@ const procurementModelSchema: ModelSchema = {
   estimatedAnnualCost: {constructor: Number},
   contractName: {constructor: String},
   referenceNumber: {constructor: String},
+  tupe: {constructor: Boolean},
   state: {constructor: String},
   updatedAt: {constructor: String}
 }

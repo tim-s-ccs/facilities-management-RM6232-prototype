@@ -29,6 +29,7 @@ class Procurement extends ActiveModel implements ProcurementInterface {
       estimatedAnnualCost: data.estimatedAnnualCost,
       contractName: data.contractName,
       referenceNumber: data.referenceNumber,
+      tupe: data.tupe,
       state: data.state,
       updatedAt: data.updatedAt
     }

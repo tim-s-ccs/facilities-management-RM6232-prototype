@@ -31,6 +31,7 @@ const procurements: Array<ProcurementRow> = [
     estimatedAnnualCost: 15_678_901,
     contractName: 'Test 3',
     referenceNumber: 'RM6232-931311-2022',
+    tupe: true,
     state: 'entering_requirements',
     updatedAt: '2022-07-01T15:33:00'
   },

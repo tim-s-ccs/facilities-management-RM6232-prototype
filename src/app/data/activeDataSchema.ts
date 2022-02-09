@@ -49,6 +49,7 @@ const procurementDataSchema: ActiveDataScheme = {
   estimatedAnnualCost: 'number',
   contractName: 'string',
   referenceNumber: 'string',
+  tupe: 'boolean',
   state: 'string',
   updatedAt: 'string'
 }

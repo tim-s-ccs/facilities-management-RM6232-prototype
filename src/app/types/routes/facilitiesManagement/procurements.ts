@@ -39,6 +39,7 @@ export type ProcurementShowParams = {
 export type ProcurementEditParams = {
   procurement: Procurement,
   step: string,
+  contractName: string,
   pageDescription?: ProcurementEditPageDescription
 }
 

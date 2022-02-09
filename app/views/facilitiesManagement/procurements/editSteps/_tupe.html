@@ -1,0 +1,46 @@
+{% set details = govukDetails({
+  summaryText: 'What you need to know about TUPE',
+  html: '
+    TUPE, the Transfer of Undertakings (Protection of Employment) protects the rights of employees when the business or commercial contract that they are working on changes to new ownership.<br>
+    It ensures that employees who find themselves transferred to a new business, retain exactly the same hours and rate of pay as they were contracted to with the old employer.
+    <a class="govuk-link" target="blank" href="https://www.gov.uk/transfers-takeovers">
+      Find out when TUPE applies (opens in a new tab)
+    </a>
+  '
+}) %}
+
+{{ govukRadios({
+  classes: "govuk-radios--inline",
+  name: "procurement[tupe]",
+  fieldset: {
+    legend: {
+      text: "Do you believe that Transfer of Undertakings (TUPE) Regulations applies to your contract?",
+      classes: "govuk-fieldset__legend--m"
+    }
+  },
+  hint: {
+    html: '
+      When a supplier changes, the original service provider’s workers may be protected under TUPE.<br>
+      For example, a new supplier is awarded the contract to provide cleaning services to a building.<br>
+      The cleaners, who are employed by the current service provider, may be protected under TUPE.
+      <div class="govuk-!-margin-top-4 govuk-!-margin-bottom-4">
+    ' + details + '
+      </div>
+    '
+  },
+  items: [
+    {
+      value: "true",
+      text: "Yes",
+      checked: procurement.data.tupe
+    },
+    {
+      value: "false",
+      text: "No",
+      checked: not procurement.data.tupe
+    }
+  ],
+  errorMessage: {
+    text: errors.tupe.errorMessage
+  } if errors.tupe !== undefined
+}) }}
