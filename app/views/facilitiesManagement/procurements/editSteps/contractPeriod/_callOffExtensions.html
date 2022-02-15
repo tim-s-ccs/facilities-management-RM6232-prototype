@@ -1,0 +1,137 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-three-quarters">
+    <div class="govuk-form-group {{ 'govuk-form-group--error' if pageDescription.additionalDetails.extensionPeriodsError or pageDescription.additionalDetails.totalContractLengthError }}">
+      <div class="govuk-!-margin-top-5">
+        {% set optionalCallOffHtml %}
+          {% for index in ['0', '1', '2', '3'] %}
+            {% set extension = pageDescription.additionalDetails.optionalCallOffPeriodData[index] %}
+            {% set rowVisible = extension.rowVisible %}
+            {% set removeButtonVisible = extension.removeButtonVisible %}
+            {% set extensionAttribute = extension.extensionAttribute %}
+            {% set extensionRequiredAttribute = extension.extensionRequiredAttribute %}
+            {% set extensionYearsAttribute = extension.extensionYearsAttribute %}
+            {% set extensionMonthsAttribute = extension.extensionMonthsAttribute %}
+            <div id="extension{{ index }}Container" class="govuk-form-group govuk-!-margin-left-3 extensionContainer {{'govuk-visually-hidden' if not rowVisible }}" data-extension="{{ index }}">
+              <fieldset class="govuk-fieldset">
+                <div class="govuk-grid-row">
+                  <div class="govuk-grid-column-full">
+                    <legend class="govuk-heading-s govuk-!-margin-bottom-1 govuk-!-padding-left-0">
+                      Extension period {{ index|int + 1 }}
+                    </legend>
+                    {{ govukErrorMessage({
+                      text: errors[extensionAttribute].errorMessage
+                    }) if errors[extensionAttribute] !== undefined }}
+                    {{ govukErrorMessage({
+                      text: errors[extensionYearsAttribute].errorMessage
+                    }) if errors[extensionYearsAttribute] !== undefined }}
+                    {{ govukErrorMessage({
+                      text: errors[extensionMonthsAttribute].errorMessage
+                    }) if errors[extensionMonthsAttribute] !== undefined }}
+                  </div>
+                </div>
+                <div class="govuk-grid-row">
+                  <div class="govuk-grid-column-one-quarter">
+                    {{ govukInput({
+                      classes: "periodInput govuk-input--width-4",
+                      id: extensionYearsAttribute,
+                      name: "procurement[" + extensionYearsAttribute + "]",
+                      value: procurement.data[extensionYearsAttribute] or "0" if procurement.data[extensionYearsAttribute] !== undefined,
+                      attributes: {
+                        'aria-label': 'The year part of extension ' + index
+                      },
+                      suffix: {
+                        text: 'years'
+                      },
+                      attributes: {
+                        'tabindex': 1 if rowVisible else 0
+                      },
+                      errorMessage: {
+                        text: '',
+                        classes: 'govuk-!-margin-0'
+                      } if errors[extensionYearsAttribute] !== undefined
+                    }) }}
+                  </div>
+                  <div class="govuk-grid-column-one-quarter">
+                    {{ govukInput({
+                      classes: "periodInput govuk-input--width-4",
+                      id: extensionMonthsAttribute,
+                      name: "procurement[" + extensionMonthsAttribute + "]",
+                      value: procurement.data[extensionMonthsAttribute] or "0" if procurement.data[extensionMonthsAttribute] !== undefined,
+                      attributes: {
+                        'aria-label': 'The month part of extension ' + index
+                      },
+                      suffix: {
+                        text: 'months'
+                      },
+                      attributes: {
+                        'tabindex': 1 if rowVisible else 0
+                      },
+                      errorMessage: {
+                        text: '',
+                        classes: 'govuk-!-margin-0'
+                      } if errors[extensionMonthsAttribute] !== undefined
+                    }) }}
+                  </div>
+                  <div class="govuk-grid-column-one-half">
+                    <input value="{{ rowVisible }}" type="hidden" name="procurement[{{ extensionRequiredAttribute }}]" id="{{ extensionRequiredAttribute }}">
+                    {{ govukButton({
+                      text: "Remove",
+                      classes: "govuk-button--secondary govuk-!-margin-bottom-0 extensionRemoveButton " + ('govuk-visually-hidde' if not removeButtonVisible),
+                      attributes: {
+                        tabindex: 1 if removeButtonVisible else 0,
+                        id: "extension" + index + "RemoveButton",
+                        'data-extension': index
+                      }
+                    }) if not loop.first }}
+                  </div>
+                </div>
+              </fieldset>
+            </div> 
+          {% endfor %}
+          {{ govukButton({
+            text: "Add extension period",
+            classes: "govuk-button--secondary govuk-!-margin-left-3 govuk-!-margin-top-3",
+            attributes: {
+              id: "addContractExtensionButton"
+            }
+          }) }}
+        {% endset -%}
+
+
+        {{ govukRadios({
+          idPrefix: "optionalCallOffRequired",
+          name: "procurement[optionalCallOffRequired]",
+          fieldset: {
+            legend: {
+              text: "Do you want the option to extend your call-off contract?",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          hint: {
+            text: 'Including this in your contract gives you the option to extend the end date of the agreement. Call-off contracts can be let for a maximum period of 10 years, inclusive of mobilisation period and all call-off extensions.'
+          },
+          items: [
+            {
+              value: "true",
+              text: "Yes",
+              id: "optionalCallOffRequiredTrue",
+              checked: procurement.data.optionalCallOffRequired,
+              conditional: {
+                html: optionalCallOffHtml
+              }
+            },
+            {
+              value: "false",
+              text: "No",
+              id: "optionalCallOffRequiredFalse",
+              checked: procurement.data.optionalCallOffRequired === false
+            }
+          ],
+          errorMessage: {
+            text: errors.optionalCallOffRequired.errorMessage
+          } if errors.optionalCallOffRequired !== undefined
+        }) }}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,99 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-three-quarters">
+    <div class="govuk-!-margin-top-3">
+      <div class="govuk-form-group {{ 'govuk-form-group--error' if pageDescription.additionalDetails.initialCallOffPeriodError or pageDescription.additionalDetails.totalContractLengthError}}" data-propertyname="Initial call-off period">
+        <h2 class="govuk-heading-m govuk-!-margin-bottom-0">
+          Initial call-off period
+        </h2>
+        <p class="govuk-caption-m govuk-!-margin-top-0 govuk-!-width-two-thirds">
+          The initial period in which the services are provided. This is the date you want services to begin and can be a maximum of 7 years.
+        </p>
+        {{ govukErrorMessage({
+          text: errors.initialCallOffPeriod.errorMessage
+        }) if errors.initialCallOffPeriod !== undefined }}
+        {{ govukErrorMessage({
+          text: errors.initialCallOffPeriodYears.errorMessage
+        }) if errors.initialCallOffPeriodYears !== undefined }}
+        {{ govukErrorMessage({
+          text: errors.initialCallOffPeriodMonths.errorMessage
+        }) if errors.initialCallOffPeriodMonths !== undefined }}
+        {{ govukErrorMessage({
+          text: errors.base.errorMessage
+        }) if errors.base !== undefined }}
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-one-quarter">
+            {{ govukInput({
+              classes: "periodInput govuk-input--width-4",
+              id: "initialCallOffPeriodYears",
+              name: "procurement[initialCallOffPeriodYears]",
+              value: procurement.data.initialCallOffPeriodYears or "0" if procurement.data.initialCallOffPeriodYears !== undefined,
+              attributes: {
+                'aria-label': 'The year part of the initial call off period'
+              },
+              suffix: {
+                text: 'years'
+              },
+              errorMessage: {
+                text: '',
+                classes: 'govuk-!-margin-0'
+              } if errors.initialCallOffPeriodYears !== undefined
+            }) }}
+          </div>
+          <div class="govuk-grid-column-one-quarter">
+            {{ govukInput({
+              classes: "periodInput govuk-input--width-4",
+              id: "initialCallOffPeriodMonths",
+              name: "procurement[initialCallOffPeriodMonths]",
+              value: procurement.data.initialCallOffPeriodMonths or "0" if procurement.data.initialCallOffPeriodMonths !== undefined,
+              attributes: {
+                'aria-label': 'The year part of the initial call off period'
+              },
+              suffix: {
+                text: 'months'
+              },
+              errorMessage: {
+                text: '',
+                classes: 'govuk-!-margin-0'
+              } if errors.initialCallOffPeriodMonths !== undefined
+            }) }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="govuk-!-margin-top-5">
+      {{ govukDateInput({
+        id: "initialCallOffPeriodStartDate",
+        namePrefix: "procurement[initialCallOffPeriodStartDate]",
+        fieldset: {
+          legend: {
+            text: "Initial call-off period start date",
+            classes: "govuk-fieldset__legend--m"
+          }
+        },
+        hint: {
+          text: "For example, 01 11 2030."
+        },
+        items: [
+          {
+            name: "day",
+            classes: "govuk-input--width-2",
+            value: pageDescription.additionalDetails.initialCallOffStartDateValues[2]
+          },
+          {
+            name: "month",
+            classes: "govuk-input--width-2",
+            value: pageDescription.additionalDetails.initialCallOffStartDateValues[1]
+          },
+          {
+            name: "year",
+            classes: "govuk-input--width-4",
+            value: pageDescription.additionalDetails.initialCallOffStartDateValues[0]
+          }
+        ],
+        errorMessage: {
+          text: errors.initialCallOffPeriodStartDate.errorMessage
+        } if errors.initialCallOffPeriodStartDate !== undefined
+      }) }}
+    </div>
+  </div>
+</div>

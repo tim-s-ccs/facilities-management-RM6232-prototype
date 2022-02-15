@@ -24,3 +24,12 @@ export type ContractDetailsTable = {
   status: string
   hasError: boolean
 }
+
+export type OptionalCallOffPeriodData = {
+  rowVisible: boolean
+  removeButtonVisible: boolean
+  extensionAttribute: string
+  extensionRequiredAttribute: string
+  extensionYearsAttribute: string
+  extensionMonthsAttribute: string
+}

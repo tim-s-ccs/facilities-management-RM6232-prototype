@@ -1,7 +1,7 @@
 import Procurement from '../../models/active/facilitiesManagement/procurement/model'
 import SuppliersSelector from '../../services/suppliersSelector'
 import { chooseServicesAccordionItems } from './quickViewAccordionSetup'
-import { ContractDetailsTable, ProcurementAdvancedRowItems, ProcurementEditPageDescription, ProcurementSearchRowItems, ProcurementShowPageDescription } from '../../types/utils/pageSetup/procurementSetup'
+import { ContractDetailsTable, OptionalCallOffPeriodData, ProcurementAdvancedRowItems, ProcurementEditPageDescription, ProcurementSearchRowItems, ProcurementShowPageDescription } from '../../types/utils/pageSetup/procurementSetup'
 import { ProcurementIndexParams, ProcurementNewParams } from '../../types/routes/facilitiesManagement/procurements'
 import { Request } from 'express'
 import { urlFormatter } from './quickViewSetup'
@@ -185,6 +185,57 @@ const getContractName = (req: Request): string => {
   return getProcurement(req).data.contractName as string
 }
 
+const isThereInitialCallOffPeriodError = (procurement: Procurement): boolean => {
+  return procurement.errors.initialCallOffPeriodYears !== undefined || procurement.errors.initialCallOffPeriodMonths !== undefined || procurement.errors.initialCallOffPeriod !== undefined
+}
+
+const isThereTotalContractPeriodError = (procurement: Procurement): boolean => {
+  return procurement.errors.base !== undefined && procurement.errors.base.error === 'totalContractPeriod'
+}
+
+const initialCallOffStartDateValues = (procurement: Procurement): string[] => {
+  if (procurement.data.initialCallOffPeriodStartDate === undefined || (procurement.errors.initialCallOffPeriodStartDate !== undefined && procurement.errors.initialCallOffPeriodStartDate.error === 'invalidDate')) {
+    return ['', '', '']
+  } else {
+    return procurement.data.initialCallOffPeriodStartDate.split('-')
+  }
+}
+
+const optionalCallOffPeriodData = (procurement: Procurement): {[key: number]: OptionalCallOffPeriodData} => {
+  const data: {[key: number]: any} = {}
+
+  const indices: number[] = [0, 1, 2, 3]
+
+  indices.forEach(index => {
+    data[index] = {
+      extensionAttribute: `extensionPeriod${index}`,
+      extensionRequiredAttribute: `extensionPeriodRequired${index}`,
+      extensionYearsAttribute: `extensionPeriodYears${index}`,
+      extensionMonthsAttribute: `extensionPeriodMonths${index}`
+    }
+
+    data[index]['rowVisible'] = isCallOffExtensionVisible(procurement, index)
+    data[index]['removeButtonVisible'] =  data[index]['rowVisible'] && !isCallOffExtensionVisible(procurement, index + 1)
+  })
+
+  return data
+}
+
+const isCallOffExtensionVisible = (procurement: Procurement, extension: number): boolean => {
+  if (!procurement.callOffExtensionRequired(extension)) return false
+
+  return procurement.callOffExtensionYears(extension) !== undefined ||
+         procurement.callOffExtensionMonths(extension) !== undefined ||
+         procurement.callOffExtensionError(extension)
+
+}
+
+const isExtensionPeriodError = (procurement: Procurement): boolean => {
+  const extensions: number[] = [0, 1, 2, 3]
+
+  return extensions.some(extension => procurement.callOffExtensionError(extension))
+}
+
 const editPageDescription = (procurement: Procurement, step: string): ProcurementEditPageDescription | undefined=> {
   switch (step) {
   case 'contract-name':
@@ -205,6 +256,17 @@ const editPageDescription = (procurement: Procurement, step: string): Procuremen
   case 'tupe':
     return {
       pageTitle: 'TUPE'
+    }
+  case 'contract-period':
+    return {
+      pageTitle: 'Contract period',
+      additionalDetails: {
+        initialCallOffPeriodError: isThereInitialCallOffPeriodError(procurement),
+        totalContractLengthError: isThereTotalContractPeriodError(procurement),
+        initialCallOffStartDateValues: initialCallOffStartDateValues(procurement),
+        optionalCallOffPeriodData: optionalCallOffPeriodData(procurement),
+        extensionPeriodsError: isExtensionPeriodError(procurement)
+      }
     }
   }
 }

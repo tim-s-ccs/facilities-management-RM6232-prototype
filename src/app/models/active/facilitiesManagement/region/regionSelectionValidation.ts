@@ -22,7 +22,7 @@ class RegionSelectionValidation extends CustomValidator {
   }
 }
 
-const regionSelectionValidationCondition: ValidationCondition<Address> = (addressModel: Address): boolean =>  addressModel.data.addressLine1 !== '' && addressModel.data.city !== ''
+const regionSelectionValidationCondition: ValidationCondition = (addressModel: Address): boolean =>  addressModel.data.addressLine1 !== '' && addressModel.data.city !== ''
 
 export { regionSelectionValidationCondition }
 export default RegionSelectionValidation

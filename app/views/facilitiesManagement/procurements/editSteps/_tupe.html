@@ -1,4 +1,5 @@
-{% set details = govukDetails({
+{% set details %}
+{{ govukDetails({
   summaryText: 'What you need to know about TUPE',
   html: '
     TUPE, the Transfer of Undertakings (Protection of Employment) protects the rights of employees when the business or commercial contract that they are working on changes to new ownership.<br>
@@ -7,7 +8,8 @@
       Find out when TUPE applies (opens in a new tab)
     </a>
   '
-}) %}
+}) }}
+{% endset -%}
 
 {{ govukRadios({
   classes: "govuk-radios--inline",
@@ -37,7 +39,7 @@
     {
       value: "false",
       text: "No",
-      checked: not procurement.data.tupe
+      checked: procurement.data.tupe === false
     }
   ],
   errorMessage: {

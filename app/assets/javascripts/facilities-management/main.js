@@ -3,6 +3,7 @@ import { finderComponent } from './fmFindAddress.js'
 import { ChooserComponent } from './chooserComponent.js'
 import { numberInput } from './numberInput.js'
 import { stepByStepNav } from './stepByStepNav.js'
+import { contractPeriod } from './contractPeriod.js'
 
 $(() => {
   if (document.querySelectorAll('[data-module=\'find-address\']').length) {
@@ -75,5 +76,11 @@ $(() => {
 $(() => {
   if ($('#step-by-step-navigation').length > 0) {
     stepByStepNav.init()
+  }
+})
+
+$(() => {
+  if ($('.extensionContainer').length > 0) {
+    contractPeriod()
   }
 })
