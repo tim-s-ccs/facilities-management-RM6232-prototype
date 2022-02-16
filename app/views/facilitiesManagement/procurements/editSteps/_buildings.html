@@ -1,0 +1,57 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-half">
+    <p>
+      Please select all of the buildings you want to include in your procurement. Only 'completed' buildings can be selected. To view a buildings details or finish setting up an incomplete building, please click on 'details' next to the building.
+    </p>
+    <p>
+      Once you have selected all your buildings for this procurement, click on the 'save and continue' button.
+    </p>
+  </div>
+  <div class="govuk-grid-column-one-half fm-add-buildings-container">
+    <h2 class="govuk-heading-m">
+     New buildings
+    </h2>
+    <p>
+      If you wish to set up a new building so that it can be included in this procurement, click on the 'Add a building' button below.
+    </p>
+    {{ govukButton({
+      href: '/facilities-management/RM6232/procurements/2/edit-buildings/new',
+      text: 'Add a building',
+      classes: 'govuk-button--secondary'
+    })}}
+    {{ govukDetails({
+      summaryText: 'How it works',
+      html:'
+        <p>
+          When creating your buildings, you are not restricted to create just full buildings, for example you may choose to set up just a floor or a specific area within a building. You may also set up an external area, such as a park, as a ‘building’.
+        </p>
+        <p>
+          Your service pricing will be broken down to show a cost per service per ‘building’, allowing you to manage your contract effectively. You should therefore create ‘buildings’ dependent on the level of detail you require.
+        </p>
+        <p>
+          If you have a site, campus, group of buildings, these should be set up individually and not grouped together into one site.
+        </p>
+      '
+    }) }}
+  </div>
+</div>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    {{ govukTable({
+      caption: "My buildings",
+      captionClasses: "govuk-table__caption--m",
+      head: [
+        {
+          text: 'Building name and address'
+        },
+        {
+          text: 'Status'
+        },
+        {
+          text: ''
+        }
+      ],
+      rows: pageDescription.additionalDetails.buildingRows
+    }) }}
+  </div>
+</div>

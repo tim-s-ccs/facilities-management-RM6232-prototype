@@ -7,7 +7,7 @@
 {% block content %}
   {{ govukBackLink({
     text: "Return to buildings",
-    href: "/facilities-management/RM6232/buildings"
+    href: return_url
   }) }}
 
   <h1 class="govuk-heading-xl">
@@ -49,7 +49,7 @@
           text: building.data.name
         },
         {
-          html: '<a role="link" class="govuk-link" href="/facilities-management/RM6232/buildings/' + building.data.id + '/edit/building-details">Change</a>'
+          html: '<a role="link" class="govuk-link" href="' + edit_url + 'building-details">Change</a>'
         }
       ],
       [
@@ -58,11 +58,11 @@
         },
         {
           text: building.data.description if building.data.description,
-          html: '<a role="link" class="govuk-link" href="/facilities-management/RM6232/buildings/' + building.data.id + '/edit/building-details">Answer question</a>' if not building.data.description
+          html: '<a role="link" class="govuk-link" href="' + edit_url + 'building-details">Answer question</a>' if not building.data.description
         },
         {
           text: '' if not building.data.description,
-          html: '<a role="link" class="govuk-link" href="/facilities-management/RM6232/buildings/' + building.data.id + '/edit/building-details">Change</a>' if building.data.description
+          html: '<a role="link" class="govuk-link" href="' + edit_url + 'building-details">Change</a>' if building.data.description
         }
       ],
       [
@@ -73,7 +73,7 @@
           text: building.data.address.fullAddress()
         },
         {
-          html: '<a role="link" class="govuk-link" href="/facilities-management/RM6232/buildings/' + building.data.id + '/edit/building-details">Change</a>'
+          html: '<a role="link" class="govuk-link" href="' + edit_url + 'building-details">Change</a>'
         }
       ],
       [
@@ -82,7 +82,7 @@
         },
         {
           text: building.data.region.data.name if building.data.region !== undefined,
-          html: '<a role="link" class="govuk-link" href="/facilities-management/RM6232/buildings/' + building.data.id + '/edit/building-details">Answer question</a>' if building.data.region === undefined
+          html: '<a role="link" class="govuk-link" href="' + edit_url + 'building-details">Answer question</a>' if building.data.region === undefined
         },
         {
           text: ''
@@ -94,11 +94,11 @@
         },
         {
           text: building.data.gia + ' sqm' if building.data.gia !== undefined,
-          html: '<a role="link" class="govuk-link" href="/facilities-management/RM6232/buildings/' + building.data.id + '/edit/area">Answer question</a>' if building.data.gia === undefined
+          html: '<a role="link" class="govuk-link" href="' + edit_url + 'area">Answer question</a>' if building.data.gia === undefined
         },
         {
           text: '' if building.data.gia === undefined,
-          html: '<a role="link" class="govuk-link" href="/facilities-management/RM6232/buildings/' + building.data.id + '/edit/area">Change</a>' if building.data.gia !== undefined
+          html: '<a role="link" class="govuk-link" href="' + edit_url + 'area">Change</a>' if building.data.gia !== undefined
         }
       ],
       [
@@ -107,11 +107,11 @@
         },
         {
           text: building.data.externalArea + ' sqm' if building.data.externalArea !== undefined,
-          html: '<a role="link" class="govuk-link" href="/facilities-management/RM6232/buildings/' + building.data.id + '/edit/area">Answer question</a>' if building.data.externalArea === undefined
+          html: '<a role="link" class="govuk-link" href="' + edit_url + 'area">Answer question</a>' if building.data.externalArea === undefined
         },
         {
           text: '' if building.data.externalArea === undefined,
-          html: '<a role="link" class="govuk-link" href="/facilities-management/RM6232/buildings/' + building.data.id + '/edit/area">Change</a>' if building.data.externalArea !== undefined
+          html: '<a role="link" class="govuk-link" href="' + edit_url + 'area">Change</a>' if building.data.externalArea !== undefined
         }
       ],
       [
@@ -120,11 +120,11 @@
         },
         {
           text: building.data.buildingType.data.name if building.data.buildingType !== undefined,
-          html: '<a role="link" class="govuk-link" href="/facilities-management/RM6232/buildings/' + building.data.id + '/edit/building-type">Answer question</a>' if building.data.buildingType === undefined
+          html: '<a role="link" class="govuk-link" href="' + edit_url + 'building-type">Answer question</a>' if building.data.buildingType === undefined
         },
         {
           text: '' if building.data.buildingType === undefined,
-          html: '<a role="link" class="govuk-link" href="/facilities-management/RM6232/buildings/' + building.data.id + '/edit/building-type">Change</a>' if building.data.buildingType !== undefined
+          html: '<a role="link" class="govuk-link" href="' + edit_url + 'building-type">Change</a>' if building.data.buildingType !== undefined
         }
       ],
       [
@@ -133,17 +133,17 @@
         },
         {
           text: building.data.securityClearance.data.name if building.data.securityClearance !== undefined,
-          html: '<a role="link" class="govuk-link" href="/facilities-management/RM6232/buildings/' + building.data.id + '/edit/security-clearance">Answer question</a>' if building.data.securityClearance === undefined
+          html: '<a role="link" class="govuk-link" href="' + edit_url + 'security-clearance">Answer question</a>' if building.data.securityClearance === undefined
         },
         {
           text: '' if building.data.securityClearance === undefined,
-          html: '<a role="link" class="govuk-link" href="/facilities-management/RM6232/buildings/' + building.data.id + '/edit/security-clearance">Change</a>' if building.data.securityClearance !== undefined
+          html: '<a role="link" class="govuk-link" href="' + edit_url + 'security-clearance">Change</a>' if building.data.securityClearance !== undefined
         }
       ]
     ]
   }) }}
 
-  <a href="/facilities-management/RM6232/buildings" class="govuk-body govuk-link--no-visited-state">
+  <a href="{{ return_url }}" class="govuk-body govuk-link--no-visited-state">
     Return to buildings
   </a>
 {% endblock %}

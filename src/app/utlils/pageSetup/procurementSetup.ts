@@ -1,7 +1,9 @@
+import Address from '../../models/active/facilitiesManagement/address/model'
+import Building from '../../models/active/facilitiesManagement/building/model'
 import Procurement from '../../models/active/facilitiesManagement/procurement/model'
 import SuppliersSelector from '../../services/suppliersSelector'
+import { BuildingsTableRow, BuildingsTableRowItem, ContractDetailsTable, OptionalCallOffPeriodData, ProcurementAdvancedRowItems, ProcurementEditPageDescription, ProcurementSearchRowItems, ProcurementShowPageDescription } from '../../types/utils/pageSetup/procurementSetup'
 import { chooseServicesAccordionItems } from './quickViewAccordionSetup'
-import { ContractDetailsTable, OptionalCallOffPeriodData, ProcurementAdvancedRowItems, ProcurementEditPageDescription, ProcurementSearchRowItems, ProcurementShowPageDescription } from '../../types/utils/pageSetup/procurementSetup'
 import { ProcurementIndexParams, ProcurementNewParams } from '../../types/routes/facilitiesManagement/procurements'
 import { Request } from 'express'
 import { urlFormatter } from './quickViewSetup'
@@ -243,7 +245,76 @@ const isExtensionPeriodError = (procurement: Procurement): boolean => {
   return extensions.some(extension => procurement.callOffExtensionError(extension))
 }
 
-const editPageDescription = (procurement: Procurement, step: string): ProcurementEditPageDescription | undefined=> {
+const getBuilingSelection = (procurement: Procurement, req: Request): BuildingsTableRow[] => {
+  const buildings: Building[] = Building.all(req)
+
+  const rows = buildings.map(building => {
+    const row: BuildingsTableRowItem[] = []
+
+    if (building.data.buildingComplete) {
+      row.push({
+        html: `
+          <div class="govuk-checkboxes govuk-checkboxes--small">
+            <div class="govuk-checkboxes__item">
+              <input
+                class="govuk-checkboxes__input"
+                title="${building.data.name}"
+                type="checkbox"
+                value="1"
+                name="procurement[procurementBuildings][]"
+                id="procurementBuildings${building.data.id}Active"
+              >
+              <label class="govuk-label govuk-checkboxes__label govuk-!-padding-top-0" for="procurementBuildings${building.data.id}Active">
+                ${procurementBuildingCheckboxText(building)}
+              </label>
+            </div>
+          </div>
+        `,
+        classes: 'govuk-!-padding-right-2'
+      })
+    } else {
+      row.push({
+        html: `
+          <div class="govuk-!-padding-left-7">
+          ${procurementBuildingCheckboxText(building)}
+          </div>
+        `,
+        classes: 'govuk-!-padding-right-2'
+      })
+    }
+
+    row.push({
+      html:  building.data.buildingComplete ? '<strong class="govuk-tag">completed</strong>' : '<strong class="govuk-tag govuk-tag--red">incomplete</strong>',
+      classes: 'govuk-!-padding-right-2'
+    })
+
+    row.push({
+      html: `
+        <a class="govuk-link govuk-link--no-visited-state" href="http://localhost:3000/facilities-management/RM6232/procurements/${procurement.data.id}/edit-buildings/${building.data.id}">
+          Details
+        </a>
+      `,
+      classes: 'govuk-!-padding-right-2'
+    })
+
+    return row as BuildingsTableRow
+  })
+
+  return rows
+}
+
+const procurementBuildingCheckboxText = (building: Building): string => {
+  return `
+    <span class="govuk-fieldset__legend">
+      ${building.data.name}
+    </span>
+    <span class="govuk-hint govuk-!-margin-bottom-0">
+      ${(building.data.address as Address).fullAddress()}
+    </span>
+  `
+}
+
+const editPageDescription = (req: Request, procurement: Procurement, step: string): ProcurementEditPageDescription | undefined=> {
   switch (step) {
   case 'contract-name':
     return {
@@ -273,6 +344,13 @@ const editPageDescription = (procurement: Procurement, step: string): Procuremen
         initialCallOffStartDateValues: initialCallOffStartDateValues(procurement),
         optionalCallOffPeriodData: optionalCallOffPeriodData(procurement),
         extensionPeriodsError: isExtensionPeriodError(procurement)
+      }
+    }
+  case 'buildings':
+    return {
+      pageTitle: 'Buildings',
+      additionalDetails: {
+        buildingRows: getBuilingSelection(procurement, req)
       }
     }
   }

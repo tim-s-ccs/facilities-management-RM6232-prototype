@@ -23,6 +23,7 @@ router.get('/new', (req: Request, res: Response) => {
 
   const params: BuildingsNewParams = {
     building: building,
+    form_url: '/facilities-management/RM6232/buildings/create',
     pageDescription: pageDescription(building, 'new')
   }
 
@@ -44,6 +45,7 @@ router.post('/create', (req: Request, res: Response) => {
   } else {
     const params: BuildingsCreateParams = {
       building: building,
+      form_url: '/facilities-management/RM6232/buildings/create',
       pageDescription: pageDescription(building, 'new'),
       errors: building.errors,
       errorList: building.errorList()
@@ -61,6 +63,7 @@ router.get('/new/building-address', (req: Request, res: Response) => {
 
   const params: BuildingsNewParams = {
     building: building,
+    form_url: '/facilities-management/RM6232/buildings/create/building-address',
     pageDescription: pageDescription(building, 'new-address')
   }
 
@@ -76,6 +79,7 @@ router.post('/create/building-address', (req: Request, res: Response) => {
   if (building.validate('new-address')) {
     const params: BuildingsNewParams = {
       building: building,
+      form_url: '/facilities-management/RM6232/buildings/create',
       pageDescription: pageDescription(building, 'new')
     }
 
@@ -87,6 +91,7 @@ router.post('/create/building-address', (req: Request, res: Response) => {
     const params: BuildingsCreateParams = {
       building: building,
       pageDescription: pageDescription(building, 'new-address'),
+      form_url: '/facilities-management/RM6232/buildings/create/building-address',
       errors: building.errors,
       errorList: building.errorList()
     }
@@ -99,8 +104,12 @@ router.post('/create/building-address', (req: Request, res: Response) => {
 })
 
 router.get('/:id', (req: Request, res: Response) => {
+  const building: Building = getBuilding(req)
+
   const params: BuildingsShowParams = {
-    building: getBuilding(req)
+    building: building,
+    return_url: '/facilities-management/RM6232/buildings',
+    edit_url: `/facilities-management/RM6232/buildings/${building.data.id}/edit/`
   }
 
   res.render(
@@ -116,6 +125,7 @@ router.get('/:id/edit/:step', (req: Request, res: Response) => {
   const params: BuildingsEditParams = {
     building: building,
     step: step,
+    form_url: `/facilities-management/RM6232/buildings/${building.data.id}/edit/${step}`,
     pageDescription: pageDescription(building, step)
   }
 
@@ -143,6 +153,7 @@ router.post('/:id/edit/:step', (req: Request, res: Response) => {
     const params: BuildingsUpdateParams = {
       building: building,
       step: step,
+      form_url: `/facilities-management/RM6232/buildings/${building.data.id}/edit/${step}`,
       pageDescription: pageDescription(building, step),
       errors: building.errors,
       errorList: building.errorList()

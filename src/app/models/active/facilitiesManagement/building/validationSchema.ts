@@ -2,7 +2,7 @@ import CombinedAreaValidation from './combinedAreaValidation'
 import { NumberValidator, NumberValidatorOptions, StringValidator, StringValidatorOptions, ValidationSchema } from 'ccs-prototype-kit-model-interface'
 
 const MAX_AREA: number = 1000000000
-const MIN_AREA: number = 0
+const MIN_AREA: number = -1
 const MAX_LENGTH: number = 50
 
 const nameOptions: StringValidatorOptions = {
