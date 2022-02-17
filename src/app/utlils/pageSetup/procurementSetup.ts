@@ -168,15 +168,22 @@ const showPageDescription = (procurement: Procurement, state: string): Procureme
   switch (state) {
   case 'completed_search':
     return {
-      pageTitle: 'What happens next?'
+      pageTitle: 'What happens next?',
+      saveAndContinue: true
     }
   case 'entering_requirements':
     return {
       pageTitle: 'Further service and contract requirements',
+      saveAndContinue: true,
       additionalDetails:{
         contractDetailsSection: getContractDetailsSection(procurement),
         buildingDetailsSection: getBuildingDetailsSection(procurement)
       }
+    }
+  case 'final_results':
+    return {
+      pageTitle: 'Further Competition',
+      saveAndContinue: false
     }
   }
 }

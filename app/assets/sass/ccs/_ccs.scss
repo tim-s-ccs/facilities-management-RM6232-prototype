@@ -62,7 +62,12 @@ $ccs-button-green: #007E8A;
   padding-right: 5px;
 }
 
-.ccs-file-download:before {
+.ccs-file-download__xlsx:before {
   background-color: #007831;
   content: ".XLSX";
+}
+
+.ccs-file-download__doc:before {
+  background-color: #0d0da0;
+  content: ".DOC";
 }

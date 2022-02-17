@@ -13,10 +13,14 @@ export type ProcurementAdvancedRowItems = [
 
 export type ProcurementShowPageDescription = {
   pageTitle: string
+  saveAndContinue: boolean
   additionalDetails?: {[key: string]: any}
 }
 
-export type ProcurementEditPageDescription = ProcurementShowPageDescription
+export type ProcurementEditPageDescription = {
+  pageTitle: string
+  additionalDetails?: {[key: string]: any}
+}
 
 export type ContractDetailsTable = {
   text: string
