@@ -98,7 +98,7 @@ router.get('/:id/edit/:step', (req: Request, res: Response) =>{
     procurement: procurement,
     step: step,
     contractName: getContractName(req),
-    pageDescription: editPageDescription(procurement, step)
+    pageDescription: editPageDescription(req, procurement, step)
   }
 
   res.render(
@@ -123,7 +123,7 @@ router.post('/:id/edit/:step', (req: Request, res: Response) =>{
       procurement: procurement,
       step: step,
       contractName: getContractName(req),
-      pageDescription: editPageDescription(procurement, step),
+      pageDescription: editPageDescription(req, procurement, step),
       errors: procurement.errors,
       errorList: procurement.errorList()
     }

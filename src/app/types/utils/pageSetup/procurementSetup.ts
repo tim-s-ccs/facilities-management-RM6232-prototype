@@ -37,3 +37,14 @@ export type OptionalCallOffPeriodData = {
   extensionYearsAttribute: string
   extensionMonthsAttribute: string
 }
+
+export type BuildingsTableRowItem = {
+  html: string,
+  classes: string
+}
+
+export type BuildingsTableRow = [
+  BuildingsTableRowItem,
+  BuildingsTableRowItem,
+  BuildingsTableRowItem
+]

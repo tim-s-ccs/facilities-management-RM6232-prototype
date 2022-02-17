@@ -8,16 +8,20 @@ export type BuildingsIndexParams = {
 
 export type BuildingsShowParams = {
   building: Building
+  return_url: string
+  edit_url: string
 }
 
 export type BuildingsNewParams = {
   building: Building,
+  form_url: string,
   pageDescription?: BuildingPageDescription
 }
 
 export type BuildingsEditParams = {
   building: Building
   step: string,
+  form_url: string,
   pageDescription?: BuildingPageDescription
 }
 
