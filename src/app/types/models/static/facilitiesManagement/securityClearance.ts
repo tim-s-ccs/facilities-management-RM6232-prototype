@@ -3,7 +3,7 @@ export interface SecurityClearanceInterface {
 }
 
 export type SecurityClearanceData = {
-  id: number
+  id: string
   name: string
   description: string
 }

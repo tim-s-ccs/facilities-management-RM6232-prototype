@@ -1,11 +1,13 @@
 import { DefaultRow } from 'ccs-prototype-kit-model-interface'
 
-export type BuildingTypeRow = DefaultRow & {
+export type BuildingTypeRow = {
+  id: string
   name: string
   description: string
 }
 
-export type SecurityClearanceRow = DefaultRow & {
+export type SecurityClearanceRow = {
+  id: string
   name: string
   description: string
 }
@@ -51,7 +53,8 @@ export type SecondaryRegionRow = {
   primary_region_code: string
 }
 
-export type SupplierRow = DefaultRow & {
+export type SupplierRow = {
+  id: string
   supplier_name: string
   contact_name: string
   contact_email: string
@@ -67,8 +70,9 @@ export type SupplierRow = DefaultRow & {
   active: boolean
 }
 
-export type SupplierLotDataRow = DefaultRow & {
-  supplier_id: number
+export type SupplierLotDataRow = {
+  id: string
+  supplier_id: string
   lot_code: string,
   service_codes: string[]
   region_codes: string[]

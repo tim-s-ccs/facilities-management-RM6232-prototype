@@ -4,14 +4,16 @@ import { SupplierData, SupplierInterface } from '../../../../types/models/static
 
 class Supplier extends StaticModel implements SupplierInterface {
   static tableName: string = 'suppliers'
+  static primaryKey: string = 'id'
+
   data: SupplierData = this.data as SupplierData
 
   lotData = (): SupplierLotData[] => {
     return SupplierLotData.where([{attribute: 'supplier_id', value: this.data.id}])
   }
 
-  static find = (id: number): Supplier => {
-    return new this(this._find(this.tableName, id))
+  static find = (id: string): Supplier => {
+    return new this(this._find(this.tableName, this.primaryKey, id))
   }
 
   static all = (): Array<Supplier> => {
@@ -23,7 +25,7 @@ class Supplier extends StaticModel implements SupplierInterface {
   }
 
   static selectSuppliers = (lotNumber: string, serviceCodes: string[], regionCodes: string[]): Array<Supplier> => {
-    const selectedSupplierIDs: number[] = SupplierLotData.where([
+    const selectedSupplierIDs: string[] = SupplierLotData.where([
       {attribute: 'lot_code', value: lotNumber[1]},
       {attribute: 'service_codes', contents: serviceCodes},
       {attribute: 'region_codes', contents: regionCodes}

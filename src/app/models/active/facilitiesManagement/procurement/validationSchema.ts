@@ -143,6 +143,11 @@ const extensionPeriodMonths3Options: NumberValidatorOptions = {
   lessThan: 12
 }
 
+const procurementBuildingsOptions: LengthValidatorOptions = {
+  on: ['buildings'],
+  min: 1
+}
+
 const procurementValidationSchema: ValidationSchema = {
   inputValidations: [
     {
@@ -342,6 +347,14 @@ const procurementValidationSchema: ValidationSchema = {
         notANumber: 'The months for the extension period must be a whole number',
         notAnInteger: 'The months for the extension period must be a whole number',
         greaterThan: 'The months for the extension period must be between 0 and 11'
+      }
+    },
+    {
+      attribute: 'procurementBuildings',
+      validator: LengthValidator,
+      options: procurementBuildingsOptions,
+      errorMessages: {
+        greaterThan: 'Select at least one building'
       }
     }
   ],

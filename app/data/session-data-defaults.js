@@ -21,7 +21,7 @@ const tables = require('../../dist/app/data/activeData').default
 
 module.exports = {
   user: {
-    id: 1,
+    id: '000001',
     email: 'buyer@example.com'
   },
   tables: tables

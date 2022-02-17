@@ -2,7 +2,7 @@ import BuyerDetail from '../../models/active/facilitiesManagement/buyerDetail/mo
 import { Request } from 'express'
 
 const getBuyerDetail = (req: Request): BuyerDetail => {
-  return BuyerDetail.find(req, Number(req.params['id']))
+  return BuyerDetail.find(req, req.params['id'])
 }
 
 export { getBuyerDetail }

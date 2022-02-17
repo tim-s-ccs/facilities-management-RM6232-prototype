@@ -3,10 +3,12 @@ import { Condition, StaticModel } from 'ccs-prototype-kit-model-interface'
 
 class BuildingType extends StaticModel implements BuildingTypeInterface {
   static tableName: string = 'buildingTypes'
+  static primaryKey: string = 'id'
+
   data: BuildingTypeData = this.data as BuildingTypeData
 
-  static find = (id: number): BuildingType => {
-    return new this(this._find(this.tableName, id))
+  static find = (id: string): BuildingType => {
+    return new this(this._find(this.tableName, this.primaryKey, id))
   }
 
   static all = (): Array<BuildingType> => {

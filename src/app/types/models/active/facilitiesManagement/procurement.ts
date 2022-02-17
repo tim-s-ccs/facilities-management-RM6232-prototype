@@ -1,3 +1,4 @@
+import ProcurementBuilding from '../../../../models/active/facilitiesManagement/procurementBuildings/model'
 import SecondaryRegion from '../../../../models/static/facilitiesManagement/secondaryRegion/model'
 import Service from '../../../../models/static/facilitiesManagement/service/model'
 import { ValidatorOptions } from 'ccs-prototype-kit-model-interface'
@@ -15,11 +16,13 @@ export interface ProcurementInterface {
   callOffExtensionYears: (extension: number) => number | undefined
   callOffExtensionMonths: (extension: number) => number | undefined
   callOffExtensionError: (extension: number) => boolean
+  activeProcurementBuildings: () => Array<ProcurementBuilding>
+  findOrBuildProcurementBuildings: (data: {[key: string]: any}) => void
 }
 
 export type ProcurementData = {
-  id: number
-  userID: number
+  id: string
+  userID: string
   serviceCodes: Array<string>
   regionCodes: Array<string>
   estimatedAnnualCost?: number
@@ -44,6 +47,7 @@ export type ProcurementData = {
   extensionPeriodRequired3?: boolean
   extensionPeriodYears3?: number
   extensionPeriodMonths3?: number
+  procurementBuildings?: Array<ProcurementBuilding>
   state?: string
   updatedAt?: string
 }

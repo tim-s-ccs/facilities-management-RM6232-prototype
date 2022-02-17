@@ -22,7 +22,7 @@ class Region extends ActiveModel implements RegionInterface {
     })
   }
 
-  static find = (req: Request, id: number): Region => {
+  static find = (req: Request, id: string): Region => {
     return new this(req, this._find(req, this.tableName, id) as RegionRow)
   }
 
@@ -38,7 +38,7 @@ class Region extends ActiveModel implements RegionInterface {
     if (data === undefined) { return new this(req, {} as RegionRow) }
 
     return new this(req, {
-      id: this.nextID(req, this.tableName),
+      id: this.generateID(),
       name: data.name,
       code: data.code
     })

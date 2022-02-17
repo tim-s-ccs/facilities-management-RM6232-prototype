@@ -5,8 +5,8 @@ export interface BuyerDetailInterface {
 }
 
 export type BuyerDetailData = {
-  id: number
-  userID: number
+  id: string
+  userID: string
   fullName: string
   jobTitle: string
   telephoneNumber: string

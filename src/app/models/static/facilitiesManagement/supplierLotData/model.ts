@@ -3,10 +3,12 @@ import { SupplierLotDataData, SupplierLotDataInterface } from '../../../../types
 
 class SupplierLotData extends StaticModel implements SupplierLotDataInterface {
   static tableName: string = 'supplierLotData'
+  static primaryKey: string = 'id'
+
   data: SupplierLotDataData = this.data as SupplierLotDataData
 
-  static find = (id: number): SupplierLotData => {
-    return new this(this._find(this.tableName, id))
+  static find = (id: string): SupplierLotData => {
+    return new this(this._find(this.tableName, this.primaryKey, id))
   }
 
   static all = (): Array<SupplierLotData> => {

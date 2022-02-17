@@ -2,7 +2,7 @@ import { SupplierLotDataRow } from '../../types/data/staticTables'
 
 const supplierLotData: Array<SupplierLotDataRow> = [
   {
-    id: 0,
+    id: '0',
     lot_code: 'b',
     service_codes: [
       'E.1',
@@ -140,10 +140,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 8
+    supplier_id: '8'
   },
   {
-    id: 1,
+    id: '1',
     lot_code: 'a',
     service_codes: [
       'E.1',
@@ -372,10 +372,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 6
+    supplier_id: '6'
   },
   {
-    id: 2,
+    id: '2',
     lot_code: 'a',
     service_codes: [
       'E.1',
@@ -604,10 +604,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 35
+    supplier_id: '35'
   },
   {
-    id: 3,
+    id: '3',
     lot_code: 'a',
     service_codes: [
       'E.1',
@@ -836,10 +836,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 18
+    supplier_id: '18'
   },
   {
-    id: 4,
+    id: '4',
     lot_code: 'a',
     service_codes: [
       'E.1',
@@ -1068,10 +1068,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 27
+    supplier_id: '27'
   },
   {
-    id: 5,
+    id: '5',
     lot_code: 'a',
     service_codes: [
       'E.1',
@@ -1300,10 +1300,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 13
+    supplier_id: '13'
   },
   {
-    id: 6,
+    id: '6',
     lot_code: 'c',
     service_codes: [
       'E.1',
@@ -1423,10 +1423,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN01',
       'UKN03'
     ],
-    supplier_id: 4
+    supplier_id: '4'
   },
   {
-    id: 7,
+    id: '7',
     lot_code: 'a',
     service_codes: [
       'E.1',
@@ -1627,10 +1627,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKL23',
       'UKL24'
     ],
-    supplier_id: 38
+    supplier_id: '38'
   },
   {
-    id: 8,
+    id: '8',
     lot_code: 'a',
     service_codes: [
       'E.1',
@@ -1831,10 +1831,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKL23',
       'UKL24'
     ],
-    supplier_id: 29
+    supplier_id: '29'
   },
   {
-    id: 9,
+    id: '9',
     lot_code: 'a',
     service_codes: [
       'E.1',
@@ -2035,10 +2035,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKL23',
       'UKL24'
     ],
-    supplier_id: 25
+    supplier_id: '25'
   },
   {
-    id: 10,
+    id: '10',
     lot_code: 'a',
     service_codes: [
       'E.1',
@@ -2239,10 +2239,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKL23',
       'UKL24'
     ],
-    supplier_id: 12
+    supplier_id: '12'
   },
   {
-    id: 11,
+    id: '11',
     lot_code: 'a',
     service_codes: [
       'E.1',
@@ -2443,10 +2443,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKL23',
       'UKL24'
     ],
-    supplier_id: 46
+    supplier_id: '46'
   },
   {
-    id: 12,
+    id: '12',
     lot_code: 'a',
     service_codes: [
       'E.1',
@@ -2565,10 +2565,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 32
+    supplier_id: '32'
   },
   {
-    id: 13,
+    id: '13',
     lot_code: 'a',
     service_codes: [
       'E.1',
@@ -2687,10 +2687,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 21
+    supplier_id: '21'
   },
   {
-    id: 14,
+    id: '14',
     lot_code: 'a',
     service_codes: [
       'E.1',
@@ -2809,10 +2809,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 41
+    supplier_id: '41'
   },
   {
-    id: 15,
+    id: '15',
     lot_code: 'a',
     service_codes: [
       'G.1',
@@ -2987,10 +2987,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 24
+    supplier_id: '24'
   },
   {
-    id: 16,
+    id: '16',
     lot_code: 'a',
     service_codes: [
       'G.1',
@@ -3165,10 +3165,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 42
+    supplier_id: '42'
   },
   {
-    id: 17,
+    id: '17',
     lot_code: 'a',
     service_codes: [
       'G.1',
@@ -3343,10 +3343,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 3
+    supplier_id: '3'
   },
   {
-    id: 18,
+    id: '18',
     lot_code: 'a',
     service_codes: [
       'E.1',
@@ -3491,10 +3491,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN02',
       'UKN04'
     ],
-    supplier_id: 22
+    supplier_id: '22'
   },
   {
-    id: 19,
+    id: '19',
     lot_code: 'a',
     service_codes: [
       'E.2',
@@ -3659,10 +3659,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN03',
       'UKN05'
     ],
-    supplier_id: 48
+    supplier_id: '48'
   },
   {
-    id: 20,
+    id: '20',
     lot_code: 'a',
     service_codes: [
       'E.1',
@@ -3792,10 +3792,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 34
+    supplier_id: '34'
   },
   {
-    id: 21,
+    id: '21',
     lot_code: 'a',
     service_codes: [
       'E.1',
@@ -3962,10 +3962,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN02',
       'UKN03'
     ],
-    supplier_id: 16
+    supplier_id: '16'
   },
   {
-    id: 22,
+    id: '22',
     lot_code: 'a',
     service_codes: [
       'E.1',
@@ -4115,10 +4115,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 26
+    supplier_id: '26'
   },
   {
-    id: 23,
+    id: '23',
     lot_code: 'a',
     service_codes: [
       'E.1',
@@ -4236,10 +4236,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKM65',
       'UKN03'
     ],
-    supplier_id: 31
+    supplier_id: '31'
   },
   {
-    id: 24,
+    id: '24',
     lot_code: 'a',
     service_codes: [
       'E.1',
@@ -4403,10 +4403,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN02',
       'UKN05'
     ],
-    supplier_id: 1
+    supplier_id: '1'
   },
   {
-    id: 25,
+    id: '25',
     lot_code: 'a',
     service_codes: [
       'E.1',
@@ -4562,10 +4562,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 7
+    supplier_id: '7'
   },
   {
-    id: 26,
+    id: '26',
     lot_code: 'a',
     service_codes: [
       'E.1',
@@ -4719,10 +4719,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 47
+    supplier_id: '47'
   },
   {
-    id: 27,
+    id: '27',
     lot_code: 'b',
     service_codes: [
       'E.1',
@@ -4951,10 +4951,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 3
+    supplier_id: '3'
   },
   {
-    id: 28,
+    id: '28',
     lot_code: 'b',
     service_codes: [
       'E.1',
@@ -5183,10 +5183,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 22
+    supplier_id: '22'
   },
   {
-    id: 29,
+    id: '29',
     lot_code: 'b',
     service_codes: [
       'E.1',
@@ -5415,10 +5415,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 48
+    supplier_id: '48'
   },
   {
-    id: 30,
+    id: '30',
     lot_code: 'b',
     service_codes: [
       'E.1',
@@ -5647,10 +5647,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 34
+    supplier_id: '34'
   },
   {
-    id: 31,
+    id: '31',
     lot_code: 'b',
     service_codes: [
       'E.1',
@@ -5879,10 +5879,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 16
+    supplier_id: '16'
   },
   {
-    id: 32,
+    id: '32',
     lot_code: 'b',
     service_codes: [
       'E.1',
@@ -6083,10 +6083,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKL23',
       'UKL24'
     ],
-    supplier_id: 26
+    supplier_id: '26'
   },
   {
-    id: 33,
+    id: '33',
     lot_code: 'b',
     service_codes: [
       'E.1',
@@ -6287,10 +6287,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKL23',
       'UKL24'
     ],
-    supplier_id: 31
+    supplier_id: '31'
   },
   {
-    id: 34,
+    id: '34',
     lot_code: 'b',
     service_codes: [
       'E.1',
@@ -6491,10 +6491,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKL23',
       'UKL24'
     ],
-    supplier_id: 1
+    supplier_id: '1'
   },
   {
-    id: 35,
+    id: '35',
     lot_code: 'b',
     service_codes: [
       'E.1',
@@ -6648,10 +6648,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN03',
       'UKN04'
     ],
-    supplier_id: 17
+    supplier_id: '17'
   },
   {
-    id: 36,
+    id: '36',
     lot_code: 'b',
     service_codes: [
       'E.1',
@@ -6852,10 +6852,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKL23',
       'UKL24'
     ],
-    supplier_id: 7
+    supplier_id: '7'
   },
   {
-    id: 37,
+    id: '37',
     lot_code: 'b',
     service_codes: [
       'E.1',
@@ -7056,10 +7056,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKL23',
       'UKL24'
     ],
-    supplier_id: 47
+    supplier_id: '47'
   },
   {
-    id: 38,
+    id: '38',
     lot_code: 'b',
     service_codes: [
       'E.1',
@@ -7178,10 +7178,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 39
+    supplier_id: '39'
   },
   {
-    id: 39,
+    id: '39',
     lot_code: 'b',
     service_codes: [
       'E.1',
@@ -7300,10 +7300,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 9
+    supplier_id: '9'
   },
   {
-    id: 40,
+    id: '40',
     lot_code: 'b',
     service_codes: [
       'E.1',
@@ -7422,10 +7422,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 5
+    supplier_id: '5'
   },
   {
-    id: 41,
+    id: '41',
     lot_code: 'b',
     service_codes: [
       'G.1',
@@ -7600,10 +7600,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 20
+    supplier_id: '20'
   },
   {
-    id: 42,
+    id: '42',
     lot_code: 'b',
     service_codes: [
       'G.1',
@@ -7778,10 +7778,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 11
+    supplier_id: '11'
   },
   {
-    id: 43,
+    id: '43',
     lot_code: 'b',
     service_codes: [
       'G.1',
@@ -7956,10 +7956,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 19
+    supplier_id: '19'
   },
   {
-    id: 44,
+    id: '44',
     lot_code: 'b',
     service_codes: [
       'E.3',
@@ -8114,10 +8114,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKM66',
       'UKN04'
     ],
-    supplier_id: 15
+    supplier_id: '15'
   },
   {
-    id: 45,
+    id: '45',
     lot_code: 'b',
     service_codes: [
       'E.1',
@@ -8290,10 +8290,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 10
+    supplier_id: '10'
   },
   {
-    id: 46,
+    id: '46',
     lot_code: 'b',
     service_codes: [
       'E.1',
@@ -8430,10 +8430,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 49
+    supplier_id: '49'
   },
   {
-    id: 47,
+    id: '47',
     lot_code: 'c',
     service_codes: [
       'E.1',
@@ -8662,10 +8662,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 39
+    supplier_id: '39'
   },
   {
-    id: 48,
+    id: '48',
     lot_code: 'c',
     service_codes: [
       'E.1',
@@ -8894,10 +8894,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 9
+    supplier_id: '9'
   },
   {
-    id: 49,
+    id: '49',
     lot_code: 'c',
     service_codes: [
       'E.1',
@@ -9126,10 +9126,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 5
+    supplier_id: '5'
   },
   {
-    id: 50,
+    id: '50',
     lot_code: 'c',
     service_codes: [
       'E.1',
@@ -9358,10 +9358,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 20
+    supplier_id: '20'
   },
   {
-    id: 51,
+    id: '51',
     lot_code: 'c',
     service_codes: [
       'E.4',
@@ -9496,10 +9496,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 2
+    supplier_id: '2'
   },
   {
-    id: 52,
+    id: '52',
     lot_code: 'c',
     service_codes: [
       'E.1',
@@ -9728,214 +9728,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 11
+    supplier_id: '11'
   },
   {
-    id: 53,
-    lot_code: 'c',
-    service_codes: [
-      'E.1',
-      'E.2',
-      'E.3',
-      'E.4',
-      'E.5',
-      'E.6',
-      'E.7',
-      'E.8',
-      'E.9',
-      'E.10',
-      'E.11',
-      'E.12',
-      'E.13',
-      'E.14',
-      'E.15',
-      'E.16',
-      'E.17',
-      'E.18',
-      'E.19',
-      'E.20',
-      'E.21',
-      'F.1',
-      'F.2',
-      'F.3',
-      'F.4',
-      'F.5',
-      'F.6',
-      'F.7',
-      'F.8',
-      'F.9',
-      'F.10',
-      'F.11',
-      'F.12',
-      'F.13',
-      'G.1',
-      'G.2',
-      'G.3',
-      'G.4',
-      'G.5',
-      'G.6',
-      'G.7',
-      'G.8',
-      'H.1',
-      'H.2',
-      'H.3',
-      'H.4',
-      'H.5',
-      'H.6',
-      'H.7',
-      'H.8',
-      'H.9',
-      'H.10',
-      'I.1',
-      'I.2',
-      'I.3',
-      'I.4',
-      'I.5',
-      'I.6',
-      'I.7',
-      'I.8',
-      'I.9',
-      'I.10',
-      'I.11',
-      'I.12',
-      'I.13',
-      'I.14',
-      'I.15',
-      'I.16',
-      'I.17',
-      'I.18',
-      'J.1',
-      'J.2',
-      'J.3',
-      'J.4',
-      'J.5',
-      'J.6',
-      'J.7',
-      'J.8',
-      'J.9',
-      'J.10',
-      'J.11',
-      'J.12',
-      'J.13',
-      'J.14',
-      'J.15',
-      'J.16',
-      'K.1',
-      'K.2',
-      'K.3',
-      'K.4',
-      'K.5',
-      'L.1',
-      'L.2',
-      'L.3',
-      'L.4',
-      'L.5',
-      'L.6',
-      'L.7',
-      'L.8',
-      'L.9',
-      'L.10',
-      'L.11',
-      'L.12',
-      'L.13',
-      'L.14',
-      'L.15',
-      'M.1',
-      'M.2',
-      'M.3',
-      'M.4',
-      'M.5',
-      'M.6',
-      'M.7',
-      'M.8',
-      'N.1',
-      'N.2',
-      'N.3',
-      'N.4',
-      'N.5',
-      'N.6',
-      'N.7',
-      'N.8',
-      'N.9',
-      'N.10',
-      'N.11',
-      'N.12',
-      'N.13',
-      'O.1',
-      'O.2',
-      'O.3',
-      'O.4',
-      'O.5',
-      'P.1',
-      'P.2',
-      'P.3',
-      'P.4',
-      'P.5',
-      'P.7',
-      'P.8',
-      'P.9',
-      'P.10',
-      'P.11',
-      'P.12',
-      'P.13',
-      'P.14',
-      'P.15',
-      'Q.1',
-      'Q.2',
-      'R.1',
-      'S.1'
-    ],
-    region_codes: [
-      'UKC1',
-      'UKC2',
-      'UKD1',
-      'UKD3',
-      'UKD4',
-      'UKD6',
-      'UKD7',
-      'UKE1',
-      'UKE2',
-      'UKE3',
-      'UKE4',
-      'UKF1',
-      'UKF2',
-      'UKF3',
-      'UKG1',
-      'UKG2',
-      'UKG3',
-      'UKH1',
-      'UKH2',
-      'UKH3',
-      'UKI3',
-      'UKI4',
-      'UKI5',
-      'UKI6',
-      'UKI7',
-      'UKJ1',
-      'UKJ2',
-      'UKJ3',
-      'UKJ4',
-      'UKK1',
-      'UKK2',
-      'UKK3',
-      'UKK4',
-      'UKL11',
-      'UKL12',
-      'UKL13',
-      'UKL14',
-      'UKL15',
-      'UKL16',
-      'UKL17',
-      'UKL18',
-      'UKL21',
-      'UKL22',
-      'UKL23',
-      'UKL24'
-    ],
-    supplier_id: 19
-  },
-  {
-    id: 54,
+    id: '53',
     lot_code: 'c',
     service_codes: [
       'E.1',
@@ -10136,10 +9932,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKL23',
       'UKL24'
     ],
-    supplier_id: 15
+    supplier_id: '19'
   },
   {
-    id: 55,
+    id: '54',
     lot_code: 'c',
     service_codes: [
       'E.1',
@@ -10340,161 +10136,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKL23',
       'UKL24'
     ],
-    supplier_id: 10
+    supplier_id: '15'
   },
   {
-    id: 56,
-    lot_code: 'c',
-    service_codes: [
-      'E.1',
-      'E.2',
-      'E.5',
-      'E.7',
-      'E.8',
-      'E.9',
-      'E.10',
-      'E.11',
-      'E.13',
-      'E.14',
-      'E.18',
-      'E.19',
-      'E.20',
-      'E.21',
-      'F.4',
-      'F.5',
-      'F.6',
-      'F.7',
-      'F.9',
-      'F.11',
-      'F.12',
-      'F.13',
-      'G.1',
-      'G.2',
-      'G.3',
-      'G.5',
-      'G.6',
-      'G.8',
-      'H.1',
-      'H.2',
-      'H.3',
-      'H.4',
-      'H.5',
-      'H.6',
-      'H.7',
-      'H.10',
-      'I.1',
-      'I.2',
-      'I.5',
-      'I.6',
-      'I.7',
-      'I.8',
-      'I.9',
-      'I.10',
-      'I.12',
-      'I.13',
-      'I.14',
-      'I.15',
-      'I.16',
-      'I.17',
-      'J.2',
-      'J.3',
-      'J.4',
-      'J.8',
-      'J.9',
-      'J.10',
-      'J.11',
-      'J.12',
-      'J.13',
-      'J.15',
-      'J.16',
-      'K.2',
-      'K.4',
-      'L.1',
-      'L.2',
-      'L.4',
-      'L.5',
-      'L.6',
-      'L.8',
-      'L.9',
-      'L.11',
-      'L.12',
-      'L.13',
-      'L.14',
-      'L.15',
-      'M.1',
-      'M.4',
-      'M.6',
-      'M.8',
-      'N.1',
-      'N.2',
-      'N.3',
-      'N.4',
-      'N.6',
-      'N.8',
-      'N.9',
-      'N.13',
-      'O.1',
-      'O.2',
-      'O.3',
-      'O.4',
-      'O.5',
-      'P.1',
-      'P.2',
-      'P.3',
-      'P.4',
-      'P.5',
-      'P.7',
-      'P.9',
-      'P.10',
-      'P.11',
-      'P.15',
-      'Q.1',
-      'Q.2',
-      'R.1',
-      'S.1'
-    ],
-    region_codes: [
-      'UKC1',
-      'UKD1',
-      'UKE1',
-      'UKE2',
-      'UKE4',
-      'UKF1',
-      'UKG1',
-      'UKH2',
-      'UKI3',
-      'UKI4',
-      'UKI7',
-      'UKJ1',
-      'UKJ4',
-      'UKK1',
-      'UKL12',
-      'UKL16',
-      'UKL23',
-      'UKL24',
-      'UKM21',
-      'UKM23',
-      'UKM27',
-      'UKM31',
-      'UKM32',
-      'UKM33',
-      'UKM34',
-      'UKM35',
-      'UKM36',
-      'UKM38',
-      'UKM50',
-      'UKM62',
-      'UKM63',
-      'UKM65',
-      'UKN01',
-      'UKN03',
-      'UKN04',
-      'UKN05'
-    ],
-    supplier_id: 43
-  },
-  {
-    id: 57,
+    id: '55',
     lot_code: 'c',
     service_codes: [
       'E.1',
@@ -10695,10 +10340,161 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKL23',
       'UKL24'
     ],
-    supplier_id: 17
+    supplier_id: '10'
   },
   {
-    id: 58,
+    id: '56',
+    lot_code: 'c',
+    service_codes: [
+      'E.1',
+      'E.2',
+      'E.5',
+      'E.7',
+      'E.8',
+      'E.9',
+      'E.10',
+      'E.11',
+      'E.13',
+      'E.14',
+      'E.18',
+      'E.19',
+      'E.20',
+      'E.21',
+      'F.4',
+      'F.5',
+      'F.6',
+      'F.7',
+      'F.9',
+      'F.11',
+      'F.12',
+      'F.13',
+      'G.1',
+      'G.2',
+      'G.3',
+      'G.5',
+      'G.6',
+      'G.8',
+      'H.1',
+      'H.2',
+      'H.3',
+      'H.4',
+      'H.5',
+      'H.6',
+      'H.7',
+      'H.10',
+      'I.1',
+      'I.2',
+      'I.5',
+      'I.6',
+      'I.7',
+      'I.8',
+      'I.9',
+      'I.10',
+      'I.12',
+      'I.13',
+      'I.14',
+      'I.15',
+      'I.16',
+      'I.17',
+      'J.2',
+      'J.3',
+      'J.4',
+      'J.8',
+      'J.9',
+      'J.10',
+      'J.11',
+      'J.12',
+      'J.13',
+      'J.15',
+      'J.16',
+      'K.2',
+      'K.4',
+      'L.1',
+      'L.2',
+      'L.4',
+      'L.5',
+      'L.6',
+      'L.8',
+      'L.9',
+      'L.11',
+      'L.12',
+      'L.13',
+      'L.14',
+      'L.15',
+      'M.1',
+      'M.4',
+      'M.6',
+      'M.8',
+      'N.1',
+      'N.2',
+      'N.3',
+      'N.4',
+      'N.6',
+      'N.8',
+      'N.9',
+      'N.13',
+      'O.1',
+      'O.2',
+      'O.3',
+      'O.4',
+      'O.5',
+      'P.1',
+      'P.2',
+      'P.3',
+      'P.4',
+      'P.5',
+      'P.7',
+      'P.9',
+      'P.10',
+      'P.11',
+      'P.15',
+      'Q.1',
+      'Q.2',
+      'R.1',
+      'S.1'
+    ],
+    region_codes: [
+      'UKC1',
+      'UKD1',
+      'UKE1',
+      'UKE2',
+      'UKE4',
+      'UKF1',
+      'UKG1',
+      'UKH2',
+      'UKI3',
+      'UKI4',
+      'UKI7',
+      'UKJ1',
+      'UKJ4',
+      'UKK1',
+      'UKL12',
+      'UKL16',
+      'UKL23',
+      'UKL24',
+      'UKM21',
+      'UKM23',
+      'UKM27',
+      'UKM31',
+      'UKM32',
+      'UKM33',
+      'UKM34',
+      'UKM35',
+      'UKM36',
+      'UKM38',
+      'UKM50',
+      'UKM62',
+      'UKM63',
+      'UKM65',
+      'UKN01',
+      'UKN03',
+      'UKN04',
+      'UKN05'
+    ],
+    supplier_id: '43'
+  },
+  {
+    id: '57',
     lot_code: 'c',
     service_codes: [
       'E.1',
@@ -10899,10 +10695,214 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKL23',
       'UKL24'
     ],
-    supplier_id: 8
+    supplier_id: '17'
   },
   {
-    id: 59,
+    id: '58',
+    lot_code: 'c',
+    service_codes: [
+      'E.1',
+      'E.2',
+      'E.3',
+      'E.4',
+      'E.5',
+      'E.6',
+      'E.7',
+      'E.8',
+      'E.9',
+      'E.10',
+      'E.11',
+      'E.12',
+      'E.13',
+      'E.14',
+      'E.15',
+      'E.16',
+      'E.17',
+      'E.18',
+      'E.19',
+      'E.20',
+      'E.21',
+      'F.1',
+      'F.2',
+      'F.3',
+      'F.4',
+      'F.5',
+      'F.6',
+      'F.7',
+      'F.8',
+      'F.9',
+      'F.10',
+      'F.11',
+      'F.12',
+      'F.13',
+      'G.1',
+      'G.2',
+      'G.3',
+      'G.4',
+      'G.5',
+      'G.6',
+      'G.7',
+      'G.8',
+      'H.1',
+      'H.2',
+      'H.3',
+      'H.4',
+      'H.5',
+      'H.6',
+      'H.7',
+      'H.8',
+      'H.9',
+      'H.10',
+      'I.1',
+      'I.2',
+      'I.3',
+      'I.4',
+      'I.5',
+      'I.6',
+      'I.7',
+      'I.8',
+      'I.9',
+      'I.10',
+      'I.11',
+      'I.12',
+      'I.13',
+      'I.14',
+      'I.15',
+      'I.16',
+      'I.17',
+      'I.18',
+      'J.1',
+      'J.2',
+      'J.3',
+      'J.4',
+      'J.5',
+      'J.6',
+      'J.7',
+      'J.8',
+      'J.9',
+      'J.10',
+      'J.11',
+      'J.12',
+      'J.13',
+      'J.14',
+      'J.15',
+      'J.16',
+      'K.1',
+      'K.2',
+      'K.3',
+      'K.4',
+      'K.5',
+      'L.1',
+      'L.2',
+      'L.3',
+      'L.4',
+      'L.5',
+      'L.6',
+      'L.7',
+      'L.8',
+      'L.9',
+      'L.10',
+      'L.11',
+      'L.12',
+      'L.13',
+      'L.14',
+      'L.15',
+      'M.1',
+      'M.2',
+      'M.3',
+      'M.4',
+      'M.5',
+      'M.6',
+      'M.7',
+      'M.8',
+      'N.1',
+      'N.2',
+      'N.3',
+      'N.4',
+      'N.5',
+      'N.6',
+      'N.7',
+      'N.8',
+      'N.9',
+      'N.10',
+      'N.11',
+      'N.12',
+      'N.13',
+      'O.1',
+      'O.2',
+      'O.3',
+      'O.4',
+      'O.5',
+      'P.1',
+      'P.2',
+      'P.3',
+      'P.4',
+      'P.5',
+      'P.7',
+      'P.8',
+      'P.9',
+      'P.10',
+      'P.11',
+      'P.12',
+      'P.13',
+      'P.14',
+      'P.15',
+      'Q.1',
+      'Q.2',
+      'R.1',
+      'S.1'
+    ],
+    region_codes: [
+      'UKC1',
+      'UKC2',
+      'UKD1',
+      'UKD3',
+      'UKD4',
+      'UKD6',
+      'UKD7',
+      'UKE1',
+      'UKE2',
+      'UKE3',
+      'UKE4',
+      'UKF1',
+      'UKF2',
+      'UKF3',
+      'UKG1',
+      'UKG2',
+      'UKG3',
+      'UKH1',
+      'UKH2',
+      'UKH3',
+      'UKI3',
+      'UKI4',
+      'UKI5',
+      'UKI6',
+      'UKI7',
+      'UKJ1',
+      'UKJ2',
+      'UKJ3',
+      'UKJ4',
+      'UKK1',
+      'UKK2',
+      'UKK3',
+      'UKK4',
+      'UKL11',
+      'UKL12',
+      'UKL13',
+      'UKL14',
+      'UKL15',
+      'UKL16',
+      'UKL17',
+      'UKL18',
+      'UKL21',
+      'UKL22',
+      'UKL23',
+      'UKL24'
+    ],
+    supplier_id: '8'
+  },
+  {
+    id: '59',
     lot_code: 'c',
     service_codes: [
       'E.1',
@@ -11021,10 +11021,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 49
+    supplier_id: '49'
   },
   {
-    id: 60,
+    id: '60',
     lot_code: 'c',
     service_codes: [
       'E.1',
@@ -11143,10 +11143,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 45
+    supplier_id: '45'
   },
   {
-    id: 61,
+    id: '61',
     lot_code: 'c',
     service_codes: [
       'E.1',
@@ -11265,10 +11265,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 36
+    supplier_id: '36'
   },
   {
-    id: 62,
+    id: '62',
     lot_code: 'c',
     service_codes: [
       'G.1',
@@ -11443,10 +11443,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 30
+    supplier_id: '30'
   },
   {
-    id: 63,
+    id: '63',
     lot_code: 'c',
     service_codes: [
       'G.1',
@@ -11621,10 +11621,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 37
+    supplier_id: '37'
   },
   {
-    id: 64,
+    id: '64',
     lot_code: 'c',
     service_codes: [
       'G.1',
@@ -11799,10 +11799,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 50
+    supplier_id: '50'
   },
   {
-    id: 65,
+    id: '65',
     lot_code: 'c',
     service_codes: [
       'E.1',
@@ -11964,10 +11964,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN03',
       'UKN04'
     ],
-    supplier_id: 28
+    supplier_id: '28'
   },
   {
-    id: 66,
+    id: '66',
     lot_code: 'c',
     service_codes: [
       'E.3',
@@ -12102,10 +12102,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN03',
       'UKN05'
     ],
-    supplier_id: 40
+    supplier_id: '40'
   },
   {
-    id: 67,
+    id: '67',
     lot_code: 'c',
     service_codes: [
       'E.3',
@@ -12236,10 +12236,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN04',
       'UKN05'
     ],
-    supplier_id: 44
+    supplier_id: '44'
   },
   {
-    id: 68,
+    id: '68',
     lot_code: 'c',
     service_codes: [
       'E.1',
@@ -12402,10 +12402,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN03',
       'UKN05'
     ],
-    supplier_id: 33
+    supplier_id: '33'
   },
   {
-    id: 69,
+    id: '69',
     lot_code: 'c',
     service_codes: [
       'E.2',
@@ -12560,10 +12560,10 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKM64',
       'UKN05'
     ],
-    supplier_id: 14
+    supplier_id: '14'
   },
   {
-    id: 70,
+    id: '70',
     lot_code: 'c',
     service_codes: [
       'E.1',
@@ -12718,7 +12718,7 @@ const supplierLotData: Array<SupplierLotDataRow> = [
       'UKN02',
       'UKN04'
     ],
-    supplier_id: 23
+    supplier_id: '23'
   }
 ]
 

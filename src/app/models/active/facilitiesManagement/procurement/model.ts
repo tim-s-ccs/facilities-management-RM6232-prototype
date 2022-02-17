@@ -1,3 +1,4 @@
+import ProcurementBuilding from '../procurementBuildings/model'
 import procurementModelSchema from './modelSchema'
 import procurementValidationSchema from './validationSchema'
 import SecondaryRegion from '../../../static/facilitiesManagement/secondaryRegion/model'
@@ -17,10 +18,10 @@ class Procurement extends ActiveModel implements ProcurementInterface {
   data: ProcurementData = this.data as ProcurementData
 
   constructor(req: Request, data: ProcurementRow) {
-    super(req, Procurement.initProcurementData(data))
+    super(req, Procurement.initProcurementData(req, data))
   }
 
-  static initProcurementData(data: ProcurementRow): ProcurementData {
+  static initProcurementData = (req: Request, data: ProcurementRow): ProcurementData => {
     return {
       id: data.id,
       userID: data.userID,
@@ -48,6 +49,7 @@ class Procurement extends ActiveModel implements ProcurementInterface {
       extensionPeriodRequired3: data.extensionPeriodRequired3,
       extensionPeriodYears3: data.extensionPeriodYears3,
       extensionPeriodMonths3: data.extensionPeriodMonths3,
+      procurementBuildings: data.procurementBuildingIDs === undefined ? [] :  ProcurementBuilding.where(req, [{attribute: 'id', values: data.procurementBuildingIDs}]),
       state: data.state,
       updatedAt: data.updatedAt
     }
@@ -57,7 +59,7 @@ class Procurement extends ActiveModel implements ProcurementInterface {
     if (data === undefined) { return new this(req, {} as ProcurementRow) }
 
     const newProcurement = new this(req, {
-      id: this.nextID(req, this.tableName),
+      id: this.generateID(),
       userID: req.session.data.user.id,
     } as ProcurementRow)
 
@@ -66,7 +68,7 @@ class Procurement extends ActiveModel implements ProcurementInterface {
     return newProcurement
   }
 
-  static find = (req: Request, id: number): Procurement => {
+  static find = (req: Request, id: string): Procurement => {
     return new this(req, this._find(req, this.tableName, id) as ProcurementRow)
   }
 
@@ -153,6 +155,30 @@ class Procurement extends ActiveModel implements ProcurementInterface {
     return this.errors[`extensionPeriodYears${extension}`] !== undefined ||
            this.errors[`extensionPeriodMonths${extension}`] !== undefined ||
            this.errors[`extensionPeriod${extension}`] !== undefined
+  }
+
+  activeProcurementBuildings = (): Array<ProcurementBuilding> => {
+    return (this.data.procurementBuildings as Array<ProcurementBuilding>).filter(procurementBuilding => procurementBuilding.data.active)
+  }
+
+  findOrBuildProcurementBuildings = (data: {[key: string]: any}) => {
+    const buildingIDs: Array<string> = data['procurementBuildings'].map((buildingID: string) => buildingID) as Array<string>
+
+    buildingIDs.forEach(buildingID => {
+      if (ProcurementBuilding.where(this.req, [
+        {attribute: 'procurementID', value: this.data.id},
+        {attribute: 'buildingID', value: buildingID}
+      ]).length === 0) {
+        this.data.procurementBuildings?.push(
+          ProcurementBuilding.build(this.req, {
+            procurementID: this.data.id,
+            buildingID: buildingID
+          })
+        )
+      }
+    })
+
+    this.data.procurementBuildings?.forEach(procurementBuilding => procurementBuilding.data.active = buildingIDs.includes(procurementBuilding.data.buildingID))
   }
 }
 

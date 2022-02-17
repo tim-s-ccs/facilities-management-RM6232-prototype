@@ -28,7 +28,7 @@ class BuyerDetail extends ActiveModel implements BuyerDetailInterface {
     })
   }
 
-  static find = (req: Request, id: number): BuyerDetail => {
+  static find = (req: Request, id: string): BuyerDetail => {
     return new this(req, this._find(req, this.tableName, id) as BuyerDetailRow)
   }
 

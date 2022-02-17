@@ -3,10 +3,12 @@ import { SecondaryRegionData, SecondaryRegionInterface } from '../../../../types
 
 class SecondaryRegion extends StaticModel implements SecondaryRegionInterface {
   static tableName: string = 'secondaryRegions'
+  static primaryKey: string = 'code'
+
   data: SecondaryRegionData = this.data as SecondaryRegionData
 
-  static find = (id: number): SecondaryRegion => {
-    return new this(this._find(this.tableName, id))
+  static find = (code: string): SecondaryRegion => {
+    return new this(this._find(this.tableName, this.primaryKey, code))
   }
 
   static all = (): Array<SecondaryRegion> => {

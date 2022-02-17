@@ -10,14 +10,14 @@ import { Request } from 'express'
 import { StaticModel } from 'ccs-prototype-kit-model-interface'
 
 const getBuilding = (req: Request): Building => {
-  return Building.find(req, Number(req.params['id']))
+  return Building.find(req, req.params['id'])
 }
 
 const getProcurement = (req: Request): Procurement => {
-  return Procurement.find(req, Number(req.params['procurement_id']))
+  return Procurement.find(req, req.params['procurement_id'])
 }
 
-const getRadioItem = (staticModel: StaticModel, id?: number): RadioItem => {
+const getRadioItem = (staticModel: StaticModel, id?: string): RadioItem => {
   return {
     value: staticModel.data.id,
     text: staticModel.data.name,
@@ -28,15 +28,15 @@ const getRadioItem = (staticModel: StaticModel, id?: number): RadioItem => {
   }
 }
 
-const getBuildingTypeRadioItems = (currentBuildingTypeID?: number): Array<RadioItem> => {
+const getBuildingTypeRadioItems = (currentBuildingTypeID?: string): Array<RadioItem> => {
   return BuildingType.all().map((buildingType: BuildingType) => getRadioItem(buildingType, currentBuildingTypeID))
 }
 
-const getSecurityClearanceRadioItems = (currentSecurityClearanceID?: number): Array<RadioItem> => {
+const getSecurityClearanceRadioItems = (currentSecurityClearanceID?: string): Array<RadioItem> => {
   return SecurityClearance.all().map((securityClearance: SecurityClearance) => getRadioItem(securityClearance, currentSecurityClearanceID))
 }
 
-const nextStepURL = (currentStep: string, id: number, procurement_id: number): string => {
+const nextStepURL = (currentStep: string, id: string, procurement_id: string): string => {
   switch (currentStep) {
   case 'building-details':
     return `/facilities-management/RM6232/procurements/${procurement_id}/edit-buildings/${id}/edit/area`
@@ -50,8 +50,8 @@ const nextStepURL = (currentStep: string, id: number, procurement_id: number): s
 }
 
 const pageDescription = (building: Building, procurement: Procurement, step: string): BuildingPageDescription | undefined => {
-  const id: number = building.data.id
-  const procurement_id: number = procurement.data.id
+  const id: string = building.data.id
+  const procurement_id: string = procurement.data.id
 
   switch (step) {
   case 'building-details':
@@ -127,7 +127,7 @@ const pageDescription = (building: Building, procurement: Procurement, step: str
       },
       additionalDetails: {
         buildingTypeRadioItems: getBuildingTypeRadioItems(building.data.buildingType?.data?.id),
-        detailsOpen: (building.data.buildingType?.data?.id as number) > 2
+        detailsOpen: Number(building.data.buildingType?.data?.id) > 2
       }
     }
   case 'security-clearance':

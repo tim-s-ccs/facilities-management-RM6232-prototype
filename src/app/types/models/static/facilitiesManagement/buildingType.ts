@@ -3,7 +3,7 @@ export interface BuildingTypeInterface {
 }
 
 export type BuildingTypeData = {
-  id: number
+  id: string
   name: string
   description: string
 }

@@ -19,6 +19,7 @@ export type ProcurementShowPageDescription = {
 
 export type ProcurementEditPageDescription = {
   pageTitle: string
+  form?: string
   additionalDetails?: {[key: string]: any}
 }
 

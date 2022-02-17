@@ -4,6 +4,8 @@ import { WorkPackageData, WorkPackageInterface } from '../../../../types/models/
 
 class WorkPackage extends StaticModel implements WorkPackageInterface {
   static tableName: string = 'workPackages'
+  static primaryKey: string = 'code'
+
   data: WorkPackageData = this.data as WorkPackageData
 
   services = (): Array<Service> => {
@@ -14,8 +16,8 @@ class WorkPackage extends StaticModel implements WorkPackageInterface {
     return this.where([{attribute: 'selectable', value: true}])
   }
 
-  static find = (id: number): WorkPackage => {
-    return new this(this._find(this.tableName, id))
+  static find = (code: string): WorkPackage => {
+    return new this(this._find(this.tableName, this.primaryKey, code))
   }
 
   static all = (): Array<WorkPackage> => {
