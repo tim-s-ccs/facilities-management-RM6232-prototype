@@ -32,7 +32,7 @@ const urlFormatter = (baseURL: string, procurement: Procurement): string => {
 
 const nextStep = (currentStep: string): string => {
   switch(currentStep) {
-  case 'what-happens-next':
+  case 'start-a-procurement':
     return '/facilities-management/RM6232/quick-view/choose-services'
   case 'choose-services':
     return '/facilities-management/RM6232/quick-view/choose-regions'
@@ -45,9 +45,9 @@ const nextStep = (currentStep: string): string => {
 
 const pageDescription = (procurement: Procurement, step: string): QuickViewPageDescription | undefined => {
   switch (step) {
-  case 'what-happens-next':
+  case 'start-a-procurement':
     return {
-      pageTitle: 'What happens next?',
+      pageTitle: 'Start a procurement',
       backText: 'Return to your account',
       backLink: '/facilities-management/RM6232',
     }
