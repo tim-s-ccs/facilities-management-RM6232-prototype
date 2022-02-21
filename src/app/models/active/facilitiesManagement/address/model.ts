@@ -14,8 +14,8 @@ class Address extends ActiveModel implements AddressInterface {
 
   data: AddressData = this.data as AddressData
 
-  constructor(data: AddressRow) {
-    super({
+  constructor(req: Request, data: AddressRow) {
+    super(req, {
       id: data.id,
       addressLine1: data.addressLine1,
       addressLine2: data.addressLine2,
@@ -26,21 +26,21 @@ class Address extends ActiveModel implements AddressInterface {
   }
 
   static find = (req: Request, id: number): Address => {
-    return new this(this._find(req, this.tableName, id) as AddressRow)
+    return new this(req, this._find(req, this.tableName, id) as AddressRow)
   }
 
   static all = (req: Request): Array<Address> => {
-    return this._all(req, this.tableName).map(data => new this(data as AddressRow))
+    return this._all(req, this.tableName).map(data => new this(req, data as AddressRow))
   }
 
   static where = (req: Request, conditions: Array<Condition>): Array<Address> => {
-    return this._where(req, this.tableName, conditions).map(data => new this(data as AddressRow))
+    return this._where(req, this.tableName, conditions).map(data => new this(req, data as AddressRow))
   }
 
   static build = (req: Request, data?: AddressAttributes): Address => {
-    if (data === undefined) { return new this({} as AddressRow) }
+    if (data === undefined) { return new this(req, {} as AddressRow) }
 
-    return new this({
+    return new this(req, {
       id: this.nextID(req, this.tableName),
       addressLine1: data.addressLine1,
       addressLine2: data.addressLine2,

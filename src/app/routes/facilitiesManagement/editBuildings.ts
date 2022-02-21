@@ -26,7 +26,7 @@ router.post('/:procurement_id/edit-buildings/create', (req: Request, res: Respon
   const building: Building = Building.build(req, req.body['building'])
   const procurement: Procurement = getProcurement(req)
 
-  if (building.create(req)) {
+  if (building.create()) {
     if (req.body['afterSave'] === 'Save and continue') {
       res.redirect(nextStepURL('building-details', building.data.id, procurement.data.id))
     } else {
@@ -138,7 +138,7 @@ router.post('/:procurement_id/edit-buildings/:id/edit/:step', (req: Request, res
   building.assignAttributes(req.body['building'])
 
   if (building.validate(step)) {
-    building.save(req)
+    building.save()
 
     if (req.body['afterSave'] === 'Save and continue') {
       res.redirect(nextStepURL(step, building.data.id, procurement.data.id))

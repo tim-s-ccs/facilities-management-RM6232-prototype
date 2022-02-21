@@ -15,8 +15,8 @@ class BuyerDetail extends ActiveModel implements BuyerDetailInterface {
 
   data: BuyerDetailData = this.data as BuyerDetailData
 
-  constructor(data: BuyerDetailRow, req: Request) {
-    super({
+  constructor(req: Request, data: BuyerDetailRow) {
+    super(req, {
       id: data.id,
       userID: data.userID,
       fullName: data.fullName,
@@ -29,15 +29,15 @@ class BuyerDetail extends ActiveModel implements BuyerDetailInterface {
   }
 
   static find = (req: Request, id: number): BuyerDetail => {
-    return new this(this._find(req, this.tableName, id) as BuyerDetailRow, req)
+    return new this(req, this._find(req, this.tableName, id) as BuyerDetailRow)
   }
 
   static all = (req: Request): Array<BuyerDetail> => {
-    return this._all(req, this.tableName).map(data => new this(data as BuyerDetailRow, req))
+    return this._all(req, this.tableName).map(data => new this(req, data as BuyerDetailRow))
   }
 
   static where = (req: Request, conditions: Array<Condition>): Array<BuyerDetail> => {
-    return this._where(req, this.tableName, conditions).map(data => new this(data as BuyerDetailRow, req))
+    return this._where(req, this.tableName, conditions).map(data => new this(req, data as BuyerDetailRow))
   }
 }
 

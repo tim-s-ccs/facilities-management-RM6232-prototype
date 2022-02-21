@@ -14,8 +14,8 @@ class Region extends ActiveModel implements RegionInterface {
 
   data: RegionData = this.data as RegionData
 
-  constructor(data: RegionRow) {
-    super({
+  constructor(req: Request, data: RegionRow) {
+    super(req, {
       id: data.id,
       name: data.name,
       code: data.code
@@ -23,21 +23,21 @@ class Region extends ActiveModel implements RegionInterface {
   }
 
   static find = (req: Request, id: number): Region => {
-    return new this(this._find(req, this.tableName, id) as RegionRow)
+    return new this(req, this._find(req, this.tableName, id) as RegionRow)
   }
 
   static all = (req: Request): Array<Region> => {
-    return this._all(req, this.tableName).map(data => new this(data as RegionRow))
+    return this._all(req, this.tableName).map(data => new this(req, data as RegionRow))
   }
 
   static where = (req: Request, conditions: Array<Condition>): Array<Region> => {
-    return this._where(req, this.tableName, conditions).map(data => new this(data as RegionRow))
+    return this._where(req, this.tableName, conditions).map(data => new this(req, data as RegionRow))
   }
 
   static build = (req: Request, data?: RegionAttributes): Region => {
-    if (data === undefined) { return new this({} as RegionRow) }
+    if (data === undefined) { return new this(req, {} as RegionRow) }
 
-    return new this({
+    return new this(req, {
       id: this.nextID(req, this.tableName),
       name: data.name,
       code: data.code

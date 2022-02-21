@@ -18,8 +18,8 @@ class Building extends ActiveModel implements BuildingInterface {
 
   data: BuildingData = this.data as BuildingData
 
-  constructor(data: BuildingRow, req: Request) {
-    super(Building.initBuildingData(data, req))
+  constructor(req: Request, data: BuildingRow) {
+    super(req, Building.initBuildingData(data, req))
   }
 
   static initBuildingData(data: BuildingRow, req: Request): BuildingData {
@@ -40,14 +40,14 @@ class Building extends ActiveModel implements BuildingInterface {
   }
 
   static build = (req: Request, data?: BuildingAttributes): Building => {
-    if (data === undefined) { return new this({} as BuildingRow, req) }
+    if (data === undefined) { return new this(req, {} as BuildingRow) }
 
-    const building = new this({
+    const building = new this(req, {
       id: this.nextID(req, this.tableName),
       userID: req.session.data.user.id,
       name: data.name,
       description: data.description,
-    } as BuildingRow, req)
+    } as BuildingRow)
 
     if (data.address !== undefined) {
       building.data.address = Address.build(req, data.address)
@@ -61,15 +61,15 @@ class Building extends ActiveModel implements BuildingInterface {
   }
 
   static find = (req: Request, id: number): Building => {
-    return new this(this._find(req, this.tableName, id) as BuildingRow, req)
+    return new this(req, this._find(req, this.tableName, id) as BuildingRow)
   }
 
   static all = (req: Request): Array<Building> => {
-    return this._all(req, this.tableName).map(data => new this(data as BuildingRow, req))
+    return this._all(req, this.tableName).map(data => new this(req, data as BuildingRow))
   }
 
   static where = (req: Request, conditions: Array<Condition>): Array<Building> => {
-    return this._where(req, this.tableName, conditions).map(data => new this(data as BuildingRow, req))
+    return this._where(req, this.tableName, conditions).map(data => new this(req, data as BuildingRow))
   }
 
   beforeSave = () => {
