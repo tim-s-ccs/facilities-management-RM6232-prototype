@@ -36,7 +36,7 @@ router.get('/new', (req: Request, res: Response) => {
 router.post('/create', (req: Request, res: Response) => {
   const building: Building = Building.build(req, req.body['building'])
 
-  if (building.create(req)) {
+  if (building.create()) {
     if (req.body['afterSave'] === 'Save and continue') {
       res.redirect(nextStepURL('building-details', building.data.id))
     } else {
@@ -142,7 +142,7 @@ router.post('/:id/edit/:step', (req: Request, res: Response) => {
   building.assignAttributes(req.body['building'])
 
   if (building.validate(step)) {
-    building.save(req)
+    building.save()
 
     if (req.body['afterSave'] === 'Save and continue') {
       res.redirect(nextStepURL(step, building.data.id))

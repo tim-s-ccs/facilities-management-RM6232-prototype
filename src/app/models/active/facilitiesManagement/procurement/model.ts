@@ -16,8 +16,8 @@ class Procurement extends ActiveModel implements ProcurementInterface {
 
   data: ProcurementData = this.data as ProcurementData
 
-  constructor(data: ProcurementRow) {
-    super(Procurement.initProcurementData(data))
+  constructor(req: Request, data: ProcurementRow) {
+    super(req, Procurement.initProcurementData(data))
   }
 
   static initProcurementData(data: ProcurementRow): ProcurementData {
@@ -54,9 +54,9 @@ class Procurement extends ActiveModel implements ProcurementInterface {
   }
 
   static build = (req: Request, data?: ProcurementAttributes): Procurement => {
-    if (data === undefined) { return new this({} as ProcurementRow) }
+    if (data === undefined) { return new this(req, {} as ProcurementRow) }
 
-    const newProcurement = new this({
+    const newProcurement = new this(req, {
       id: this.nextID(req, this.tableName),
       userID: req.session.data.user.id,
     } as ProcurementRow)
@@ -67,15 +67,15 @@ class Procurement extends ActiveModel implements ProcurementInterface {
   }
 
   static find = (req: Request, id: number): Procurement => {
-    return new this(this._find(req, this.tableName, id) as ProcurementRow)
+    return new this(req, this._find(req, this.tableName, id) as ProcurementRow)
   }
 
   static all = (req: Request): Array<Procurement> => {
-    return this._all(req, this.tableName).map(data => new this(data as ProcurementRow))
+    return this._all(req, this.tableName).map(data => new this(req, data as ProcurementRow))
   }
 
   static where = (req: Request, conditions: Array<Condition>): Array<Procurement> => {
-    return this._where(req, this.tableName, conditions).map(data => new this(data as ProcurementRow))
+    return this._where(req, this.tableName, conditions).map(data => new this(req, data as ProcurementRow))
   }
 
   services = (): Service[] => {

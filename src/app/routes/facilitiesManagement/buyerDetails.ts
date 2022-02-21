@@ -33,7 +33,7 @@ router.post('/:id', (req: Request, res: Response) => {
   buyerDetail.assignAttributes(req.body['buyerDetail'])
 
   if (buyerDetail.validate('update')) {
-    buyerDetail.save(req)
+    buyerDetail.save()
 
     res.redirect('/facilities-management/RM6232')
   } else {
@@ -80,7 +80,7 @@ router.post('/:id/edit-address', (req: Request, res: Response) => {
   organisationAddress.assignAttributes(req.body['buyerDetail']['organisationAddress'])
 
   if (organisationAddress.validate('update_address')) {
-    organisationAddress.save(req)
+    organisationAddress.save()
 
     res.redirect(`/facilities-management/RM6232/buyer-details/${buyerDetail.data.id}/edit`)
   } else {

@@ -29,7 +29,7 @@ router.get('/new', (req: Request, res: Response) => {
 router.post('/new', (req: Request, res: Response) => {
   const procurement: Procurement = Procurement.build(req, req.body['procurement'])
 
-  if (procurement.create(req)) {
+  if (procurement.create()) {
     if (req.body['afterSave'] === 'Save and continue') {
       res.redirect(`/facilities-management/RM6232/procurements/${procurement.data.id}`)
     } else {
@@ -71,7 +71,7 @@ router.post('/:id', (req: Request, res: Response) =>{
 
   if (procurement.validate(state)) {
     procurement.goToNextState()
-    procurement.save(req)
+    procurement.save()
 
     res.redirect(`/facilities-management/RM6232/procurements/${procurement.data.id}`)
   } else {
@@ -115,7 +115,7 @@ router.post('/:id/edit/:step', (req: Request, res: Response) =>{
   procurement.assignAttributes(req.body['procurement'])
 
   if (procurement.validate(step)) {
-    procurement.save(req)
+    procurement.save()
 
     res.redirect(`/facilities-management/RM6232/procurements/${procurement.data.id}`)
   } else {
