@@ -15,18 +15,21 @@
           {% for section in pageDescription.additionalDetails.contractDetailsSection %}
             <tr class="govuk-table__row {{ 'govuk-form-group--error' if section.hasError }}">
               <td class="govuk-table__cell govuk-!-padding-right-2 {{ 'ccs-border-bottom_none govuk-!-padding-left-2' if section.hasError }}">
-                {% if section.status in ['cannot start', 'not required'] %}
+                <a class="govuk-link" href="{{ section.link }}">
                   {{ section.text }}
-                {% else %}
-                  <a class="govuk-link" href="{{ section.link }}">
-                    {{ section.text }}
-                  </a>
-                {% endif %}
+                </a>
               </td>
               <td class="govuk-table__cell {{ 'ccs-border-bottom_none' if section.hasError }}" style="text-align: right">
+                {% set classes = "" %}
+                {% if section.status === 'not started' %}
+                  {% set classes = 'govuk-tag--grey' %}
+                {% elseif section.status === 'incomplete' %}
+                  {% set classes = 'govuk-tag--red' %}
+                {% endif %}
+
                 {{ govukTag({
                   text: section.status,
-                  classes: "govuk-tag--grey" if section.status !== 'completed'
+                  classes: classes
                 }) }}
               </td>
             </tr>
@@ -60,9 +63,16 @@
                 {% endif %}
               </td>
               <td class="govuk-table__cell {{ 'ccs-border-bottom_none' if section.hasError }}" style="text-align: right">
+                {% set classes = "" %}
+                {% if section.status === 'cannot start' or section.status === 'not started' %}
+                  {% set classes = 'govuk-tag--grey' %}
+                {% elseif section.status === 'incomplete' %}
+                  {% set classes = 'govuk-tag--red' %}
+                {% endif %}
+
                 {{ govukTag({
                   text: section.status,
-                  classes: "govuk-tag--grey" if section.status !== 'completed'
+                  classes: classes
                 }) }}
               </td>
             </tr>

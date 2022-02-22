@@ -7,8 +7,8 @@ const procurementBuildings: Array<ProcurementBuildingRow> = [
     buildingID: '000001',
     active: true,
     serviceCodes: [
-      'UKF1',
-      'UKF2'
+      'F.1',
+      'F.2'
     ]
   },
   {

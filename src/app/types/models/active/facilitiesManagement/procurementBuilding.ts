@@ -7,6 +7,8 @@ export interface ProcurementBuildingInterface {
   services: () => Service[]
   procurement: () => Procurement
   building: () => Building
+  buildingName: () => string
+  isCompleted: () => boolean
 }
 
 export type ProcurementBuildingData = {

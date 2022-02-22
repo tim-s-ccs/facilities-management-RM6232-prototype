@@ -26,7 +26,7 @@ const procurements: Array<ProcurementRow> = [
   {
     id: '000003',
     userID: '000001',
-    serviceCodes: ['G.1', 'G.2'],
+    serviceCodes: ['E.1', 'E.2', 'F.1', 'F.2', 'G.1', 'G.2'],
     regionCodes: ['UKF1', 'UKF2'],
     estimatedAnnualCost: 15_678_901,
     contractName: 'Test 3',

@@ -4,6 +4,7 @@ import { ChooserComponent } from './chooserComponent.js'
 import { numberInput } from './numberInput.js'
 import { stepByStepNav } from './stepByStepNav.js'
 import { contractPeriod } from './contractPeriod.js'
+import { selectServicesForBuildings } from './selectServicesForBuildings.js'
 
 $(() => {
   if (document.querySelectorAll('[data-module=\'find-address\']').length) {
@@ -82,5 +83,11 @@ $(() => {
 $(() => {
   if ($('.extensionContainer').length > 0) {
     contractPeriod()
+  }
+})
+
+$(() => {
+  if ($('div[data-module="ccs-select-services-for-buildings"]').length > 0) {
+    selectServicesForBuildings.init()
   }
 })
