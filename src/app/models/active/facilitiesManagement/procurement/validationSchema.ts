@@ -453,17 +453,3 @@ const procurementValidationSchema: ValidationSchema = {
 }
 
 export default procurementValidationSchema
-
-// const procurementBuildingsOptions: LengthValidatorOptions = {
-//   on: ['buildings'],
-//   min: 1
-// }
-
-// {
-//   attribute: 'procurementBuildings',
-//   validator: LengthValidator,
-//   options: procurementBuildingsOptions,
-// errorMessages: {
-//   greaterThan: 'Select at least one building'
-// }
-// }
