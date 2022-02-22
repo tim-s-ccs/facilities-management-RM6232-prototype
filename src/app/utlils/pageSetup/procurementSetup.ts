@@ -128,15 +128,13 @@ const getContractDetailsSection = (procurement: Procurement): Array<ContractDeta
     {
       text: 'TUPE',
       link: `/facilities-management/RM6232/procurements/${procurement.data.id}/edit/tupe`,
-      status: 'not started',
-      // status: procurement.data.tupe === undefined ? 'not started' : 'completed',
+      status: procurement.status('tupe'),
       hasError: false
     },
     {
       text: 'Contract period',
       link: `/facilities-management/RM6232/procurements/${procurement.data.id}/edit/contract-period`,
-      status: 'not started',
-      // status: procurement.data.tupe === undefined ? 'not started' : 'completed',
+      status: procurement.status('contract-period'),
       hasError: false
     }
   ]
@@ -153,14 +151,13 @@ const getBuildingDetailsSection = (procurement: Procurement): Array<ContractDeta
     {
       text: 'Buildings',
       link: `/facilities-management/RM6232/procurements/${procurement.data.id}/edit/buildings`,
-      status: 'not started',
+      status: procurement.status('buildings'),
       hasError: false
     },
     {
       text: 'Assigning services to buildings',
       link: `/facilities-management/RM6232/procurements/${procurement.data.id}/edit/assigning-services-to-buildings`,
-      status: 'cannot start',
-      // status: procurement.data.tupe === undefined ? 'not started' : 'completed',
+      status: procurement.status('assigning-services-to-buildings'),
       hasError: false
     }
   ]
