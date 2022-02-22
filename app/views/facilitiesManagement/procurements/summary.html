@@ -1,0 +1,32 @@
+{% extends "application.html" %}
+
+{% block pageTitle %}
+  {{ pageDescription.pageTitle }}: {{ super() }}
+{% endblock %}
+
+{% block content %}
+  {{ govukErrorSummary({
+    titleText: "There is a problem",
+    errorList: errorList
+  }) if errorList.length > 0 }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <span class="govuk-caption-m govuk-!-font-size-24">
+       {{ procurement.data.contractName }} - {{ procurement.data.referenceNumber }}
+      </span>
+      <h1 class="govuk-heading-xl">
+        {{ pageDescription.pageTitle }}
+      </h1>
+    </div>
+  </div>
+
+  {% include 'facilitiesManagement/procurements/summarySteps/_' + step + '.html' %}
+
+  <div class="govuk-!-margin-top-5">
+    <a href="/facilities-management/RM6232/procurements/{{ procurement.data.id }}" class="govuk-body govuk-link--no-visited-state">
+      Return to requirements
+    </a>
+  </div>
+    
+{% endblock %}

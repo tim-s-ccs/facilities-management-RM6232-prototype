@@ -3,7 +3,7 @@ import procurementModelSchema from './modelSchema'
 import procurementValidationSchema from './validationSchema'
 import SecondaryRegion from '../../../static/facilitiesManagement/secondaryRegion/model'
 import Service from '../../../static/facilitiesManagement/service/model'
-import { ActiveModel, Condition, ModelSchema, utils, ValidationSchema } from 'ccs-prototype-kit-model-interface'
+import { ActiveModel, Condition, ModelSchema, Period, utils, ValidationSchema } from 'ccs-prototype-kit-model-interface'
 import { ProcurementAttributes, ProcurementData, ProcurementInterface } from '../../../../types/models/active/facilitiesManagement/procurement'
 import { ProcurementRow } from '../../../../types/data/activeTables'
 import { Request } from 'express'
@@ -104,8 +104,28 @@ class Procurement extends ActiveModel implements ProcurementInterface {
     this.data.referenceNumber = `RM6232-${utils.addLeadingZeros(Math.floor(Math.random() * 1000000), 6)}-2022`
   }
 
+  static periodEndDate = (startDate: Date, period: Period): Date => {
+    let endDate: Date = utils.dateHelpers.addPeriodToDate(startDate, period)
+
+    if (startDate.getDate() === endDate.getDate()) endDate = utils.dateHelpers.addPeriodToDate(endDate, {days: -1})
+
+    return endDate
+  }
+
   initialCallOffPeriod = (): number => {
     return (this.data.initialCallOffPeriodYears || 0) * 12 + (this.data.initialCallOffPeriodMonths || 0)
+  }
+
+  initialCallOffPeriodStartDate = (): Date => new Date(this.data.initialCallOffPeriodStartDate as string)
+
+  initialCallOffPeriodEndDate = (): Date => {
+    const initialCallOffPeriodStartDate: Date = this.initialCallOffPeriodStartDate()
+    const period: Period = {
+      years: this.data.initialCallOffPeriodYears,
+      months: this.data.initialCallOffPeriodMonths
+    }
+
+    return Procurement.periodEndDate(initialCallOffPeriodStartDate, period)
   }
 
   mobilisationStartDate = (): Date => {
@@ -114,18 +134,37 @@ class Procurement extends ActiveModel implements ProcurementInterface {
 
     const mobilisationPeriodDays: number = 7 * (this.data.mobilisationPeriod as number)
 
-    mobilisationEndDateValue.setDate(mobilisationEndDateValue.getDate() - mobilisationPeriodDays)
-
-    return mobilisationEndDateValue
+    return utils.dateHelpers.addPeriodToDate(mobilisationEndDateValue, {days: - mobilisationPeriodDays})
   }
 
   mobilisationEndDate = (): Date => {
-    const initialCallOffPeriodStartDate: Date = new Date(this.data.initialCallOffPeriodStartDate as string)
+    const initialCallOffPeriodStartDate: Date = this.initialCallOffPeriodStartDate()
     initialCallOffPeriodStartDate.setHours(0,0,0,0)
 
-    initialCallOffPeriodStartDate.setDate(initialCallOffPeriodStartDate.getDate() - 1)
+    return utils.dateHelpers.addPeriodToDate(initialCallOffPeriodStartDate, {days: - 1})
+  }
 
-    return initialCallOffPeriodStartDate
+  extensionPeriodStartDate = (extensionPeriod: number): Date => {
+    const extensionPeriods: number[] = [...Array(extensionPeriod).keys()]
+
+    const period: Period = {
+      years: extensionPeriods.reduce((years: number, currentPeriod: number) => years + (this.callOffExtensionYears(currentPeriod) as number), 0),
+      months: extensionPeriods.reduce((months: number, currentPeriod: number) => months + (this.callOffExtensionMonths(currentPeriod) as number), 0),
+      days: 1
+    }
+
+    return utils.dateHelpers.addPeriodToDate(this.initialCallOffPeriodEndDate(), period)
+  }
+
+  extensionPeriodEndDate = (extensionPeriod: number): Date => {
+    const extensionPeriods: number[] = [...Array(extensionPeriod+1).keys()]
+
+    const period: Period = {
+      years: extensionPeriods.reduce((years: number, currentPeriod: number) => years + (this.callOffExtensionYears(currentPeriod) as number), 0),
+      months: extensionPeriods.reduce((months: number, currentPeriod: number) => months + (this.callOffExtensionMonths(currentPeriod) as number), 0),
+    }
+
+    return utils.dateHelpers.addPeriodToDate(this.initialCallOffPeriodEndDate(), period)
   }
 
   callOffExtension = (extension: number): number | undefined => {
@@ -200,6 +239,8 @@ class Procurement extends ActiveModel implements ProcurementInterface {
 
       return 'completed'
     }
+    case 'services':
+      return 'completed'
     case 'buildings':
       return this.activeProcurementBuildings().length > 0 ? 'completed' : 'not started'
     case 'assigning-services-to-buildings':

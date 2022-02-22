@@ -1,0 +1,26 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-three-quarters">
+    <h2 class="govuk-heading-l">
+      Contract period
+    </h2>
+    {{ govukButton({
+      element: 'a',
+      href: '/facilities-management/RM6232/procurements/' + procurement.data.id + '/edit/contract-period',
+      text: 'Change',
+      classes: 'govuk-button--secondary govuk-!-margin-bottom-2'
+    }) }}
+
+    {{ govukTable({
+      firstCellIsHeader: true,
+      head: [
+        {
+          text: ""
+        },
+        {
+          text: ""
+        }
+      ],
+      rows: pageDescription.additionalDetails.contractPeriodRows
+    }) }}
+  </div>
+</div>

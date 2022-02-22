@@ -2,12 +2,12 @@ import Address from '../../models/active/facilitiesManagement/address/model'
 import Building from '../../models/active/facilitiesManagement/building/model'
 import Procurement from '../../models/active/facilitiesManagement/procurement/model'
 import SuppliersSelector from '../../services/suppliersSelector'
-import { BuildingsTableRow, BuildingsTableRowItem, ContractDetailsTable, OptionalCallOffPeriodData, ProcurementAdvancedRowItems, ProcurementEditPageDescription, ProcurementSearchRowItems, ProcurementShowPageDescription } from '../../types/utils/pageSetup/procurementSetup'
+import { BuildingsSummaryTableRow, BuildingsTableRow, BuildingsTableRowItem, ContractDetailsTable, ContractPeriodTableRow, LinkAndStatus, OptionalCallOffPeriodData, ProcurementAdvancedRowItems, ProcurementEditPageDescription, ProcurementSearchRowItems, ProcurementShowPageDescription, ProcurementSummaryPageDescription } from '../../types/utils/pageSetup/procurementSetup'
 import { chooseServicesAccordionItems } from './quickViewAccordionSetup'
+import { Period, utils } from 'ccs-prototype-kit-model-interface'
 import { ProcurementIndexParams, ProcurementNewParams } from '../../types/routes/facilitiesManagement/procurements'
 import { Request } from 'express'
 import { urlFormatter } from './quickViewSetup'
-import { utils } from 'ccs-prototype-kit-model-interface'
 
 const SEARCH_STATES = ['completed_search', 'entering_requirements']
 const ADVANCED_PROCUREMENT_STATES = ['final_results']
@@ -111,6 +111,15 @@ const getProcurementNewParams = (procurement: Procurement): ProcurementNewParams
   }
 }
 
+const getContractRequirementsLinkAndStatus = (procurement: Procurement, step: string): LinkAndStatus  => {
+  const status: string = procurement.status(step)
+
+  return {
+    link: status === 'completed' ? `/facilities-management/RM6232/procurements/${procurement.data.id}/summary/${step}` : `/facilities-management/RM6232/procurements/${procurement.data.id}/edit/${step}`,
+    status: status
+  }
+}
+
 const getContractDetailsSection = (procurement: Procurement): Array<ContractDetailsTable> => {
   return [
     {
@@ -133,9 +142,8 @@ const getContractDetailsSection = (procurement: Procurement): Array<ContractDeta
     },
     {
       text: 'Contract period',
-      link: `/facilities-management/RM6232/procurements/${procurement.data.id}/edit/contract-period`,
-      status: procurement.status('contract-period'),
-      hasError: false
+      hasError: false,
+      ...getContractRequirementsLinkAndStatus(procurement, 'contract-period')
     }
   ]
 }
@@ -144,21 +152,19 @@ const getBuildingDetailsSection = (procurement: Procurement): Array<ContractDeta
   return [
     {
       text: 'Services',
-      link: `/facilities-management/RM6232/procurements/${procurement.data.id}/edit/services`,
-      status: 'completed',
-      hasError: false
+      hasError: false,
+      ...getContractRequirementsLinkAndStatus(procurement, 'services')
     },
     {
       text: 'Buildings',
-      link: `/facilities-management/RM6232/procurements/${procurement.data.id}/edit/buildings`,
-      status: procurement.status('buildings'),
-      hasError: false
+      hasError: false,
+      ...getContractRequirementsLinkAndStatus(procurement, 'buildings')
     },
     {
       text: 'Assigning services to buildings',
-      link: `/facilities-management/RM6232/procurements/${procurement.data.id}/edit/assigning-services-to-buildings`,
+      link: `/facilities-management/RM6232/procurements/${procurement.data.id}/summary/assigning-services-to-buildings`,
       status: procurement.status('assigning-services-to-buildings'),
-      hasError: false
+      hasError: false,
     }
   ]
 }
@@ -313,7 +319,17 @@ const procurementBuildingCheckboxText = (building: Building): string => {
   `
 }
 
-const editPageDescription = (req: Request, procurement: Procurement, step: string): ProcurementEditPageDescription | undefined=> {
+const PAGES_WITH_SUMMARY = [
+  'contract-period',
+  'services',
+  'buildings'
+]
+
+const pageHasSummary = (step: string): boolean => {
+  return PAGES_WITH_SUMMARY.includes(step)
+}
+
+const editPageDescription = (req: Request, procurement: Procurement, step: string): ProcurementEditPageDescription | undefined => {
   switch (step) {
   case 'contract-name':
     return {
@@ -322,13 +338,6 @@ const editPageDescription = (req: Request, procurement: Procurement, step: strin
   case 'annual-contract-value':
     return {
       pageTitle: 'Annual contract value'
-    }
-  case 'services':
-    return {
-      pageTitle: 'Services',
-      additionalDetails: {
-        accordionItems: chooseServicesAccordionItems(procurement)
-      }
     }
   case 'tupe':
     return {
@@ -345,10 +354,16 @@ const editPageDescription = (req: Request, procurement: Procurement, step: strin
         extensionPeriodsError: isExtensionPeriodError(procurement)
       }
     }
+  case 'services':
+    return {
+      pageTitle: 'Services',
+      additionalDetails: {
+        accordionItems: chooseServicesAccordionItems(procurement)
+      }
+    }
   case 'buildings':
     return {
       pageTitle: 'Buildings',
-      form: `/facilities-management/RM6232/procurements/${procurement.data.id}/edit/${step}/procurement-buildings`,
       additionalDetails: {
         buildingRows: getBuilingSelection(procurement, req)
       }
@@ -356,5 +371,143 @@ const editPageDescription = (req: Request, procurement: Procurement, step: strin
   }
 }
 
+const formatDatePeriod = (startDate: Date, endDate: Date): string => {
+  return `${utils.formatDate(startDate)} to ${utils.formatDate(endDate)}`
+}
 
-export { getProcurementNewParams, getProcurementIndexParams, getProcurement, showPageDescription, getContractName, editPageDescription }
+const createContractPeriodRow = (rowHeading: string, period: Period & {weeks?: number}, startDate: Date, endDate: Date): ContractPeriodTableRow[] => {
+  return [
+    [
+      {
+        text: rowHeading,
+        classes: 'ccs-border-bottom_none'
+      },
+      {
+        text: period.weeks !== undefined ? `${period.weeks} ${utils.pluralise('week', period.weeks)}` : utils.periodToString(period.years as number, period.months as number),
+        classes: 'ccs-border-bottom_none'
+      }
+    ],
+    [
+      {
+        text: ''
+      },
+      {
+        text: formatDatePeriod(startDate, endDate)
+      }
+    ]
+  ]
+}
+
+const getContractPeriodRows = (procurement: Procurement): ContractPeriodTableRow[] => {
+  const rows: ContractPeriodTableRow[] = []
+
+  rows.push(...createContractPeriodRow(
+    'Initial call-off period',
+    {
+      years: procurement.data.initialCallOffPeriodYears,
+      months: procurement.data.initialCallOffPeriodMonths
+    },
+    procurement.initialCallOffPeriodStartDate(),
+    procurement.initialCallOffPeriodEndDate()
+  ))
+
+  if (procurement.data.mobilisationPeriodRequired) {
+    rows.push(...createContractPeriodRow(
+      'Mobilisation period',
+      {
+        weeks: procurement.data.mobilisationPeriod
+      },
+      procurement.mobilisationStartDate(),
+      procurement.mobilisationEndDate()
+    ))
+  } else {
+    rows.push([
+      {
+        text: 'Mobilisation period'
+      },
+      {
+        text: 'None'
+      }
+    ])
+  }
+
+  if (procurement.data.optionalCallOffRequired) {
+    const extensionPeriods = [...Array(4).keys()]
+
+    extensionPeriods.forEach(extensionPeriod => {
+      if (procurement.callOffExtensionRequired(extensionPeriod)) {
+        rows.push(...createContractPeriodRow(
+          `Optional call-off extension period ${extensionPeriod + 1}`,
+          {
+            years: procurement.callOffExtensionYears(extensionPeriod),
+            months: procurement.callOffExtensionMonths(extensionPeriod)
+          },
+          procurement.extensionPeriodStartDate(extensionPeriod),
+          procurement.extensionPeriodEndDate(extensionPeriod)
+        ))
+      }
+    })
+  } else {
+    rows.push([
+      {
+        text: 'Optional call-off extensions'
+      },
+      {
+        text: 'None'
+      }
+    ])
+  }
+
+  return rows
+}
+
+const getActiveProcurementBuildingRows = (procurement: Procurement): BuildingsSummaryTableRow[] => {
+  return procurement.activeProcurementBuildings().reduce((rows: BuildingsSummaryTableRow[], procurementBuilding) => {
+    const building: Building = procurementBuilding.building()
+
+    rows.push(
+      [
+        {
+          text: building.data.name as string,
+          classes: 'govuk-table__header ccs-border-bottom_none govuk-!-padding-bottom-0'
+        }
+      ],
+      [
+        {
+          text: building.data.address?.fullAddress() as string,
+          classes: 'govuk-!-padding-top-0'
+        },
+      ]
+    )
+
+    return rows
+  }, [])
+}
+
+const summaryPageDescription = (procurement: Procurement, step: string): ProcurementSummaryPageDescription | undefined => {
+  switch (step) {
+  case 'contract-period':
+    return {
+      pageTitle: 'Contract period summary',
+      additionalDetails: {
+        contractPeriodRows: getContractPeriodRows(procurement)
+      }
+    }
+  case 'services':
+    return {
+      pageTitle: 'Services summary',
+      additionalDetails: {
+        services: procurement.services().map(service => [{ text: service.data.name }])
+      }
+    }
+  case 'buildings':
+    return {
+      pageTitle: 'Buildings summary',
+      additionalDetails: {
+        buildings: getActiveProcurementBuildingRows(procurement)
+      }
+    }
+  }
+}
+
+export { getProcurementNewParams, getProcurementIndexParams, getProcurement, showPageDescription, getContractName, editPageDescription, pageHasSummary, summaryPageDescription }

@@ -34,7 +34,7 @@ const procurements: Array<ProcurementRow> = [
     tupe: true,
     initialCallOffPeriodYears: 2,
     initialCallOffPeriodMonths: 3,
-    initialCallOffPeriodStartDate: '2023-03-04',
+    initialCallOffPeriodStartDate: '2022-11-01',
     mobilisationPeriodRequired: true,
     mobilisationPeriod: 4,
     optionalCallOffRequired: true,

@@ -9,8 +9,12 @@ export interface ProcurementInterface {
   regions: () => SecondaryRegion[]
   goToNextState: () => void
   initialCallOffPeriod: () => number
+  initialCallOffPeriodStartDate: () => Date
+  initialCallOffPeriodEndDate: () => Date
   mobilisationStartDate: () => Date
   mobilisationEndDate: () => Date
+  extensionPeriodStartDate: (extensionPeriod: number) => Date
+  extensionPeriodEndDate: (extensionPeriod: number) => Date
   callOffExtension: (extension: number) => number | undefined
   callOffExtensionRequired: (extension: number) => boolean
   callOffExtensionYears: (extension: number) => number | undefined

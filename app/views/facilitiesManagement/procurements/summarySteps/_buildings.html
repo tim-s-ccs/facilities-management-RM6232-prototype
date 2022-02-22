@@ -1,0 +1,33 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-three-quarters">
+    <h2 class="govuk-heading-m govuk-!-margin-bottom-2">
+      You have selected
+    </h2>
+    <div id="number-of-services">
+      <p class="govuk-!-font-size-48 govuk-!-font-weight-bold govuk-!-margin-bottom-0">
+        {{ pageDescription.additionalDetails.buildings.length / 2}}
+      </p>
+      <p class="govuk-!-font-weight-bold">
+        buildings
+      </p>
+    </div>
+    <p class="govuk-caption-m">
+      The buildings below have been selected for this procurement.
+      If you wish to add or remove buildings please click on the 'change' button.
+    </p>
+    {{ govukButton({
+      element: 'a',
+      href: '/facilities-management/RM6232/procurements/' + procurement.data.id + '/edit/buildings',
+      text: 'Change',
+      classes: 'govuk-button--secondary govuk-!-margin-bottom-6'
+    }) }}
+    {{ govukTable({
+      head: [
+        {
+          text: "Buildings"
+        }
+      ],
+      rows: pageDescription.additionalDetails.buildings
+    }) }}
+  </div>
+</div>

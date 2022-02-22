@@ -43,6 +43,12 @@ export type ProcurementEditParams = {
   pageDescription?: ProcurementEditPageDescription
 }
 
+export type ProcurementSummaryParams = {
+  procurement: Procurement,
+  step: string,
+  pageDescription?: ProcurementEditPageDescription
+}
+
 export type ProcurementCreateParams = ErrorParams & ProcurementNewParams
 export type ProcurementShowPostParams = ErrorParams & ProcurementShowParams
 export type ProcurementUpdateParams = ErrorParams & ProcurementEditParams

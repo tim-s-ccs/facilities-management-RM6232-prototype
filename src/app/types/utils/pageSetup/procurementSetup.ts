@@ -19,7 +19,11 @@ export type ProcurementShowPageDescription = {
 
 export type ProcurementEditPageDescription = {
   pageTitle: string
-  form?: string
+  additionalDetails?: {[key: string]: any}
+}
+
+export type ProcurementSummaryPageDescription = {
+  pageTitle: string
   additionalDetails?: {[key: string]: any}
 }
 
@@ -28,6 +32,11 @@ export type ContractDetailsTable = {
   link: string
   status: string
   hasError: boolean
+}
+
+export type LinkAndStatus = {
+  link: string
+  status: string
 }
 
 export type OptionalCallOffPeriodData = {
@@ -49,3 +58,13 @@ export type BuildingsTableRow = [
   BuildingsTableRowItem,
   BuildingsTableRowItem
 ]
+
+export type ContractPeriodTableRow = Array<{
+  text: string
+  classes?: string
+}>
+
+export type BuildingsSummaryTableRow = Array<{
+  text: string,
+  classes: string
+}>
