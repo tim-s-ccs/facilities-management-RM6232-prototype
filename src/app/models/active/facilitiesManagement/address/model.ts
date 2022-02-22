@@ -25,7 +25,7 @@ class Address extends ActiveModel implements AddressInterface {
     })
   }
 
-  static find = (req: Request, id: number): Address => {
+  static find = (req: Request, id: string): Address => {
     return new this(req, this._find(req, this.tableName, id) as AddressRow)
   }
 
@@ -41,7 +41,7 @@ class Address extends ActiveModel implements AddressInterface {
     if (data === undefined) { return new this(req, {} as AddressRow) }
 
     return new this(req, {
-      id: this.nextID(req, this.tableName),
+      id: this.generateID(),
       addressLine1: data.addressLine1,
       addressLine2: data.addressLine2,
       city: data.city,

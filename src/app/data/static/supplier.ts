@@ -2,7 +2,7 @@ import { SupplierRow } from '../../types/data/staticTables'
 
 const suppliers: Array<SupplierRow> = [
   {
-    id: 1,
+    id: '1',
     supplier_name: 'Abshire-Oberbrunner',
     contact_name: 'Mrs. Lazaro Beatty',
     contact_email: 'lloyd_kihn@johnsconn.name',
@@ -18,7 +18,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 2,
+    id: '2',
     supplier_name: 'Anderson-Weber',
     contact_name: 'Al Okuneva',
     contact_email: 'sam_huels@johnsonmckenzie.net',
@@ -34,7 +34,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 3,
+    id: '3',
     supplier_name: 'Baumbach and Sons',
     contact_name: 'Julissa Hand',
     contact_email: 'loren@jacobsoncasper.io',
@@ -50,7 +50,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 4,
+    id: '4',
     supplier_name: 'Beahan-Gottlieb',
     contact_name: 'Kasie Windler',
     contact_email: 'renay@wiza.co',
@@ -66,7 +66,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 5,
+    id: '5',
     supplier_name: 'Bernhard-Langosh',
     contact_name: 'Benton King',
     contact_email: 'katelin.oconnell@lowe.biz',
@@ -82,7 +82,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 6,
+    id: '6',
     supplier_name: 'Blanda-Jerde',
     contact_name: 'Ariel Stracke II',
     contact_email: 'zulema.smitham@creminstracke.net',
@@ -98,7 +98,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 7,
+    id: '7',
     supplier_name: 'Corkery and Sons',
     contact_name: 'Patrice Ratke',
     contact_email: 'asa_fahey@oreillythompson.name',
@@ -114,7 +114,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 8,
+    id: '8',
     supplier_name: 'Davis LLC',
     contact_name: 'Arlen Gutkowski Sr.',
     contact_email: 'lawrence.larson@goyette.biz',
@@ -130,7 +130,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 9,
+    id: '9',
     supplier_name: 'Dickinson, Goodwin and Terry',
     contact_name: 'Jarred Yost PhD',
     contact_email: 'francene.johnson@nikolaus.co',
@@ -146,7 +146,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 10,
+    id: '10',
     supplier_name: 'Fritsch Group',
     contact_name: 'Goldie Becker',
     contact_email: 'gerard_heidenreich@torprobel.biz',
@@ -162,7 +162,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 11,
+    id: '11',
     supplier_name: 'Hagenes, Graham and Farrell',
     contact_name: 'Rafael D\'Amore',
     contact_email: 'nilsa.moen@rosenbaum.org',
@@ -178,7 +178,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 12,
+    id: '12',
     supplier_name: 'Hane, Oberbrunner and Koepp',
     contact_name: 'Jacinto Bode',
     contact_email: 'daina_mosciski@johnsoncollins.io',
@@ -194,7 +194,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 13,
+    id: '13',
     supplier_name: 'Heathcote Inc',
     contact_name: 'Gia Strosin IV',
     contact_email: 'alona@emmerich.co',
@@ -210,7 +210,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 14,
+    id: '14',
     supplier_name: 'Hessel, Luettgen and Larson',
     contact_name: 'Emmanuel Daugherty',
     contact_email: 'tyson@harveyhuels.org',
@@ -226,7 +226,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 15,
+    id: '15',
     supplier_name: 'Hyatt-Leffler',
     contact_name: 'Yung Kassulke',
     contact_email: 'jewel.walker@king.com',
@@ -242,7 +242,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 16,
+    id: '16',
     supplier_name: 'Jacobson Group',
     contact_name: 'Ela Brakus',
     contact_email: 'mike.schinner@baumbach.com',
@@ -258,7 +258,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 17,
+    id: '17',
     supplier_name: 'Kertzmann, Koelpin and Gutkowski',
     contact_name: 'Malcolm Terry',
     contact_email: 'hortense@kihnflatley.co',
@@ -274,7 +274,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 18,
+    id: '18',
     supplier_name: 'Kertzmann-Kohler',
     contact_name: 'Dominque Turcotte',
     contact_email: 'alan.daniel@douglas.biz',
@@ -290,7 +290,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 19,
+    id: '19',
     supplier_name: 'Kris-Schimmel',
     contact_name: 'Pansy Zieme',
     contact_email: 'caterina_grady@rempeltreutel.io',
@@ -306,7 +306,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 20,
+    id: '20',
     supplier_name: 'MacGyver, Parker and Thompson',
     contact_name: 'Renaldo Batz III',
     contact_email: 'ryann@lynchthiel.biz',
@@ -322,7 +322,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 21,
+    id: '21',
     supplier_name: 'Macejkovic, Nolan and Shanahan',
     contact_name: 'Cordie Hammes II',
     contact_email: 'leopoldo@jerde.com',
@@ -338,7 +338,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 22,
+    id: '22',
     supplier_name: 'Marquardt Group',
     contact_name: 'Danilo Glover Sr.',
     contact_email: 'hipolito@anderson.info',
@@ -354,7 +354,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 23,
+    id: '23',
     supplier_name: 'McDermott, Kunze and Keeling',
     contact_name: 'Krissy Toy',
     contact_email: 'tomas@runte.org',
@@ -370,7 +370,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 24,
+    id: '24',
     supplier_name: 'Nicolas, Mertz and Smitham',
     contact_name: 'Herb Rohan',
     contact_email: 'carmelo.considine@ferry.biz',
@@ -386,7 +386,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 25,
+    id: '25',
     supplier_name: 'O\'Connell, Krajcik and Kris',
     contact_name: 'Nelia Treutel',
     contact_email: 'antonio_carroll@wymanondricka.name',
@@ -402,7 +402,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 26,
+    id: '26',
     supplier_name: 'Orn, Heaney and Weber',
     contact_name: 'Ai Kunze',
     contact_email: 'dillon@stantonbeatty.co',
@@ -418,7 +418,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 27,
+    id: '27',
     supplier_name: 'Rempel-Erdman',
     contact_name: 'Teresia Veum',
     contact_email: 'felipa.breitenberg@gutmannlueilwitz.co',
@@ -434,7 +434,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 28,
+    id: '28',
     supplier_name: 'Rogahn-Grimes',
     contact_name: 'Ernesto Jast',
     contact_email: 'cari@auer.com',
@@ -450,7 +450,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 29,
+    id: '29',
     supplier_name: 'Rohan, Labadie and Hodkiewicz',
     contact_name: 'Amiee Kertzmann',
     contact_email: 'jean@greenfelder.biz',
@@ -466,7 +466,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 30,
+    id: '30',
     supplier_name: 'Runolfsson, Pfannerstill and Huel',
     contact_name: 'Danyell Swaniawski',
     contact_email: 'norbert_jenkins@reichel.io',
@@ -482,7 +482,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 31,
+    id: '31',
     supplier_name: 'Runte Inc',
     contact_name: 'Jerrod Kub',
     contact_email: 'gregg@bauch.info',
@@ -498,7 +498,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 32,
+    id: '32',
     supplier_name: 'Runte, Strosin and Reilly',
     contact_name: 'Jimmy Wiegand',
     contact_email: 'johnie_hansen@adamslang.io',
@@ -514,7 +514,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 33,
+    id: '33',
     supplier_name: 'Sanford Group',
     contact_name: 'Shasta Cummings DVM',
     contact_email: 'maida_daniel@mcdermott.io',
@@ -530,7 +530,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 34,
+    id: '34',
     supplier_name: 'Schinner Inc',
     contact_name: 'Edwina Sanford',
     contact_email: 'renaldo.hamill@huels.com',
@@ -546,7 +546,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 35,
+    id: '35',
     supplier_name: 'Senger, Lesch and Mann',
     contact_name: 'Molly Kunze',
     contact_email: 'arleen_metz@trantow.info',
@@ -562,7 +562,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 36,
+    id: '36',
     supplier_name: 'Stracke-Streich',
     contact_name: 'Gaylord Parisian',
     contact_email: 'marcellus@schuppe.io',
@@ -578,7 +578,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 37,
+    id: '37',
     supplier_name: 'Terry, Jerde and Conn',
     contact_name: 'Claudia Ondricka',
     contact_email: 'jewel@considine.name',
@@ -594,7 +594,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 38,
+    id: '38',
     supplier_name: 'Thiel and Sons',
     contact_name: 'Rosie DuBuque',
     contact_email: 'ronnie@hodkiewicz.co',
@@ -610,7 +610,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 39,
+    id: '39',
     supplier_name: 'Toy LLC',
     contact_name: 'Theodore Schaefer DDS',
     contact_email: 'cathey@joneshermiston.io',
@@ -626,7 +626,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 40,
+    id: '40',
     supplier_name: 'Treutel Inc',
     contact_name: 'Dr. Rowena Fay',
     contact_email: 'jed.will@goyette.net',
@@ -642,7 +642,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 41,
+    id: '41',
     supplier_name: 'VonRueden Group',
     contact_name: 'Jacob Pouros II',
     contact_email: 'delmer_maggio@maggio.net',
@@ -658,7 +658,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 42,
+    id: '42',
     supplier_name: 'Waelchi Inc',
     contact_name: 'Maye Hilpert',
     contact_email: 'rena_bayer@kling.org',
@@ -674,7 +674,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 43,
+    id: '43',
     supplier_name: 'Ward-Murphy',
     contact_name: 'Jillian Dickinson',
     contact_email: 'arden.towne@feilgutkowski.name',
@@ -690,7 +690,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 44,
+    id: '44',
     supplier_name: 'Wisozk-Little',
     contact_name: 'Mrs. Kourtney Gutkowski',
     contact_email: 'shirley@marquardt.net',
@@ -706,7 +706,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 45,
+    id: '45',
     supplier_name: 'Wisozk-Marquardt',
     contact_name: 'Mr. Ricarda Barrows',
     contact_email: 'hubert.terry@dubuque.biz',
@@ -722,7 +722,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 46,
+    id: '46',
     supplier_name: 'Wiza Group',
     contact_name: 'Jamie Nader',
     contact_email: 'alia.hoeger@hoeger.net',
@@ -738,7 +738,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 47,
+    id: '47',
     supplier_name: 'Wiza, Schroeder and Dicki',
     contact_name: 'Karmen Runolfsdottir',
     contact_email: 'alex_hirthe@mcglynnbins.biz',
@@ -754,7 +754,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 48,
+    id: '48',
     supplier_name: 'Wiza, Yundt and Gislason',
     contact_name: 'Luis Graham Jr.',
     contact_email: 'otto@blanda.com',
@@ -770,7 +770,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 49,
+    id: '49',
     supplier_name: 'Wolf-Hoppe',
     contact_name: 'Dr. Franklin Ziemann',
     contact_email: 'lynelle@vandervortterry.com',
@@ -786,7 +786,7 @@ const suppliers: Array<SupplierRow> = [
     active: true
   },
   {
-    id: 50,
+    id: '50',
     supplier_name: 'Zieme, Gaylord and Goyette',
     contact_name: 'Dr. Nicolas Ritchie',
     contact_email: 'pedro_lemke@nader.com',

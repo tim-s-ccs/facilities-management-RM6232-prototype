@@ -4,14 +4,16 @@ import { PrimaryRegionData, PrimaryRegionInterface } from '../../../../types/mod
 
 class PrimaryRegion extends StaticModel implements PrimaryRegionInterface {
   static tableName: string = 'primaryRegions'
+  static primaryKey: string = 'code'
+
   data: PrimaryRegionData = this.data as PrimaryRegionData
 
   secondaryRegions = (): Array<SecondaryRegion> => {
     return SecondaryRegion.where([{attribute: 'primary_region_code', value: this.data.code}])
   }
 
-  static find = (id: number): PrimaryRegion => {
-    return new this(this._find(this.tableName, id))
+  static find = (code: string): PrimaryRegion => {
+    return new this(this._find(this.tableName, this.primaryKey, code))
   }
 
   static all = (): Array<PrimaryRegion> => {

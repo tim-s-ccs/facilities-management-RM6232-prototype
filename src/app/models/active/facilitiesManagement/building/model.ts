@@ -19,10 +19,10 @@ class Building extends ActiveModel implements BuildingInterface {
   data: BuildingData = this.data as BuildingData
 
   constructor(req: Request, data: BuildingRow) {
-    super(req, Building.initBuildingData(data, req))
+    super(req, Building.initBuildingData(req, data))
   }
 
-  static initBuildingData(data: BuildingRow, req: Request): BuildingData {
+  static initBuildingData = (req: Request, data: BuildingRow): BuildingData => {
     return {
       id: data.id,
       userID: data.userID,
@@ -43,7 +43,7 @@ class Building extends ActiveModel implements BuildingInterface {
     if (data === undefined) { return new this(req, {} as BuildingRow) }
 
     const building = new this(req, {
-      id: this.nextID(req, this.tableName),
+      id: this.generateID(),
       userID: req.session.data.user.id,
       name: data.name,
       description: data.description,
@@ -60,7 +60,7 @@ class Building extends ActiveModel implements BuildingInterface {
     return building
   }
 
-  static find = (req: Request, id: number): Building => {
+  static find = (req: Request, id: string): Building => {
     return new this(req, this._find(req, this.tableName, id) as BuildingRow)
   }
 

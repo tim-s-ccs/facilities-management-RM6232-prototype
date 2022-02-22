@@ -9,26 +9,26 @@ export type AddressRow = DefaultRow & {
 }
 
 export type BuildingRow = DefaultRow & {
-  userID: number
+  userID: string
   name: string
   description?: string
-  addressID: number
-  regionID?: number
+  addressID: string
+  regionID?: string
   gia?: number,
   externalArea?: number,
-  buildingTypeID?: number
-  securityClearanceID?: number
+  buildingTypeID?: string
+  securityClearanceID?: string
   updatedAt: string
   buildingComplete: boolean
 }
 
 export type BuyerDetailRow = DefaultRow & {
-  userID: number
+  userID: string
   fullName: string
   jobTitle: string
   telephoneNumber: string
   organisationName: string
-  organisationAddressID: number
+  organisationAddressID: string
   centralGovernment: boolean
 }
 
@@ -38,7 +38,7 @@ export type RegionRow = DefaultRow & {
 }
 
 export type ProcurementRow = DefaultRow & {
-  userID: number
+  userID: string
   serviceCodes: Array<string>
   regionCodes: Array<string>
   estimatedAnnualCost: number
@@ -63,8 +63,16 @@ export type ProcurementRow = DefaultRow & {
   extensionPeriodRequired3?: boolean
   extensionPeriodYears3?: number
   extensionPeriodMonths3?: number
+  procurementBuildingIDs?: Array<string>
   state: string
   updatedAt: string
+}
+
+export type ProcurementBuildingRow = DefaultRow & {
+  procurementID: string
+  buildingID: string
+  active: boolean
+  serviceCodes?: Array<string>
 }
 
 export type ActiveTables = {
@@ -73,4 +81,5 @@ export type ActiveTables = {
   buyerDetails: Array<BuyerDetailRow>
   regions: Array<RegionRow>
   procurements: Array<ProcurementRow>
+  procurementBuildings: Array<ProcurementBuildingRow>
 }

@@ -2,7 +2,7 @@ import { UKAddressRow } from '../../types/data/staticTables'
 
 const ukAddresses: Array<UKAddressRow> = [
   {
-    id: 1,
+    id: '000001',
     summary_line: '10 South Colonnade, Canary Wharf, London',
     address_line_1: '10 South Colonnade',
     address_line_2: '',
@@ -10,7 +10,7 @@ const ukAddresses: Array<UKAddressRow> = [
     address_town: 'London'
   },
   {
-    id: 2,
+    id: '000002',
     summary_line: 'The Capital Building, 39 Old Hall Street, Liverpool',
     address_line_1: 'The Capital Building',
     address_line_2: '39 Old Hall Street',
@@ -18,7 +18,7 @@ const ukAddresses: Array<UKAddressRow> = [
     address_town: 'Liverpool'
   },
   {
-    id: 3,
+    id: '000003',
     summary_line: '2 Rivergate, Temple Quay, Bristol',
     address_line_1: '2 Rivergate',
     address_line_2: 'Temple Quay',
@@ -26,7 +26,7 @@ const ukAddresses: Array<UKAddressRow> = [
     address_town: 'Bristol'
   },
   {
-    id: 4,
+    id: '000004',
     summary_line: 'Concept House, Cardiff Road, Newport',
     address_line_1: 'Concept House',
     address_line_2: 'Cardiff Road',
@@ -34,7 +34,7 @@ const ukAddresses: Array<UKAddressRow> = [
     address_town: 'Newport'
   },
   {
-    id: 5,
+    id: '000005',
     summary_line: 'Rosebery Court, Central Avenue, Norwich',
     address_line_1: 'Rosebery Court',
     address_line_2: 'Central Avenue',
@@ -42,7 +42,7 @@ const ukAddresses: Array<UKAddressRow> = [
     address_town: 'Norwich'
   },
   {
-    id: 6,
+    id: '000006',
     summary_line: '23 Stephenson Street, Birmingham',
     address_line_1: '23 Stephenson Street',
     address_line_2: '',

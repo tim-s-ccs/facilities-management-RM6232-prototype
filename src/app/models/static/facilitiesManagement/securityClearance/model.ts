@@ -3,10 +3,12 @@ import { SecurityClearanceData, SecurityClearanceInterface } from '../../../../t
 
 class SecurityClearance extends StaticModel implements SecurityClearanceInterface {
   static tableName: string = 'securityClearances'
+  static primaryKey: string = 'id'
+
   data: SecurityClearanceData = this.data as SecurityClearanceData
 
-  static find = (id: number): SecurityClearance => {
-    return new this(this._find(this.tableName, id))
+  static find = (id: string): SecurityClearance => {
+    return new this(this._find(this.tableName, this.primaryKey, id))
   }
 
   static all = (): Array<SecurityClearance> => {

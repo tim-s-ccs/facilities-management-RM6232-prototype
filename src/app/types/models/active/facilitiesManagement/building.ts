@@ -11,8 +11,8 @@ export interface BuildingInterface {
 }
 
 export type BuildingData = {
-  id: number
-  userID: number
+  id: string
+  userID: string
   name?: string
   description?: string
   address?: Address

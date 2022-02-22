@@ -13,7 +13,7 @@ const SEARCH_STATES = ['completed_search', 'entering_requirements']
 const ADVANCED_PROCUREMENT_STATES = ['final_results']
 
 const getProcurement = (req: Request): Procurement => {
-  return Procurement.find(req, Number(req.params['id']))
+  return Procurement.find(req, req.params['id'])
 }
 
 const stateToDisplayName = (state: string): string => {
@@ -247,6 +247,7 @@ const isExtensionPeriodError = (procurement: Procurement): boolean => {
 
 const getBuilingSelection = (procurement: Procurement, req: Request): BuildingsTableRow[] => {
   const buildings: Building[] = Building.all(req)
+  const buildingIDs = procurement.activeProcurementBuildings().map(procurementBuilding => procurementBuilding.data.buildingID)
 
   const rows = buildings.map(building => {
     const row: BuildingsTableRowItem[] = []
@@ -260,9 +261,10 @@ const getBuilingSelection = (procurement: Procurement, req: Request): BuildingsT
                 class="govuk-checkboxes__input"
                 title="${building.data.name}"
                 type="checkbox"
-                value="1"
+                value="${building.data.id}"
                 name="procurement[procurementBuildings][]"
                 id="procurementBuildings${building.data.id}Active"
+                ${buildingIDs?.includes(building.data.id) ? 'checked' : '' }
               >
               <label class="govuk-label govuk-checkboxes__label govuk-!-padding-top-0" for="procurementBuildings${building.data.id}Active">
                 ${procurementBuildingCheckboxText(building)}
@@ -349,6 +351,7 @@ const editPageDescription = (req: Request, procurement: Procurement, step: strin
   case 'buildings':
     return {
       pageTitle: 'Buildings',
+      form: `/facilities-management/RM6232/procurements/${procurement.data.id}/edit/${step}/procurement-buildings`,
       additionalDetails: {
         buildingRows: getBuilingSelection(procurement, req)
       }

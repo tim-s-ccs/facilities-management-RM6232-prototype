@@ -6,7 +6,7 @@ export interface SupplierInterface {
 }
 
 export type SupplierData = {
-  id: number
+  id: string
   supplier_name: string
   contact_name: string
   contact_email: string

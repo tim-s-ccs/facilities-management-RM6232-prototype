@@ -1,3 +1,4 @@
+import ProcurementBuilding from '../procurementBuildings/model'
 import { ModelSchema } from 'ccs-prototype-kit-model-interface'
 
 const procurementModelSchema: ModelSchema = {
@@ -27,6 +28,7 @@ const procurementModelSchema: ModelSchema = {
   extensionPeriodRequired3: {constructor: Boolean},
   extensionPeriodYears3: {constructor: Number},
   extensionPeriodMonths3: {constructor: Number},
+  procurementBuildings: {constructor: Array, arrayItemConstuctor: ProcurementBuilding},
   state: {constructor: String},
   updatedAt: {constructor: String}
 }

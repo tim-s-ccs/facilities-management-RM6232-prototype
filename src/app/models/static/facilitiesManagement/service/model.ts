@@ -3,12 +3,14 @@ import { ServiceData, ServiceInterface } from '../../../../types/models/static/f
 
 class Service extends StaticModel implements ServiceInterface {
   static tableName: string = 'services'
+  static primaryKey: string = 'code'
+
   data: ServiceData = this.data as ServiceData
 
   hyphenateCode = () => this.data.code.replace('.', '-')
 
-  static find = (id: number): Service => {
-    return new this(this._find(this.tableName, id))
+  static find = (code: string): Service => {
+    return new this(this._find(this.tableName, this.primaryKey, code))
   }
 
   static all = (): Array<Service> => {

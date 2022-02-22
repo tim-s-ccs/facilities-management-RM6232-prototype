@@ -49,7 +49,7 @@ router.post('/new', (req: Request, res: Response) => {
   }
 })
 
-router.get('/:id', (req: Request, res: Response) =>{
+router.get('/:id', (req: Request, res: Response) => {
   const procurement: Procurement = getProcurement(req)
   const state: string = procurement.data.state as string
 
@@ -65,7 +65,7 @@ router.get('/:id', (req: Request, res: Response) =>{
   )
 })
 
-router.post('/:id', (req: Request, res: Response) =>{
+router.post('/:id', (req: Request, res: Response) => {
   const procurement: Procurement = getProcurement(req)
   const state: string = procurement.data.state as string
 
@@ -90,7 +90,7 @@ router.post('/:id', (req: Request, res: Response) =>{
   }
 })
 
-router.get('/:id/edit/:step', (req: Request, res: Response) =>{
+router.get('/:id/edit/:step', (req: Request, res: Response) => {
   const procurement: Procurement = getProcurement(req)
   const step: string = req.params['step']
 
@@ -107,12 +107,40 @@ router.get('/:id/edit/:step', (req: Request, res: Response) =>{
   )
 })
 
-router.post('/:id/edit/:step', (req: Request, res: Response) =>{
+router.post('/:id/edit/:step', (req: Request, res: Response) => {
   const step: string = req.params['step']
   const procurement: Procurement = getProcurement(req)
 
   // TODO: Fix issuse when active model does not exist
   procurement.assignAttributes(req.body['procurement'])
+
+  if (procurement.validate(step)) {
+    procurement.save()
+
+    res.redirect(`/facilities-management/RM6232/procurements/${procurement.data.id}`)
+  } else {
+    const params: ProcurementUpdateParams = {
+      procurement: procurement,
+      step: step,
+      contractName: getContractName(req),
+      pageDescription: editPageDescription(req, procurement, step),
+      errors: procurement.errors,
+      errorList: procurement.errorList()
+    }
+
+    res.render(
+      'facilitiesManagement/procurements/edit.html',
+      params
+    )
+  }
+})
+
+router.post('/:id/edit/:step/procurement-buildings', (req: Request, res: Response) => {
+  const step: string = req.params['step']
+  const procurement: Procurement = getProcurement(req)
+
+  // TODO: Fix issuse when active model does not exist
+  procurement.findOrBuildProcurementBuildings(req.body['procurement'])
 
   if (procurement.validate(step)) {
     procurement.save()

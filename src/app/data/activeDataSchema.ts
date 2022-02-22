@@ -1,7 +1,7 @@
 import { ActiveDataSchema, ActiveDataScheme } from 'ccs-prototype-kit-model-interface'
 
 const addressDataSchema: ActiveDataScheme = {
-  id: 'number',
+  id: 'string',
   addressLine1: 'string',
   addressLine2: 'string',
   city: 'string',
@@ -10,40 +10,40 @@ const addressDataSchema: ActiveDataScheme = {
 }
 
 const buildingDataSchema: ActiveDataScheme = {
-  id: 'number',
-  userID: 'number',
+  id: 'string',
+  userID: 'string',
   name: 'string',
   description: 'string',
-  addressID: 'number',
-  regionID: 'number',
+  addressID: 'string',
+  regionID: 'string',
   gia: 'number',
   externalArea: 'number',
-  buildingTypeID: 'number',
-  securityClearanceID: 'number',
+  buildingTypeID: 'string',
+  securityClearanceID: 'string',
   updatedAt: 'string',
   buildingComplete: 'boolean',
 }
 
 const buyerDetailDataSchema: ActiveDataScheme = {
-  id: 'number',
-  userID: 'number',
+  id: 'string',
+  userID: 'string',
   fullName: 'string',
   jobTitle: 'string',
   telephoneNumber: 'string',
   organisationName: 'string',
-  organisationAddressID: 'number',
+  organisationAddressID: 'string',
   centralGovernment: 'boolean'
 }
 
 const regionDataSchema: ActiveDataScheme = {
-  id: 'number',
+  id: 'string',
   name: 'string',
   code: 'string'
 }
 
 const procurementDataSchema: ActiveDataScheme = {
-  id: 'number',
-  userID: 'number',
+  id: 'string',
+  userID: 'string',
   serviceCodes: 'object',
   regionCodes: 'object',
   estimatedAnnualCost: 'number',
@@ -68,8 +68,17 @@ const procurementDataSchema: ActiveDataScheme = {
   extensionPeriodRequired3: 'boolean',
   extensionPeriodYears3: 'number',
   extensionPeriodMonths3: 'number',
+  procurementBuildingIDs: 'object',
   state: 'string',
   updatedAt: 'string'
+}
+
+const procurementBuildingsDataSchema: ActiveDataScheme = {
+  id: 'string',
+  procurementID: 'string',
+  buildingID: 'string',
+  active: 'boolean',
+  serviceCodes: 'object'
 }
 
 const activeDataSchema: ActiveDataSchema = {
@@ -77,7 +86,8 @@ const activeDataSchema: ActiveDataSchema = {
   buildings: buildingDataSchema,
   buyerDetails: buyerDetailDataSchema,
   regions: regionDataSchema,
-  procurements: procurementDataSchema
+  procurements: procurementDataSchema,
+  procurementBuildings: procurementBuildingsDataSchema
 }
 
 export default activeDataSchema

@@ -7,7 +7,7 @@ declare module 'express-session' {
     data: {
       tables: Tables
       user: {
-        id: number
+        id: string
         email: string
       }
     }
