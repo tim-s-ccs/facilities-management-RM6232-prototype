@@ -180,6 +180,41 @@ class Procurement extends ActiveModel implements ProcurementInterface {
 
     this.data.procurementBuildings?.forEach(procurementBuilding => procurementBuilding.data.active = buildingIDs.includes(procurementBuilding.data.buildingID))
   }
+
+  status = (stage: string): string => {
+    switch(stage) {
+    case 'tupe':
+      return this.data.tupe === undefined ? 'not started' : 'completed'
+    case 'contract-period': {
+      const relevantAttributes: any[] = [
+        this.data.initialCallOffPeriodYears,
+        this.data.initialCallOffPeriodMonths,
+        this.data.initialCallOffPeriodStartDate,
+        this.data.mobilisationPeriodRequired,
+        this.data.optionalCallOffRequired
+      ]
+
+      if (relevantAttributes.every(element => element === undefined)) return 'not started'
+
+      if (relevantAttributes.some(element => element === undefined)) return 'incomplete'
+
+      return 'completed'
+    }
+    case 'buildings':
+      return this.activeProcurementBuildings().length > 0 ? 'completed' : 'not started'
+    case 'assigning-services-to-buildings':
+      if (this.status('buildings') === 'not started') return 'cannot start'
+
+      if (this.activeProcurementBuildings().some(procurementBuilding => {
+        return procurementBuilding.data.serviceCodes === undefined ||
+               procurementBuilding.data.serviceCodes.length === 0
+      })) return 'incomplete'
+
+      return 'completed'
+    default:
+      return 'cannot start'
+    }
+  }
 }
 
 export default Procurement

@@ -1,3 +1,4 @@
+import ActiveProcurementBuildingsValidation from './customValidators/activeProcurementBuildingsValidation'
 import ExtensionValidation, { extension0Required, extension1Required, extension2Required, extension3Required } from './customValidators/extensionValidation'
 import InitialCallOffPeriodLengthValidation from './customValidators/initialCallOffPeriodLengthValidation'
 import MobilisationStartDateValidation, { mobilisationPeriodCondition, mobilisationPeriodRequiredCondition, mobilisationStartDateCondition } from './customValidators/mobilisationPeriodValidation'
@@ -141,11 +142,6 @@ const extensionPeriodMonths3Options: NumberValidatorOptions = {
   onlyInteger: true,
   greaterThan: -1,
   lessThan: 12
-}
-
-const procurementBuildingsOptions: LengthValidatorOptions = {
-  on: ['buildings'],
-  min: 1
 }
 
 const procurementValidationSchema: ValidationSchema = {
@@ -348,14 +344,6 @@ const procurementValidationSchema: ValidationSchema = {
         notAnInteger: 'The months for the extension period must be a whole number',
         greaterThan: 'The months for the extension period must be between 0 and 11'
       }
-    },
-    {
-      attribute: 'procurementBuildings',
-      validator: LengthValidator,
-      options: procurementBuildingsOptions,
-      errorMessages: {
-        greaterThan: 'Select at least one building'
-      }
     }
   ],
   customValidations: [
@@ -450,8 +438,32 @@ const procurementValidationSchema: ValidationSchema = {
       errorMessages: {
         totalContractPeriod: 'Call-off contract period, including extensions and mobilisation period, must not be more than 10 years in total'
       }
+    },
+    {
+      attribute: 'procurementBuildings',
+      validator: ActiveProcurementBuildingsValidation,
+      options: {
+        on: ['buildings']
+      },
+      errorMessages: {
+        greaterThan: 'Select at least one building'
+      }
     }
   ]
 }
 
 export default procurementValidationSchema
+
+// const procurementBuildingsOptions: LengthValidatorOptions = {
+//   on: ['buildings'],
+//   min: 1
+// }
+
+// {
+//   attribute: 'procurementBuildings',
+//   validator: LengthValidator,
+//   options: procurementBuildingsOptions,
+// errorMessages: {
+//   greaterThan: 'Select at least one building'
+// }
+// }

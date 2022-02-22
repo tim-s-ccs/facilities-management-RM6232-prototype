@@ -18,6 +18,7 @@ export interface ProcurementInterface {
   callOffExtensionError: (extension: number) => boolean
   activeProcurementBuildings: () => Array<ProcurementBuilding>
   findOrBuildProcurementBuildings: (data: {[key: string]: any}) => void
+  status: (section: string) => string
 }
 
 export type ProcurementData = {
