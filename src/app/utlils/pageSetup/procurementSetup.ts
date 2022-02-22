@@ -2,7 +2,7 @@ import Address from '../../models/active/facilitiesManagement/address/model'
 import Building from '../../models/active/facilitiesManagement/building/model'
 import Procurement from '../../models/active/facilitiesManagement/procurement/model'
 import SuppliersSelector from '../../services/suppliersSelector'
-import { BuildingsSummaryTableRow, BuildingsTableRow, BuildingsTableRowItem, ContractDetailsTable, ContractPeriodTableRow, LinkAndStatus, OptionalCallOffPeriodData, ProcurementAdvancedRowItems, ProcurementEditPageDescription, ProcurementSearchRowItems, ProcurementShowPageDescription, ProcurementSummaryPageDescription } from '../../types/utils/pageSetup/procurementSetup'
+import { BuildingsSummaryTableRow, BuildingsTableRow, BuildingsTableRowItem, BuildingsWithServicesTableRow, ContractDetailsTable, ContractPeriodTableRow, LinkAndStatus, OptionalCallOffPeriodData, ProcurementAdvancedRowItems, ProcurementEditPageDescription, ProcurementSearchRowItems, ProcurementShowPageDescription, ProcurementSummaryPageDescription } from '../../types/utils/pageSetup/procurementSetup'
 import { chooseServicesAccordionItems } from './quickViewAccordionSetup'
 import { Period, utils } from 'ccs-prototype-kit-model-interface'
 import { ProcurementIndexParams, ProcurementNewParams } from '../../types/routes/facilitiesManagement/procurements'
@@ -484,6 +484,64 @@ const getActiveProcurementBuildingRows = (procurement: Procurement): BuildingsSu
   }, [])
 }
 
+const getbuildingsWithServices = (procurement: Procurement): BuildingsWithServicesTableRow[] => {
+  return procurement.activeProcurementBuildings().reduce((rows: BuildingsWithServicesTableRow[], procurementBuilding) => {
+    const building: Building = procurementBuilding.building()
+
+    const buildingDetail: {html: string, classes: string} =  {
+      html: `
+      <a
+        class="govuk-link--no-visited-state govuk-!-font-weight-bold"
+        href="/facilities-management/RM6232/procurement-buildings/${procurementBuilding.data.id}/edit">
+        ${building.data.name}
+      </a>
+      <br>
+      ${building.data.address?.fullAddress()}
+      `,
+      classes: 'govuk-!-padding-right-2'
+    }
+
+    if (procurementBuilding.isCompleted()) {
+      const services = procurementBuilding.services().map(service => `<li>${service.data.name}</li>`)
+
+      rows.push(
+        [
+          buildingDetail,
+          {
+            html: `
+            <details class="govuk-details" data-module="govuk-details">
+              <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">
+                  ${services.length} ${utils.pluralise('service', services.length)} selected
+                </span>
+              </summary>
+              <div class="govuk-details__text">
+                <ul class="govuk-list govuk-list--bullet">
+                  ${services.join('')}
+                </ul>
+              </div>
+            </details>
+          `,
+            classes: 'govuk-!-padding-right-2'
+          }
+        ]
+      )
+    } else {
+      rows.push(
+        [
+          buildingDetail,
+          {
+            html: '<span class="govuk-hint"> No service selected </span>',
+            classes: 'govuk-!-padding-right-2'
+          }
+        ]
+      )
+    }
+
+    return rows
+  }, [])
+}
+
 const summaryPageDescription = (procurement: Procurement, step: string): ProcurementSummaryPageDescription | undefined => {
   switch (step) {
   case 'contract-period':
@@ -505,6 +563,14 @@ const summaryPageDescription = (procurement: Procurement, step: string): Procure
       pageTitle: 'Buildings summary',
       additionalDetails: {
         buildings: getActiveProcurementBuildingRows(procurement)
+      }
+    }
+  case 'assigning-services-to-buildings':
+    return {
+      pageTitle: 'Assigning services to buildings summary',
+      additionalDetails: {
+        completed: procurement.activeProcurementBuildings().every(procurementBuilding => procurementBuilding.isCompleted()),
+        buildingsWithServices: getbuildingsWithServices(procurement)
       }
     }
   }

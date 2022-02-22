@@ -1,0 +1,73 @@
+{% extends "application.html" %}
+
+{% block pageTitle %}
+  Assigning services to a building: {{ super() }}
+{% endblock %}
+
+{% block content %}
+  {{ govukBackLink({
+    text: 'Return to assigning services to buildings summary page',
+    href: '/facilities-management/RM6232/procurements/' + procurementID + '/summary/assigning-services-to-buildings'
+  }) }}
+
+  {{ govukErrorSummary({
+    titleText: "There is a problem",
+    errorList: errorList
+  }) if errorList.length > 0 }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <span class="govuk-caption-m govuk-!-font-size-24">
+       {{ procurementName }}
+      </span>
+      <h1 class="govuk-heading-xl">
+        {{ buildingName }}
+      </h1>
+    </div>
+  </div>
+
+  <form action="/facilities-management/RM6232/procurement-buildings/{{ procurementBuilding.data.id }}/edit" method="post" class="form" novalidate>
+    {{ govukCheckboxes({
+      idPrefix: "procurementBuildingServiceCodes",
+      name: "procurementBuilding[serviceCodes][]",
+      fieldset: {
+        legend: {
+          text: "Which of your services are required within this building?",
+          classes: "govuk-fieldset__legend--m"
+        }
+      },
+      hint: {
+        html: '
+          <p class="govuk-hint">
+            To add to, or change your list of services to select from, please go back to your Requirements summary page, and click on
+            \'<a
+              class="govuk-link govuk-link--no-visited-state"
+              href="/facilities-management/RM36232/procurements/' + procurementID + '/summary/services">Services</a>\'
+            in section 2.
+          </p>
+        '
+      },
+      items: serviceCheckboxes,
+      attributes: {
+        'data-module': 'ccs-select-services-for-buildings'
+      },
+      errorMessage: {
+        text: errors.serviceCodes.errorMessage
+      } if errors.serviceCodes !== undefined
+    }) }}
+  
+    <div class="govuk-!-margin-top-5">
+      {{ govukButton({
+        element: "input",
+        text: "Save and return",
+        name: "afterSave",
+        classes: "govuk-!-margin-right-4"
+      }) }}
+      <br/>
+      <a href="/facilities-management/RM6232/procurements/{{ procurementID }}/summary/assigning-services-to-buildings" class="govuk-body govuk-link--no-visited-state">
+        Return to assigning services to buildings summary page
+      </a>
+    </div>
+  </form>
+    
+{% endblock %}

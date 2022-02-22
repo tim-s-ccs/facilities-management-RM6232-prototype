@@ -4,7 +4,7 @@ import procurementBuildingModelSchema from './modelSchema'
 import procurementBuildingValidationSchema from './validationSchema'
 import Service from '../../../static/facilitiesManagement/service/model'
 import { ActiveModel, Condition, ModelSchema, ValidationSchema } from 'ccs-prototype-kit-model-interface'
-import { ProcurementBuildingAttributes, ProcurementBuildingData, ProcurementBuildingInterface } from '../../../../types/models/active/facilitiesManagement/procurementBuildings'
+import { ProcurementBuildingAttributes, ProcurementBuildingData, ProcurementBuildingInterface } from '../../../../types/models/active/facilitiesManagement/procurementBuilding'
 import { ProcurementBuildingRow } from '../../../../types/data/activeTables'
 import { Request } from 'express'
 
@@ -62,6 +62,14 @@ class ProcurementBuilding extends ActiveModel implements ProcurementBuildingInte
 
   building = (): Building => {
     return Building.find(this.req, this.data.buildingID)
+  }
+
+  buildingName = (): string => {
+    return this.building().data.name as string
+  }
+
+  isCompleted = (): boolean => {
+    return this.services().length > 0
   }
 }
 

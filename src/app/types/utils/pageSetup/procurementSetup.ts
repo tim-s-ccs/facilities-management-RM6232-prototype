@@ -68,3 +68,14 @@ export type BuildingsSummaryTableRow = Array<{
   text: string,
   classes: string
 }>
+
+export type BuildingsWithServicesTableRow = [
+  {
+    html: string,
+    classes: string
+  },
+  {
+    html: string,
+    classes: string
+  }
+]

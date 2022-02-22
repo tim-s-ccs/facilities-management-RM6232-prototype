@@ -1,0 +1,41 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds govuk-body">
+        Status
+        <span class="govuk-!-padding-left-2">
+          {{ govukTag({
+            text: 'completed' if pageDescription.additionalDetails.completed else 'incomplete',
+            classes: 'govuk-tag--red' if not pageDescription.additionalDetails.completed
+          }) }}
+        </span>
+      </div>
+      <div class="govuk-grid-column-full govuk-hint">
+        Please click on each of your buildings listed below and select the services you require within each building.
+        The status indicator above will show as 'complete' once services have been selected for all your buildings listed.
+        To add to, or change your list of buildings, please go back to your Requirements summary page, and click on
+        '<a class="govuk-link govuk-link--no-visited-state" href="/facilities-management/RM6232/procurements/{{procurement.data.id }}/summary/buildings">
+          Buildings
+        </a>'
+        in section 2.
+      </div>
+    </div>
+    {{ govukTable({
+      head: [
+        {
+          text: 'Building name and address',
+          attributes: {
+            style: "width: 50%"
+          }
+        },
+        {
+          text: 'Assigned services',
+          attributes: {
+            style: "width: 50%"
+          }
+        }
+      ],
+      rows: pageDescription.additionalDetails.buildingsWithServices
+    }) }}
+  </div>
+</div>
