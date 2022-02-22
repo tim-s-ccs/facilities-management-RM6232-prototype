@@ -14,7 +14,7 @@
         <tbody class="govuk-table__body">
           {% for section in pageDescription.additionalDetails.contractDetailsSection %}
             <tr class="govuk-table__row {{ 'govuk-form-group--error' if section.hasError }}">
-              <td class="govuk-table__cell govuk-!-padding-right-2 {{ 'govuk-border-bottom_none govuk-!-padding-left-2' if section.hasError }}">
+              <td class="govuk-table__cell govuk-!-padding-right-2 {{ 'ccs-border-bottom_none govuk-!-padding-left-2' if section.hasError }}">
                 {% if section.status in ['cannot start', 'not required'] %}
                   {{ section.text }}
                 {% else %}
@@ -23,7 +23,7 @@
                   </a>
                 {% endif %}
               </td>
-              <td class="govuk-table__cell {{ 'govuk-border-bottom_none' if section.hasError }}" style="text-align: right">
+              <td class="govuk-table__cell {{ 'ccs-border-bottom_none' if section.hasError }}" style="text-align: right">
                 {{ govukTag({
                   text: section.status,
                   classes: "govuk-tag--grey" if section.status !== 'completed'
@@ -50,7 +50,7 @@
         <tbody class="govuk-table__body">
           {% for section in pageDescription.additionalDetails.buildingDetailsSection %}
             <tr class="govuk-table__row {{ 'govuk-form-group--error' if section.hasError }}">
-              <td class="govuk-table__cell govuk-!-padding-right-2 {{ 'govuk-border-bottom_none govuk-!-padding-left-2' if section.hasError }}">
+              <td class="govuk-table__cell govuk-!-padding-right-2 {{ 'ccs-border-bottom_none govuk-!-padding-left-2' if section.hasError }}">
                 {% if section.status in ['cannot start', 'not required'] %}
                   {{ section.text }}
                 {% else %}
@@ -59,7 +59,7 @@
                   </a>
                 {% endif %}
               </td>
-              <td class="govuk-table__cell {{ 'govuk-border-bottom_none' if section.hasError }}" style="text-align: right">
+              <td class="govuk-table__cell {{ 'ccs-border-bottom_none' if section.hasError }}" style="text-align: right">
                 {{ govukTag({
                   text: section.status,
                   classes: "govuk-tag--grey" if section.status !== 'completed'

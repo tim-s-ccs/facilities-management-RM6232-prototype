@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <form action="{{ pageDescription.form or '/facilities-management/RM6232/procurements/' + procurement.data.id + '/edit/' + step }}" method="post" class="form" novalidate>
+  <form action="/facilities-management/RM6232/procurements/{{ procurement.data.id }}/edit/{{ step }}" method="post" class="form" novalidate>
     {% include 'facilitiesManagement/procurements/editSteps/_' + step + '.html' %}
 
     <div class="govuk-!-margin-top-5">

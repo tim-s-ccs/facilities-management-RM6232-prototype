@@ -1,6 +1,6 @@
 import Procurement from '../../models/active/facilitiesManagement/procurement/model'
-import { editPageDescription, getContractName, getProcurement, getProcurementIndexParams, getProcurementNewParams, showPageDescription } from '../../utlils/pageSetup/procurementSetup'
-import { ProcurementCreateParams, ProcurementEditParams, ProcurementIndexParams, ProcurementNewParams, ProcurementShowParams, ProcurementShowPostParams, ProcurementUpdateParams } from '../../types/routes/facilitiesManagement/procurements'
+import { editPageDescription, getContractName, getProcurement, getProcurementIndexParams, getProcurementNewParams, pageHasSummary, showPageDescription, summaryPageDescription } from '../../utlils/pageSetup/procurementSetup'
+import { ProcurementCreateParams, ProcurementEditParams, ProcurementIndexParams, ProcurementNewParams, ProcurementShowParams, ProcurementShowPostParams, ProcurementSummaryParams, ProcurementUpdateParams } from '../../types/routes/facilitiesManagement/procurements'
 import { Request, Response, Router } from 'express'
 
 const router = Router()
@@ -112,12 +112,20 @@ router.post('/:id/edit/:step', (req: Request, res: Response) => {
   const procurement: Procurement = getProcurement(req)
 
   // TODO: Fix issuse when active model does not exist
-  procurement.assignAttributes(req.body['procurement'])
+  if (step === 'buildings') {
+    procurement.findOrBuildProcurementBuildings(req.body['procurement'])
+  } else {
+    procurement.assignAttributes(req.body['procurement'])
+  }
 
   if (procurement.validate(step)) {
     procurement.save()
 
-    res.redirect(`/facilities-management/RM6232/procurements/${procurement.data.id}`)
+    if (pageHasSummary(step)) {
+      res.redirect(`/facilities-management/RM6232/procurements/${procurement.data.id}/summary/${step}`)
+    } else {
+      res.redirect(`/facilities-management/RM6232/procurements/${procurement.data.id}`)
+    }
   } else {
     const params: ProcurementUpdateParams = {
       procurement: procurement,
@@ -135,32 +143,20 @@ router.post('/:id/edit/:step', (req: Request, res: Response) => {
   }
 })
 
-router.post('/:id/edit/:step/procurement-buildings', (req: Request, res: Response) => {
-  const step: string = req.params['step']
+router.get('/:id/summary/:step', (req: Request, res: Response) => {
   const procurement: Procurement = getProcurement(req)
+  const step: string = req.params['step']
 
-  // TODO: Fix issuse when active model does not exist
-  procurement.findOrBuildProcurementBuildings(req.body['procurement'])
-
-  if (procurement.validate(step)) {
-    procurement.save()
-
-    res.redirect(`/facilities-management/RM6232/procurements/${procurement.data.id}`)
-  } else {
-    const params: ProcurementUpdateParams = {
-      procurement: procurement,
-      step: step,
-      contractName: getContractName(req),
-      pageDescription: editPageDescription(req, procurement, step),
-      errors: procurement.errors,
-      errorList: procurement.errorList()
-    }
-
-    res.render(
-      'facilitiesManagement/procurements/edit.html',
-      params
-    )
+  const params: ProcurementSummaryParams = {
+    procurement: procurement,
+    step: step,
+    pageDescription: summaryPageDescription(procurement, step)
   }
+
+  res.render(
+    'facilitiesManagement/procurements/summary.html',
+    params
+  )
 })
 
 export default router
