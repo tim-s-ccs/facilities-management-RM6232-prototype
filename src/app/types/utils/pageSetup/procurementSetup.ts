@@ -14,7 +14,15 @@ export type ProcurementAdvancedRowItems = [
 export type ProcurementShowPageDescription = {
   pageTitle: string
   saveAndContinue: boolean
+  secondaryButton?: GovUKButton
   additionalDetails?: {[key: string]: any}
+}
+
+type GovUKButton = {
+  element: string
+  text: string
+  name: string
+  classes?: string
 }
 
 export type ProcurementEditPageDescription = {

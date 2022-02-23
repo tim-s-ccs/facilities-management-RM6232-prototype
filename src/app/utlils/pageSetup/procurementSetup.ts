@@ -9,7 +9,7 @@ import { ProcurementIndexParams, ProcurementNewParams } from '../../types/routes
 import { Request } from 'express'
 import { urlFormatter } from './quickViewSetup'
 
-const SEARCH_STATES = ['completed_search', 'entering_requirements']
+const SEARCH_STATES = ['completed_search', 'entering_requirements', 'results']
 const ADVANCED_PROCUREMENT_STATES = ['final_results']
 
 const getProcurement = (req: Request): Procurement => {
@@ -22,6 +22,8 @@ const stateToDisplayName = (state: string): string => {
     return 'Completed search'
   case 'entering_requirements':
     return 'Entering requirements'
+  case 'results':
+    return 'Results'
   default:
     return 'Completed search'
   }
@@ -187,11 +189,39 @@ const showPageDescription = (procurement: Procurement, state: string): Procureme
     return {
       pageTitle: 'Further service and contract requirements',
       saveAndContinue: true,
-      additionalDetails:{
+      additionalDetails: {
         contractDetailsSection: getContractDetailsSection(procurement),
         buildingDetailsSection: getBuildingDetailsSection(procurement)
       }
     }
+  case 'results': {
+    const suppliersSelector: SuppliersSelector = procurement.suppliersSelector()
+    const buildings: string[] = procurement.activeProcurementBuildings().map(procurementBuilding => `<li>${procurementBuilding.buildingName()}</li>`)
+    const services: string[] = procurement.uniqueServiceNames().map(serviceName => `<li>${serviceName}</li>`)
+
+    return {
+      pageTitle: 'Results',
+      saveAndContinue: true,
+      secondaryButton: {
+        element: 'input',
+        text: 'Change requirements',
+        name: 'changeRequirements',
+        classes: 'govuk-button--secondary'
+      },
+      additionalDetails: {
+        lotNumber: suppliersSelector.lotNumber,
+        selectedSuppliersNames: suppliersSelector.selectedSuppliers.map(supplier => supplier.data.supplier_name).sort(),
+        buildings: {
+          text: `${utils.pluralise('Building', buildings.length)} (${buildings.length})`,
+          list: `<ul class="govuk-list govuk-list--bullet">${buildings.join('')}</ul>`
+        },
+        services: {
+          text: `${utils.pluralise('Service', services.length)} (${services.length})`,
+          list: `<ul class="govuk-list govuk-list--bullet">${services.join('')}</ul>`
+        }
+      }
+    }
+  }
   case 'final_results':
     return {
       pageTitle: 'Further Competition',

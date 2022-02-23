@@ -70,7 +70,12 @@ router.post('/:id', (req: Request, res: Response) => {
   const state: string = procurement.data.state as string
 
   if (procurement.validate(state)) {
-    procurement.goToNextState()
+    if (req.body['changeRequirements'] !== undefined) {
+      procurement.goToPreviousState()
+    } else {
+      procurement.goToNextState()
+    }
+
     procurement.save()
 
     res.redirect(`/facilities-management/RM6232/procurements/${procurement.data.id}`)

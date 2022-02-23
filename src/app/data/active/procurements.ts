@@ -69,7 +69,7 @@ const procurements: Array<ProcurementRow> = [
     mobilisationPeriodRequired: false,
     optionalCallOffRequired: false,
     procurementBuildingIDs: ['000004', '000005'],
-    state: 'entering_requirements',
+    state: 'results',
     updatedAt: '2022-07-01T15:33:00'
   },
   {

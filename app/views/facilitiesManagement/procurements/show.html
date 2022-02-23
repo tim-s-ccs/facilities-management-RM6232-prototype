@@ -34,10 +34,11 @@
         <div class="govuk-!-margin-top-5">
           {{ govukButton({
             element: "input",
-            text: "Save and continue",
+            text: "Continue",
             name: "afterSave",
             classes: "govuk-!-margin-right-4"
           }) if pageDescription.saveAndContinue }}
+          {{ govukButton(pageDescription.secondaryButton) if pageDescription.secondaryButton }}
           <br/>
           <a href="/facilities-management/RM6232" class="govuk-body govuk-link--no-visited-state">
             Return to your account
@@ -46,5 +47,4 @@
       </div>
     </div>
   </form>
-    
 {% endblock %}

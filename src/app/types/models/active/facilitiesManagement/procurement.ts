@@ -1,6 +1,7 @@
 import ProcurementBuilding from '../../../../models/active/facilitiesManagement/procurementBuildings/model'
 import SecondaryRegion from '../../../../models/static/facilitiesManagement/secondaryRegion/model'
 import Service from '../../../../models/static/facilitiesManagement/service/model'
+import SuppliersSelector from '../../../../services/suppliersSelector'
 import { ValidatorOptions } from 'ccs-prototype-kit-model-interface'
 
 export interface ProcurementInterface {
@@ -8,6 +9,7 @@ export interface ProcurementInterface {
   services: () => Service[]
   regions: () => SecondaryRegion[]
   goToNextState: () => void
+  goToPreviousState: () => void
   initialCallOffPeriod: () => number
   initialCallOffPeriodStartDate: () => Date
   initialCallOffPeriodEndDate: () => Date
@@ -23,6 +25,8 @@ export interface ProcurementInterface {
   activeProcurementBuildings: () => Array<ProcurementBuilding>
   findOrBuildProcurementBuildings: (data: {[key: string]: any}) => void
   status: (section: string) => string
+  suppliersSelector: () => SuppliersSelector
+  uniqueServiceNames: () => string[]
 }
 
 export type ProcurementData = {
