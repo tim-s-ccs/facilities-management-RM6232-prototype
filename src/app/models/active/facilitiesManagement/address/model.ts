@@ -5,36 +5,30 @@ import { AddressAttributes, AddressData, AddressInterface } from '../../../../ty
 import { AddressRow } from '../../../../types/data/activeTables'
 import { Request } from 'express'
 
-class Address extends ActiveModel implements AddressInterface {
-  static tableName: string = 'addresses'
+const TABLE_NAME: string = 'addresses'
+const MODEL_SCHEMA: ModelSchema = addressModelSchema
 
-  tableName: string = 'addresses'
-  modelSchema: ModelSchema = addressModelSchema
+class Address extends ActiveModel implements AddressInterface {
+  tableName: string = TABLE_NAME
+  modelSchema: ModelSchema = MODEL_SCHEMA
   validationSchema: ValidationSchema = addressValidationSchema
 
   data: AddressData = this.data as AddressData
 
   constructor(req: Request, data: AddressRow) {
-    super(req, {
-      id: data.id,
-      addressLine1: data.addressLine1,
-      addressLine2: data.addressLine2,
-      city: data.city,
-      county: data.county,
-      postcode: data.postcode
-    })
+    super(req, data, MODEL_SCHEMA)
   }
 
   static find = (req: Request, id: string): Address => {
-    return new this(req, this._find(req, this.tableName, id) as AddressRow)
+    return new this(req, this._find(req, TABLE_NAME, id) as AddressRow)
   }
 
   static all = (req: Request): Array<Address> => {
-    return this._all(req, this.tableName).map(data => new this(req, data as AddressRow))
+    return this._all(req, TABLE_NAME).map(data => new this(req, data as AddressRow))
   }
 
   static where = (req: Request, conditions: Array<Condition>): Array<Address> => {
-    return this._where(req, this.tableName, conditions).map(data => new this(req, data as AddressRow))
+    return this._where(req, TABLE_NAME, conditions).map(data => new this(req, data as AddressRow))
   }
 
   static build = (req: Request, data?: AddressAttributes): Address => {
