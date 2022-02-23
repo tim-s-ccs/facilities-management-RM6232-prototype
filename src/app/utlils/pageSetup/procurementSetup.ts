@@ -123,26 +123,30 @@ const getContractRequirementsLinkAndStatus = (procurement: Procurement, step: st
 const getContractDetailsSection = (procurement: Procurement): Array<ContractDetailsTable> => {
   return [
     {
+      step: 'contract-name',
       text: 'Contract name',
       link: `/facilities-management/RM6232/procurements/${procurement.data.id}/edit/contract-name`,
       status: 'completed',
       hasError: false
     },
     {
+      step: 'annual-contract-value',
       text: 'Annual contract value',
       link: `/facilities-management/RM6232/procurements/${procurement.data.id}/edit/annual-contract-value`,
       status: 'completed',
       hasError: false
     },
     {
+      step: 'tupe',
       text: 'TUPE',
       link: `/facilities-management/RM6232/procurements/${procurement.data.id}/edit/tupe`,
       status: procurement.status('tupe'),
-      hasError: false
+      hasError: procurement.errors.tupe !== undefined
     },
     {
+      step: 'contract-period',
       text: 'Contract period',
-      hasError: false,
+      hasError: procurement.errors['contract-period'] !== undefined,
       ...getContractRequirementsLinkAndStatus(procurement, 'contract-period')
     }
   ]
@@ -151,20 +155,23 @@ const getContractDetailsSection = (procurement: Procurement): Array<ContractDeta
 const getBuildingDetailsSection = (procurement: Procurement): Array<ContractDetailsTable> => {
   return [
     {
+      step: 'services',
       text: 'Services',
       hasError: false,
       ...getContractRequirementsLinkAndStatus(procurement, 'services')
     },
     {
+      step: 'buildings',
       text: 'Buildings',
-      hasError: false,
+      hasError: procurement.errors['buildings'] !== undefined,
       ...getContractRequirementsLinkAndStatus(procurement, 'buildings')
     },
     {
+      step: 'assigning-services-to-buildings',
       text: 'Assigning services to buildings',
       link: `/facilities-management/RM6232/procurements/${procurement.data.id}/summary/assigning-services-to-buildings`,
       status: procurement.status('assigning-services-to-buildings'),
-      hasError: false,
+      hasError: procurement.errors['assigning-services-to-buildings'] !== undefined,
     }
   ]
 }

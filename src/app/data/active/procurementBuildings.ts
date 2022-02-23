@@ -22,6 +22,20 @@ const procurementBuildings: Array<ProcurementBuildingRow> = [
     procurementID: '000003',
     buildingID: '000003',
     active: false
+  },
+  {
+    id: '000004',
+    procurementID: '000004',
+    buildingID: '000004',
+    active: true,
+    serviceCodes: ['E.1', 'E.2', 'F.1']
+  },
+  {
+    id: '000005',
+    procurementID: '000004',
+    buildingID: '000005',
+    active: true,
+    serviceCodes: ['F.2', 'G.1', 'G.2']
   }
 ]
 

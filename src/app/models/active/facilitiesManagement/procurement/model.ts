@@ -220,8 +220,8 @@ class Procurement extends ActiveModel implements ProcurementInterface {
     this.data.procurementBuildings?.forEach(procurementBuilding => procurementBuilding.data.active = buildingIDs.includes(procurementBuilding.data.buildingID))
   }
 
-  status = (stage: string): string => {
-    switch(stage) {
+  status = (step: string): string => {
+    switch(step) {
     case 'tupe':
       return this.data.tupe === undefined ? 'not started' : 'completed'
     case 'contract-period': {
