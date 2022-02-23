@@ -1,4 +1,5 @@
 import ActiveProcurementBuildingsValidation from './customValidators/activeProcurementBuildingsValidation'
+import EnteringRequirementsValidation from './customValidators/enteringRequirementsValidation'
 import ExtensionValidation, { extension0Required, extension1Required, extension2Required, extension3Required } from './customValidators/extensionValidation'
 import InitialCallOffPeriodLengthValidation from './customValidators/initialCallOffPeriodLengthValidation'
 import MobilisationStartDateValidation, { mobilisationPeriodCondition, mobilisationPeriodRequiredCondition, mobilisationStartDateCondition } from './customValidators/mobilisationPeriodValidation'
@@ -447,6 +448,19 @@ const procurementValidationSchema: ValidationSchema = {
       },
       errorMessages: {
         greaterThan: 'Select at least one building'
+      }
+    },
+    {
+      attribute: 'base',
+      validator: EnteringRequirementsValidation,
+      options: {
+        on: ['entering_requirements']
+      },
+      errorMessages: {
+        'tupe_incomplete': '‘TUPE’ must be ‘COMPLETED’',
+        'contract-period_incomplete': '‘Contract period’ must be ‘COMPLETED’',
+        'buildings_incomplete': '‘Buildings’ must be ‘COMPLETED’',
+        'assigning-services-to-buildings_incomplete': '‘Assigning services to buildings’ must be ‘COMPLETED’'
       }
     }
   ]

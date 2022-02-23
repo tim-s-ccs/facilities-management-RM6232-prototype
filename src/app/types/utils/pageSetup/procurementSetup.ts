@@ -28,6 +28,7 @@ export type ProcurementSummaryPageDescription = {
 }
 
 export type ContractDetailsTable = {
+  step: string
   text: string
   link: string
   status: string
