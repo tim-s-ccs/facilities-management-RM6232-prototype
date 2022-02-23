@@ -3,6 +3,7 @@ import procurementModelSchema from './modelSchema'
 import procurementValidationSchema from './validationSchema'
 import SecondaryRegion from '../../../static/facilitiesManagement/secondaryRegion/model'
 import Service from '../../../static/facilitiesManagement/service/model'
+import SuppliersSelector from '../../../../services/suppliersSelector'
 import { ActiveModel, Condition, ModelSchema, Period, utils, ValidationSchema } from 'ccs-prototype-kit-model-interface'
 import { ProcurementAttributes, ProcurementData, ProcurementInterface } from '../../../../types/models/active/facilitiesManagement/procurement'
 import { ProcurementRow } from '../../../../types/data/activeTables'
@@ -88,7 +89,7 @@ class Procurement extends ActiveModel implements ProcurementInterface {
     return SecondaryRegion.where([{attribute: 'code', values: this.data.regionCodes}])
   }
 
-  static states = ['completed_search', 'entering_requirements', 'final_results']
+  static states = ['completed_search', 'entering_requirements', 'results', 'final_results']
 
   goToNextState = (): void => {
     const currentStateIndex: number = Procurement.states.indexOf(this.data.state as string)
@@ -96,6 +97,15 @@ class Procurement extends ActiveModel implements ProcurementInterface {
 
     if (nextSateIndex < Procurement.states.length) {
       this.data.state = Procurement.states[nextSateIndex]
+    }
+  }
+
+  goToPreviousState = (): void => {
+    const currentStateIndex: number = Procurement.states.indexOf(this.data.state as string)
+    const previousSateIndex: number = currentStateIndex - 1
+
+    if (previousSateIndex >= 0) {
+      this.data.state = Procurement.states[previousSateIndex]
     }
   }
 
@@ -255,6 +265,19 @@ class Procurement extends ActiveModel implements ProcurementInterface {
     default:
       return 'cannot start'
     }
+  }
+
+  suppliersSelector = (): SuppliersSelector => {
+    const serviceCodes = [...new Set(this.activeProcurementBuildings().reduce((serviceCodes: string[], procurementBuildings) => serviceCodes.concat(procurementBuildings.data.serviceCodes as string[]), []))]
+    const buildingRegions = [...new Set(this.activeProcurementBuildings().map(procurementBuildings => procurementBuildings.building().data.region?.data.code as string))]
+
+    return new SuppliersSelector(serviceCodes, buildingRegions, this.data.estimatedAnnualCost as number)
+  }
+
+  uniqueServiceNames = (): string[] => {
+    const services: Service[] = this.activeProcurementBuildings().reduce((services: Service[], procurementBuildings) => services.concat(procurementBuildings.services()), []).sort((a, b) => a.data.code.localeCompare(b.data.code))
+
+    return [...new Set(services.map(service => service.data.name))]
   }
 }
 
