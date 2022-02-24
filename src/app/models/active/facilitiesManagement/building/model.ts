@@ -1,42 +1,24 @@
 import Address from '../address/model'
 import buildingModelSchema from './modelSchema'
-import BuildingType from '../../../static/facilitiesManagement/buildingType/model'
 import buildingValidationSchema from './validationSchema'
 import Region from '../region/model'
-import SecurityClearance from '../../../static/facilitiesManagement/securityClearance/model'
 import { ActiveModel, Condition, ModelSchema, ValidationSchema } from 'ccs-prototype-kit-model-interface'
 import { BuildingAttributes, BuildingData, BuildingInterface } from '../../../../types/models/active/facilitiesManagement/building'
 import { BuildingRow } from '../../../../types/data/activeTables'
 import { Request } from 'express'
 
-class Building extends ActiveModel implements BuildingInterface {
-  static tableName: string = 'buildings'
+const TABLE_NAME: string = 'buildings'
+const MODEL_SCHEMA: ModelSchema = buildingModelSchema
 
-  tableName: string = 'buildings'
-  modelSchema: ModelSchema = buildingModelSchema
+class Building extends ActiveModel implements BuildingInterface {
+  tableName: string = TABLE_NAME
+  modelSchema: ModelSchema = MODEL_SCHEMA
   validationSchema: ValidationSchema = buildingValidationSchema
 
   data: BuildingData = this.data as BuildingData
 
   constructor(req: Request, data: BuildingRow) {
-    super(req, Building.initBuildingData(req, data))
-  }
-
-  static initBuildingData = (req: Request, data: BuildingRow): BuildingData => {
-    return {
-      id: data.id,
-      userID: data.userID,
-      name: data.name,
-      description: data.description,
-      address: data.addressID ? Address.find(req, data.addressID) : undefined,
-      region: data.regionID ? Region.find(req, data.regionID) : undefined,
-      gia: data.gia,
-      externalArea: data.externalArea,
-      buildingType: data.buildingTypeID ? BuildingType.find(data.buildingTypeID) : undefined,
-      securityClearance: data.securityClearanceID ? SecurityClearance.find(data.securityClearanceID) : undefined,
-      updatedAt: data.updatedAt,
-      buildingComplete: data.buildingComplete
-    }
+    super(req, data, MODEL_SCHEMA)
   }
 
   static build = (req: Request, data?: BuildingAttributes): Building => {
@@ -61,15 +43,15 @@ class Building extends ActiveModel implements BuildingInterface {
   }
 
   static find = (req: Request, id: string): Building => {
-    return new this(req, this._find(req, this.tableName, id) as BuildingRow)
+    return new this(req, this._find(req, TABLE_NAME, id) as BuildingRow)
   }
 
   static all = (req: Request): Array<Building> => {
-    return this._all(req, this.tableName).map(data => new this(req, data as BuildingRow))
+    return this._all(req, TABLE_NAME).map(data => new this(req, data as BuildingRow))
   }
 
   static where = (req: Request, conditions: Array<Condition>): Array<Building> => {
-    return this._where(req, this.tableName, conditions).map(data => new this(req, data as BuildingRow))
+    return this._where(req, TABLE_NAME, conditions).map(data => new this(req, data as BuildingRow))
   }
 
   beforeSave = () => {

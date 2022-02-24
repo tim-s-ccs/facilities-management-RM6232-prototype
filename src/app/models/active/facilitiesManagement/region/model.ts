@@ -5,33 +5,30 @@ import { RegionAttributes, RegionData, RegionInterface } from '../../../../types
 import { RegionRow } from '../../../../types/data/activeTables'
 import { Request } from 'express'
 
-class Region extends ActiveModel implements RegionInterface {
-  static tableName: string = 'regions'
+const TABLE_NAME: string = 'regions'
+const MODEL_SCHEMA: ModelSchema = regionModelSchema
 
-  tableName: string = 'regions'
-  modelSchema: ModelSchema = regionModelSchema
+class Region extends ActiveModel implements RegionInterface {
+  tableName: string = TABLE_NAME
+  modelSchema: ModelSchema = MODEL_SCHEMA
   validationSchema: ValidationSchema = regionValidationSchema
 
   data: RegionData = this.data as RegionData
 
   constructor(req: Request, data: RegionRow) {
-    super(req, {
-      id: data.id,
-      name: data.name,
-      code: data.code
-    })
+    super(req, data, MODEL_SCHEMA)
   }
 
   static find = (req: Request, id: string): Region => {
-    return new this(req, this._find(req, this.tableName, id) as RegionRow)
+    return new this(req, this._find(req, TABLE_NAME, id) as RegionRow)
   }
 
   static all = (req: Request): Array<Region> => {
-    return this._all(req, this.tableName).map(data => new this(req, data as RegionRow))
+    return this._all(req, TABLE_NAME).map(data => new this(req, data as RegionRow))
   }
 
   static where = (req: Request, conditions: Array<Condition>): Array<Region> => {
-    return this._where(req, this.tableName, conditions).map(data => new this(req, data as RegionRow))
+    return this._where(req, TABLE_NAME, conditions).map(data => new this(req, data as RegionRow))
   }
 
   static build = (req: Request, data?: RegionAttributes): Region => {

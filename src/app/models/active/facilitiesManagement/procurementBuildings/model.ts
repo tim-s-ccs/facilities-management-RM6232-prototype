@@ -8,17 +8,18 @@ import { ProcurementBuildingAttributes, ProcurementBuildingData, ProcurementBuil
 import { ProcurementBuildingRow } from '../../../../types/data/activeTables'
 import { Request } from 'express'
 
-class ProcurementBuilding extends ActiveModel implements ProcurementBuildingInterface {
-  static tableName: string = 'procurementBuildings'
+const TABLE_NAME: string = 'procurementBuildings'
+const MODEL_SCHEMA: ModelSchema = procurementBuildingModelSchema
 
-  tableName: string = 'procurementBuildings'
-  modelSchema: ModelSchema = procurementBuildingModelSchema
+class ProcurementBuilding extends ActiveModel implements ProcurementBuildingInterface {
+  tableName: string = TABLE_NAME
+  modelSchema: ModelSchema = MODEL_SCHEMA
   validationSchema: ValidationSchema = procurementBuildingValidationSchema
 
   data: ProcurementBuildingData = this.data as ProcurementBuildingData
 
   constructor(req: Request, data: ProcurementBuildingRow) {
-    super(req, ProcurementBuilding.initProcurementBuildingData(req, data))
+    super(req, data, procurementBuildingModelSchema)
   }
 
   static initProcurementBuildingData = (req: Request, data: ProcurementBuildingRow): ProcurementBuildingData => {
@@ -41,15 +42,15 @@ class ProcurementBuilding extends ActiveModel implements ProcurementBuildingInte
   }
 
   static find = (req: Request, id: string): ProcurementBuilding => {
-    return new this(req, this._find(req, this.tableName, id) as ProcurementBuildingRow)
+    return new this(req, this._find(req, TABLE_NAME, id) as ProcurementBuildingRow)
   }
 
   static all = (req: Request): Array<ProcurementBuilding> => {
-    return this._all(req, this.tableName).map(data => new this(req, data as ProcurementBuildingRow))
+    return this._all(req, TABLE_NAME).map(data => new this(req, data as ProcurementBuildingRow))
   }
 
   static where = (req: Request, conditions: Array<Condition>): Array<ProcurementBuilding> => {
-    return this._where(req, this.tableName, conditions).map(data => new this(req, data as ProcurementBuildingRow))
+    return this._where(req, TABLE_NAME, conditions).map(data => new this(req, data as ProcurementBuildingRow))
   }
 
   services = (): Service[] => {
