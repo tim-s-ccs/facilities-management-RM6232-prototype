@@ -3,10 +3,10 @@ import { AddressRow } from '../../types/data/activeTables'
 const addresses: Array<AddressRow> = [
   {
     id: '000001',
-    addressLine1: 'SIS Building',
-    addressLine2: '85 Albert Embankment',
-    city: 'London',
-    postcode: 'SE11 5AW'
+    addressLine1: 'The Capital Building',
+    addressLine2: '39 Old Hall Street',
+    city: 'Liverpool',
+    postcode: 'L3 9PP'
   },
   {
     id: '000002',

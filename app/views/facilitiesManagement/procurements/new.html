@@ -105,9 +105,7 @@
   <hr class="govuk-section-break govuk-section-break--l govuk-!-margin-top-0"/>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <p>
-        Phasellus at eros sem. Quisque ac ante in est dignissim feugiat. Etiam dignissim nibh tincidunt, euismod sem in, efficitur lorem. Morbi eu justo quis metus pellentesque ornare vitae quis urna. Proin malesuada risus id dolor vehicula, sit.
-      </p>
+
       <form action="/facilities-management/RM6232/procurements/new" method="post" class="form" novalidate>
         {% for serviceCode in procurement.data.serviceCodes %}
           <input type="hidden" name="procurement[serviceCodes][]" value="{{ serviceCode }}" />
