@@ -34,7 +34,7 @@ export type WorkPackageRow = {
 export type ServiceRow = {
   code: string
   name: string
-  description: string
+  description?: string
   work_package_code: string
   total: boolean
   hard: boolean
